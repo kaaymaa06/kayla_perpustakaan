@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class user extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<\Database\Factories\userFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -44,7 +44,7 @@ class user extends Authenticatable
     }
     public function kepala()
     {
-        return $this->hasOne(KepalaPerpustakaan::class);
+        return $this->hasOne(kepala_perpus::class);
     }
 
     /**

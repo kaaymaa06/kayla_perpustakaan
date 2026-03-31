@@ -15,6 +15,6 @@ class kepala_perpus extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(user::class);
     }
 }
