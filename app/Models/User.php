@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class user extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'level',
     ];
 
     /**
@@ -30,8 +31,21 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
+
+    //relasi
+    public function anggota()
+    {
+        return $this->hasOne(Anggota::class);
+    }
+     public function petugas()
+    {
+        return $this->hasOne(Petugas::class);
+    }
+    public function kepala()
+    {
+        return $this->hasOne(KepalaPerpustakaan::class);
+    }
 
     /**
      * Get the attributes that should be cast.
