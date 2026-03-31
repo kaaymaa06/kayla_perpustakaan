@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('akun.index');
 });
-Route::get('/daftar_akun', function () {
-    return view('daftar-akun');
-});
+
+// Route untuk Akun
+Route::resource('akun', AkunController::class)->except(['show']);
+Route::get('akun/{id}/detail', [AkunController::class, 'detail'])->name('akun.detail');
