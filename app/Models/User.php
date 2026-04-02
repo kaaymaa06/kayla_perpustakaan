@@ -44,7 +44,7 @@ class user extends Authenticatable
     }
     public function kepala()
     {
-        return $this->hasOne(kepala_perpus::class);
+        return $this->hasOne(KepalaPerpus::class);
     }
 
     /**

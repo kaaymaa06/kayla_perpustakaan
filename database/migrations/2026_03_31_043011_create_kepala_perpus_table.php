@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kepala_perpus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('nip')->nullable();
+            $table->string('nip_kepala')->nullable();
             $table->timestamps();
         });
     }

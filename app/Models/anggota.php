@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
-class anggota extends Model
+class Anggota extends Model
 {
     protected $table = 'anggota';
 

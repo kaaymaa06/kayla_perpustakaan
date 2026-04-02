@@ -10,11 +10,11 @@ class KepalaPerpus extends Model
 
     protected $fillable = [
         'user_id',
-        'nip',
+        'nip_kepala',
     ];
 
     public function user()
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
     }
 }
