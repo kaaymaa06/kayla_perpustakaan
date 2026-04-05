@@ -1,10 +1,11 @@
-@extends('layouts.app')
+@extends('kepala.layouts.app')
 
 @section('content')
 <div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
     <h2>Data Buku</h2>
-
     <a href="{{ route('kepala.buku.create') }}" class="btn btn-primary mb-3">Tambah Buku</a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -36,9 +37,9 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('buku.edit', $b->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('kepala.buku.edit', $b->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
-                    <form action="{{ route('buku.destroy', $b->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('kepala.buku.destroy', $b->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button onclick="return confirm('Yakin hapus?')" class="btn btn-danger btn-sm">

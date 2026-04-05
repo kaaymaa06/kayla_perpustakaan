@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('kepala.layouts.app')
 
 @section('content')
 <div class="p-4">
@@ -67,8 +67,8 @@
         <h5 class="mb-2">Data Kepala Perpus</h5>
         <div class="mb-3">
             <label class="form-label">NIP</label>
-            <input type="text" name="nip_petugas" class="form-control @error('nip_petugas') is-invalid @enderror" value="{{ old('nip_petugas', $user->kepala->nip_petugas) }}">
-            @error('nip_petugas')<div class="invalid-feedback">{{ $message }}</div>@enderror
+            <input type="text" name="nip_kepala" class="form-control @error('nip_kepala') is-invalid @enderror" value="{{ old('nip_kepala', $user->kepala->nip_kepala) }}">
+            @error('nip_kepala')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         @endif
 

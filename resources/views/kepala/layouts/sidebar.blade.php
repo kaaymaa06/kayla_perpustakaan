@@ -10,7 +10,7 @@
         <li class="nav-item mb-2">
             <a href="/dashboard"
                class="nav-link sidebar-link {{ request()->is('dashboard') ? 'active' : '' }}">
-                🏠 Dashboard
+                Dashboard
             </a>
         </li>
 
@@ -18,7 +18,7 @@
         <li class="nav-item mb-2">
             <a href="/transaki"
                class="nav-link sidebar-link {{ request()->is('transaksi*') ? 'active' : '' }}">
-                🔄 Transaksi
+                Transaksi
             </a>
         </li>
 
@@ -28,24 +28,24 @@
             <a href="{{ route('kepala.akun.index') }}"
                class="nav-link sidebar-link {{ request()->routeIs('kepala.akun.index',
                 'kepala.akun.edit', 'kepala,akun.view', 'kepala.akun.create') ? 'active' : '' }}">
-                👥 Daftar Pengguna
+                Daftar Pengguna
             </a>
         </li>
 
-        {{-- Daftar buku --}}
+        {{-- Data buku --}}
         <li class="nav-item mb-2">
             <a href="{{ route('kepala.buku.index') }}"
                class="nav-link sidebar-link {{ request()->routeIs('kepala.buku.index',
                 'kepala.buku.edit', 'kepala,buku.view', 'kepala.buku.create') ? 'active' : '' }}">
-                📚 Daftar Buku
+                Data Buku
             </a>
         </li>
 
         {{-- Profile --}}
         <li class="nav-item mb-2">
-            <a href="/profile"
-               class="nav-link sidebar-link {{ request()->is('profile') ? 'active' : '' }}">
-                👤 Profile
+            <a href="{{ route('kepala.profile.index') }}"
+               class="nav-link sidebar-link {{ request()->routeIs('kepala.profile.index') ? 'active' : '' }}">
+                Profile
             </a>
         </li>
 

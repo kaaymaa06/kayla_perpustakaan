@@ -10,7 +10,7 @@
 <div class="d-flex">
 
     {{-- Sidebar --}}
-    @include('layouts.sidebar')
+    @include('kepala.layouts.sidebar')
 
     {{-- Content --}}
     <div class="flex-grow-1 p-4">

@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('kepala.layouts.app')
 
 @section('content')
 <div class="container mt-4">
     <h2>Edit Buku</h2>
 
-    <form action="{{ route('buku.update', $buku->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('kepala.buku.update', $buku->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -25,7 +25,7 @@
 
         <div class="mb-2">
             <label>Tahun Terbit</label>
-            <input type="number" name="tahun_terbit" value="{{ $buku->tahun_terbit }}" class="form-control">
+            <input type="number" name="tahun_terbit" min="1990" max="2030" value="{{ $buku->tahun_terbit }}" class="form-control">
         </div>
 
         <div class="mb-2">
@@ -51,7 +51,7 @@
         </div>
 
         <button class="btn btn-success">Update</button>
-        <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('kepala.buku.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 
