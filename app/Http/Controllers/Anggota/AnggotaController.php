@@ -14,8 +14,12 @@ class AnggotaController extends Controller
             ->where('user_id', auth()->id())
             ->first();
 
+        if (!$anggota) {
+            return redirect()->back()->with('error', 'Data anggota tidak ditemukan');
+        }
+
         $inisial = '';
-        if ($anggota && $anggota->user) {
+        if ($anggota->user) {
             $nama = explode(' ', $anggota->user->name);
 
             foreach ($nama as $n) {

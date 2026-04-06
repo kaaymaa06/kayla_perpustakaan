@@ -12,9 +12,14 @@ class PetugasController extends Controller
 {
     public function index()
     {
-        $petugas = Petugas::with('user')->first();
+        $user = auth()->user();
+
+        $petugas = Petugas::with('user')
+            ->where('user_id', $user->id)
+            ->first();
 
         $inisial = '';
+
         if ($petugas && $petugas->user) {
             $nama = explode(' ', $petugas->user->name);
 

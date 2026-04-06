@@ -1,10 +1,10 @@
 @extends('kepala.layouts.app')
 
 @section('content')
-<div class="p-6 bg-gray-100 min-h-screen space-y-6">
+<div class="p-6 min-h-screen space-y-6">
 
     {{-- 🔥 HEADER --}}
-    <div class="bg-gradient-to-r from-indigo-500 to-blue-500 text-black p-6 rounded-2xl shadow">
+    <div class="bg-white text-black p-6 rounded-2xl shadow">
         <h1 class="text-2xl font-bold">Selamat Datang!</h1>
         <p class="text-sm mt-1 opacity-90">
             Semoga harimu menyenangkan. Kelola perpustakaan dengan mudah di sini.

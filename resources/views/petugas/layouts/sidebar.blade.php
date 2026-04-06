@@ -17,9 +17,9 @@
 
         {{-- Daftar pengguna --}}
         <li class="nav-item mb-2">
-            <a href="{{ route('kepala.akun.index') }}"
-               class="nav-link sidebar-link {{ request()->routeIs('kepala.akun.index',
-                'kepala.akun.edit', 'kepala.akun.view', 'kepala.akun.create') ? 'active' : '' }}">
+            <a href="{{ route('petugas.akun.index') }}"
+               class="nav-link sidebar-link {{ request()->routeIs('petugas.akun.index',
+                'petugas.akun.edit', 'petugas.akun.view', 'petugas.akun.create') ? 'active' : '' }}">
                 Daftar Pengguna
             </a>
         </li>

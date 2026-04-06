@@ -1,17 +1,17 @@
-@extends('kepala.layouts.app')
+@extends('petugas.layouts.app')
 
 @section('content')
 <div class="p-4">
     <h3 class="mb-3">Edit Akun - {{ $user->name }}</h3>
 
-    <form action="{{ route('kepala.akun.update', $user->id) }}" method="POST">
+    <form action="{{ route('petugas.akun.update', $user->id) }}" method="POST">
         @method('PUT')
         @csrf
 
         <div class="mb-3">
-            <label class="form-label">role</label>
-            <input type="text" class="form-control" value="{{ ucfirst($user->role) }}" disabled>
-            <small class="text-muted">role tidak bisa diubah</small>
+            <label class="form-label">Level</label>
+            <input type="text" class="form-control" value="{{ ucfirst($user->level) }}" disabled>
+            <small class="text-muted">Level tidak bisa diubah</small>
         </div>
 
         <div class="mb-3">
@@ -28,7 +28,7 @@
 
         <hr>
 
-        @if($user->role == 'anggota' && $user->anggota)
+        @if($user->level == 'anggota' && $user->anggota)
         <h5 class="mb-2">Data Anggota</h5>
         <div class="row mb-3">
             <div class="col">
@@ -48,7 +48,7 @@
         </div>
         @endif
 
-        @if($user->role == 'petugas' && $user->petugas)
+        @if($user->level == 'petugas' && $user->petugas)
         <h5 class="mb-2">Data Petugas</h5>
         <div class="row mb-3">
             <div class="col">
@@ -63,7 +63,7 @@
         </div>
         @endif
 
-        @if($user->role == 'kepala' && $user->kepala)
+        @if($user->level == 'kepala' && $user->kepala)
         <h5 class="mb-2">Data Kepala Perpus</h5>
         <div class="mb-3">
             <label class="form-label">NIP</label>
@@ -73,7 +73,7 @@
         @endif
 
         <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('kepala.akun.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('petugas.akun.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

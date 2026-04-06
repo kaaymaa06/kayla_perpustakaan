@@ -4,12 +4,17 @@ use App\Http\Controllers\KepalaPerpus\AkunController;
 use App\Http\Controllers\KepalaPerpus\BukuController;
 use App\Http\Controllers\KepalaPerpus\KepalaPerpusController;
 use App\Http\Controllers\KepalaPerpus\DashboardController;
+
 use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\Petugas\DashboardController as PetugasDashboardController;
 use App\Http\Controllers\Petugas\PetugasController;
 use App\Http\Controllers\Petugas\BukuController as PetugasBukuController;
+use App\Http\Controllers\Petugas\AkunController as PetugasAkunController;
+
 use App\Http\Controllers\Anggota\AnggotaController;
 use App\Http\Controllers\Anggota\DashboardController as AnggotaDashboardController;
+
 // use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,8 +34,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/dashboard/petugas', [RoleController::class, 'petugas'])->name('petugas.dashboard');
 // Route::get('/dashboard/anggota', [RoleController::class, 'anggota'])->name('anggota.dashboard');
 
-Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'showlogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/register', [AuthController::class, 'showRegister']);
+Route::post('/register', [AuthController::class, 'register']);
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
@@ -113,6 +122,24 @@ Route::prefix('petugas')->middleware('auth')->name('petugas.')->group(function (
     Route::get('/profile', [PetugasController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit/{id}', [PetugasController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update/{id}', [PetugasController::class, 'update'])->name('profile.update');
+
+    /*
+    |----------------------------------
+    | MANAJEMEN AKUN
+    |----------------------------------
+    */
+    Route::prefix('akun')->name('akun.')->group(function () {
+
+        Route::get('/', [PetugasAkunController::class, 'index'])->name('index');
+        Route::get('/create', [PetugasAkunController::class, 'create'])->name('create');
+        Route::post('/store', [PetugasAkunController::class, 'store'])->name('store');
+
+        Route::get('/{id}/detail', [PetugasAkunController::class, 'detail'])->name('detail');
+        Route::get('/{id}/edit', [PetugasAkunController::class, 'edit'])->name('edit');
+        Route::put('/{id}/update', [PetugasAkunController::class, 'update'])->name('update');
+        Route::delete('/{id}/delete', [PetugasAkunController::class, 'destroy'])->name('destroy');
+    });
+
 /*
     |----------------------------------
     | MANAJEMEN BUKU

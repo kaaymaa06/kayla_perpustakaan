@@ -1,10 +1,10 @@
-@extends('kepala.layouts.app')
+@extends('petugas.layouts.app')
 
 @section('content')
 <div class="p-4">
     <div class="d-flex justify-content-between mb-3">
         <h3>Daftar Pengguna</h3>
-        <a href="{{ route('kepala.akun.create') }}" class="btn btn-primary">+ Tambah Akun</a>
+        <a href="{{ route('petugas.akun.create') }}" class="btn btn-primary">+ Tambah Akun</a>
     </div>
 
     <table class="table table-bordered">
@@ -13,7 +13,7 @@
                 <th>No</th>
                 <th>Nama</th>
                 <th>Email</th>
-                <th>role</th>
+                <th>Level</th>
                 <th>Identitas</th>
                 <th>Aksi</th>
             </tr>
@@ -24,22 +24,22 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ ucfirst($user->role) }}</td>
+                <td>{{ ucfirst($user->level) }}</td>
                 <td>
-                    @if($user->role == 'anggota' && $user->anggota)
+                    @if($user->level == 'anggota' && $user->anggota)
                         NIS: {{ $user->anggota->nis }} / {{ $user->anggota->kelas }}
-                    @elseif($user->role == 'petugas' && $user->petugas)
+                    @elseif($user->level == 'petugas' && $user->petugas)
                         NIP: {{ $user->petugas->nip_petugas ?? '-' }}
-                    @elseif($user->role == 'kepala' && $user->kepala)
+                    @elseif($user->level == 'kepala' && $user->kepala)
                         NIP: {{ $user->kepala->nip_kepala ?? '-' }}
                     @else
                         -
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('kepala.akun.detail', $user->id) }}" class="btn btn-sm btn-info text-white">Detail</a>
-                    <a href="{{ route('kepala.akun.edit', $user->id) }}" class="btn btn-sm btn-warning text-white">Edit</a>
-                    <form action="{{ route('kepala.akun.destroy', $user->id) }}" method="POST" class="d-inline">
+                    <a href="{{ route('petugas.akun.detail', $user->id) }}" class="btn btn-sm btn-info text-white">Detail</a>
+                    <a href="{{ route('petugas.akun.edit', $user->id) }}" class="btn btn-sm btn-warning text-white">Edit</a>
+                    <form action="{{ route('petugas.akun.destroy', $user->id) }}" method="POST" class="d-inline">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus akun ini?')">Hapus</button>
                     </form>

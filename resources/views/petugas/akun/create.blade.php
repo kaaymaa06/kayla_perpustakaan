@@ -1,22 +1,22 @@
-@extends('kepala.layouts.app')
+@extends('petugas.layouts.app')
 
 @section('content')
 <div class="p-4">
     <h3 class="mb-3">Tambah Akun</h3>
 
-    <form action="{{ route('kepala.akun.store') }}" method="POST">
+    <form action="{{ route('petugas.akun.store') }}" method="POST">
         @csrf
 
-        <!-- role -->
+        <!-- Level -->
         <div class="mb-3">
-            <label class="form-label">role *</label>
-            <select name="role" id="role" class="form-control" required>
-                <option value="">-- Pilih role --</option>
+            <label class="form-label">Level *</label>
+            <select name="level" id="level" class="form-control" required>
+                <option value="">-- Pilih Level --</option>
                 <option value="anggota">Anggota</option>
                 <option value="petugas">Petugas</option>
                 <option value="kepala">Kepala Perpus</option>
             </select>
-            @error('role')<div class="text-danger small">{{ $message }}</div>@enderror
+            @error('level')<div class="text-danger small">{{ $message }}</div>@enderror
         </div>
 
         <!-- Data User -->
@@ -92,23 +92,23 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('kepala.akun.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('petugas.akun.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection
 
 @push('scripts')
 <script>
-    document.getElementById('role').addEventListener('change', function() {
+    document.getElementById('level').addEventListener('change', function() {
         document.getElementById('fieldAnggota').style.display = this.value === 'anggota' ? 'block' : 'none';
         document.getElementById('fieldPetugas').style.display = this.value === 'petugas' ? 'block' : 'none';
         document.getElementById('fieldKepala').style.display  = this.value === 'kepala'  ? 'block' : 'none';
     });
 
     // Restore old value kalau ada error
-    @if(old('role'))
-        document.getElementById('role').value = '{{ old("role") }}';
-        document.getElementById('role').dispatchEvent(new Event('change'));
+    @if(old('level'))
+        document.getElementById('level').value = '{{ old("level") }}';
+        document.getElementById('level').dispatchEvent(new Event('change'));
     @endif
 </script>
 @endpush
