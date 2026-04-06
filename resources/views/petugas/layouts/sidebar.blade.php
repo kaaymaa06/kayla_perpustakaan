@@ -8,17 +8,9 @@
 
         {{-- Dashboard --}}
         <li class="nav-item mb-2">
-            <a href="{{ route('kepala.dashboard') }}"
-               class="nav-link sidebar-link {{ request()->routeIs('kepala.dashboard') ? 'active' : '' }}">
+            <a href="{{ route('petugas.dashboard') }}"
+               class="nav-link sidebar-link {{ request()->routeIs('petugas.dashboard') ? 'active' : '' }}">
                 Dashboard
-            </a>
-        </li>
-
-        {{-- Transaksi --}}
-        <li class="nav-item mb-2">
-            <a href="/transaki"
-               class="nav-link sidebar-link {{ request()->is('transaksi*') ? 'active' : '' }}">
-                Transaksi
             </a>
         </li>
 
@@ -34,17 +26,17 @@
 
         {{-- Data buku --}}
         <li class="nav-item mb-2">
-            <a href="{{ route('kepala.buku.index') }}"
-               class="nav-link sidebar-link {{ request()->routeIs('kepala.buku.index',
-                'kepala.buku.edit', 'kepala.buku.view', 'kepala.buku.create') ? 'active' : '' }}">
+            <a href="{{ route('petugas.buku.index') }}"
+               class="nav-link sidebar-link {{ request()->routeIs('petugas.buku.index',
+                'petugas.buku.edit', 'petugas.buku.view', 'petugas.buku.create') ? 'active' : '' }}">
                 Data Buku
             </a>
         </li>
 
         {{-- Profile --}}
         <li class="nav-item mb-2">
-            <a href="{{ route('kepala.profile.index') }}"
-               class="nav-link sidebar-link {{ request()->routeIs('kepala.profile.index') ? 'active' : '' }}">
+            <a href="{{ route('petugas.profile.index') }}"
+               class="nav-link sidebar-link {{ request()->routeIs('petugas.profile.index') ? 'active' : '' }}">
                 Profile
             </a>
         </li>
@@ -54,7 +46,7 @@
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit"
-                    class="nav-link sidebar-link w-100 text-start border-0 bg-transparent">
+                    class="nav-link sidebar-link">
                     Logout
                 </button>
             </form>
@@ -65,7 +57,6 @@
 
 {{-- STYLE --}}
 <style>
-
 .sidebar{
     background-color: #DBEAFE;
 }
