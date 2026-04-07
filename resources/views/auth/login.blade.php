@@ -4,50 +4,79 @@
     <title>Login</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body class="min-h-screen flex items-center justify-center bg-[#b8c3d1]">
 
-<div class="bg-white p-8 rounded-xl shadow-lg w-96">
-    <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+<div class="bg-gray-100 p-10 rounded-2xl shadow-xl w-full max-w-md">
+
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">
+        Selamat Datang
+    </h1>
+
+    <p class="text-center text-gray-500 mb-6">
+        Silakan login untuk melanjutkan
+    </p>
 
     {{-- SUCCESS --}}
     @if(session('success'))
-        <div class="bg-green-100 text-green-700 p-2 mb-3 rounded">
+        <div class="bg-green-100 text-green-700 p-3 mb-4 rounded-lg text-sm">
             {{ session('success') }}
         </div>
     @endif
 
     {{-- ERROR --}}
     @if(session('error'))
-        <div class="bg-red-100 text-red-700 p-2 mb-3 rounded">
+        <div class="bg-red-100 text-red-700 p-3 mb-4 rounded-lg text-sm">
             {{ session('error') }}
         </div>
     @endif
 
     @if($errors->any())
-        <div class="bg-red-100 text-red-700 p-2 mb-3 rounded">
+        <div class="bg-red-100 text-red-700 p-3 mb-4 rounded-lg text-sm">
             {{ $errors->first() }}
         </div>
     @endif
 
-    <form method="POST" action="/login">
+    <form method="POST" action="/login" class="space-y-4">
         @csrf
 
-        <input type="email" name="email" placeholder="Email"
-            class="w-full mb-3 p-2 border rounded"
-            value="{{ old('email') }}" required>
+        {{-- EMAIL --}}
+        <div>
+            <label class="text-sm text-gray-600">Email</label>
+            <input type="email" name="email"
+                value="{{ old('email') }}"
+                class="w-full mt-1 p-3 rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                required>
+        </div>
 
-        <input type="password" name="password" placeholder="Password"
-            class="w-full mb-4 p-2 border rounded" required>
+        {{-- PASSWORD --}}
+        <div>
+            <label class="text-sm text-gray-600">Password</label>
+            <input type="password" name="password"
+                class="w-full mt-1 p-3 rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                required>
+        </div>
 
-        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded">
+        {{-- BUTTON --}}
+        <button class="w-full py-3 rounded-lg text-white font-semibold
+            bg-gradient-to-r from-indigo-500 to-purple-600
+            hover:opacity-90 transition">
             Login
         </button>
     </form>
 
-    <p class="text-sm text-center mt-4">
-        Belum punya akun?
-        <a href="/register" class="text-green-500 hover:underline">Register</a>
+    {{-- FOOTER --}}
+    <p class="text-center text-sm text-gray-500 mt-6">
+        © 2026 Perpustakaan
     </p>
+
+    {{-- REGISTER --}}
+    <p class="text-center text-sm mt-2">
+        Belum punya akun?
+        <a href="/register" class="text-indigo-600 font-medium hover:underline">
+            Register
+        </a>
+    </p>
+
 </div>
 
 </body>

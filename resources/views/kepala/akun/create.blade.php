@@ -1,99 +1,130 @@
 @extends('kepala.layouts.app')
 
 @section('content')
-<div class="p-4">
-    <h3 class="mb-3">Tambah Akun</h3>
+<div class="p-5 flex justify-center min-h-screen">
 
-    <form action="{{ route('kepala.akun.store') }}" method="POST">
-        @csrf
+    <div class="w-full max-w-3xl">
+        <div class="bg-white rounded-xl shadow p-6">
 
-        <!-- role -->
-        <div class="mb-3">
-            <label class="form-label">role *</label>
-            <select name="role" id="role" class="form-control" required>
-                <option value="">-- Pilih role --</option>
-                <option value="anggota">Anggota</option>
-                <option value="petugas">Petugas</option>
-                <option value="kepala">Kepala Perpus</option>
-            </select>
-            @error('role')<div class="text-danger small">{{ $message }}</div>@enderror
-        </div>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6">
+                Tambah Akun
+            </h3>
 
-        <!-- Data User -->
-        <div class="mb-3">
-            <label class="form-label">Nama *</label>
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
-            @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Email *</label>
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
-            @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <label class="form-label">Password *</label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
-                @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
-            <div class="col">
-                <label class="form-label">Konfirmasi Password *</label>
-                <input type="password" name="password_confirmation" class="form-control">
-            </div>
-        </div>
+            <form action="{{ route('kepala.akun.store') }}" method="POST">
+                @csrf
 
-        <hr>
-
-        <!-- Dinamis: Anggota -->
-        <div id="fieldAnggota" style="display:block;">
-            <h5 class="mb-2">Data Anggota</h5>
-            <div class="row mb-3">
-                <div class="col">
-                    <label class="form-label">NIS *</label>
-                    <input type="text" name="nis" class="form-control @error('nis') is-invalid @enderror" value="{{ old('nis') }}">
-                    @error('nis')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                {{-- ROLE --}}
+                <div class="mb-4">
+                    <label class="block mb-1">Role</label>
+                    <select name="role" id="role"
+                        class="w-full border rounded px-3 py-2">
+                        <option value="">-- Pilih role --</option>
+                        <option value="anggota">Anggota</option>
+                        <option value="petugas">Petugas</option>
+                        <option value="kepala">Kepala Perpus</option>
+                        @error('level')<div class="text-danger small">{{ $message }}</div>@enderror
+                    </select>
                 </div>
-                <div class="col">
-                    <label class="form-label">Kelas *</label>
-                    <input type="text" name="kelas" class="form-control @error('kelas') is-invalid @enderror" placeholder="Contoh: 10A" value="{{ old('kelas') }}">
-                    @error('kelas')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Alamat</label>
-                <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}">
-            </div>
-        </div>
 
-        <!-- Dinamis: Petugas -->
-        <div id="fieldPetugas" style="display:block;">
-            <h5 class="mb-2">Data Petugas</h5>
-            <div class="row mb-3">
-                <div class="col">
-                    <label class="form-label">NIP</label>
-                    <input type="text" name="nip_petugas" class="form-control @error('nip_petugas') is-invalid @enderror" value="{{ old('nip_petugas') }}">
-                    @error('nip_petugas')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                {{-- NAMA --}}
+                <div class="mb-4">
+                    <label class="block mb-1">Nama</label>
+                    <input type="text" name="name"
+                        class="w-full border rounded px-3 py-2"
+                        value="{{ old('name') }}">
                 </div>
-                <div class="col">
-                    <label class="form-label">No HP</label>
-                    <input type="text" name="no_hp" class="form-control" value="{{ old('no_hp') }}">
+
+                {{-- EMAIL --}}
+                <div class="mb-4">
+                    <label class="block mb-1">Email</label>
+                    <input type="email" name="email"
+                        class="w-full border rounded px-3 py-2"
+                        value="{{ old('email') }}">
                 </div>
-            </div>
-        </div>
 
-        <!-- Dinamis: Kepala -->
-        <div id="fieldKepala" style="display:block;">
-            <h5 class="mb-2">Data Kepala Perpus</h5>
-            <div class="mb-3">
-                <label class="form-label">NIP</label>
-                <input type="text" name="nip_kepala" class="form-control @error('nip_kepala') is-invalid @enderror" value="{{ old('nip_kepala') }}">
-                @error('nip_kepala')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
-        </div>
+                {{-- PASSWORD --}}
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block mb-1">Password</label>
+                        <input type="password" name="password"
+                            class="w-full border rounded px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block mb-1">Konfirmasi</label>
+                        <input type="password" name="password_confirmation"
+                            class="w-full border rounded px-3 py-2">
+                    </div>
+                </div>
 
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('kepala.akun.index') }}" class="btn btn-secondary">Batal</a>
-    </form>
+                <hr class="my-6">
+
+                {{-- ANGGOTA --}}
+                <div id="fieldAnggota">
+                    <h5 class="font-semibold mb-3">Data Anggota</h5>
+
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <input type="text" name="nis"
+                            placeholder="NIS"
+                            class="border rounded px-3 py-2"
+                            value="{{ old('nis') }}">
+
+                        <input type="text" name="kelas"
+                            placeholder="Kelas"
+                            class="border rounded px-3 py-2"
+                            value="{{ old('kelas') }}">
+                    </div>
+
+                    <input type="text" name="alamat"
+                        placeholder="Alamat"
+                        class="w-full border rounded px-3 py-2 mb-4"
+                        value="{{ old('alamat') }}">
+                </div>
+
+                {{-- PETUGAS --}}
+                <div id="fieldPetugas">
+                    <h5 class="font-semibold mb-3">Data Petugas</h5>
+
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <input type="text" name="nip_petugas"
+                            placeholder="NIP"
+                            class="border rounded px-3 py-2"
+                            value="{{ old('nip_petugas') }}">
+
+                        <input type="text" name="no_hp"
+                            placeholder="No HP"
+                            class="border rounded px-3 py-2"
+                            value="{{ old('no_hp') }}">
+                    </div>
+                </div>
+
+                {{-- KEPALA --}}
+                <div id="fieldKepala">
+                    <h5 class="font-semibold mb-3">Data Kepala</h5>
+
+                    <input type="text" name="nip_kepala"
+                        placeholder="NIP"
+                        class="w-full border rounded px-3 py-2 mb-4"
+                        value="{{ old('nip_kepala') }}">
+                </div>
+
+                {{-- BUTTON --}}
+                <div class="flex gap-3 mt-6">
+                    <button type="submit"
+                        class="bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600">
+                        Simpan
+                    </button>
+
+                    <a href="{{ route('kepala.akun.index') }}"
+                       class="bg-gray-300 px-5 py-2 rounded hover:bg-gray-400">
+                        Batal
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
 </div>
 @endsection
 
@@ -105,7 +136,6 @@
         document.getElementById('fieldKepala').style.display  = this.value === 'kepala'  ? 'block' : 'none';
     });
 
-    // Restore old value kalau ada error
     @if(old('role'))
         document.getElementById('role').value = '{{ old("role") }}';
         document.getElementById('role').dispatchEvent(new Event('change'));

@@ -13,6 +13,7 @@ use App\Http\Controllers\Petugas\BukuController as PetugasBukuController;
 use App\Http\Controllers\Petugas\AkunController as PetugasAkunController;
 
 use App\Http\Controllers\Anggota\AnggotaController;
+use App\Http\Controllers\Anggota\BukuController as AnggotaBukuController;
 use App\Http\Controllers\Anggota\DashboardController as AnggotaDashboardController;
 
 // use App\Http\Controllers\RoleController;
@@ -179,5 +180,15 @@ Route::prefix('anggota')->middleware('auth')->name('anggota.')->group(function (
     Route::get('/profile', [AnggotaController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit/{id}', [AnggotaController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update/{id}', [AnggotaController::class, 'update'])->name('profile.update');
+
+    /*
+    |----------------------------------
+    | MANAJEMEN BUKU
+    |----------------------------------
+    */
+    Route::get('/buku', [AnggotaBukuController::class, 'index'])->name('buku.index');
+    Route::get('/buku/{buku}', [AnggotaBukuController::class, 'view'])->name('buku.view');
+
+
 
 });

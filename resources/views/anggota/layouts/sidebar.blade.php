@@ -1,10 +1,10 @@
-<div class=" text-black p-3 d-flex flex-column sidebar" style="width: 250px; min-height: 100vh;">
-
+<div class="text-white d-flex flex-column sidebar p-4">
+    {{-- Logo --}}
     <div>
         <img src="{{ asset('image/logo.png')}}" alt="logo" style="width:120px; height:auto; margin-bottom:30px;">
     </div>
 
-    <ul class="nav flex-column">
+    <ul class="nav flex-column gap-2">
 
         {{-- Dashboard --}}
         <li class="nav-item mb-2">
@@ -14,15 +14,13 @@
             </a>
         </li>
 
-
-        {{-- Data buku --}}
-        {{-- <li class="nav-item mb-2">
-            <a href="{{ route('petugas.buku.index') }}"
-               class="nav-link sidebar-link {{ request()->routeIs('petugas.buku.index',
-                'petugas.buku.edit', 'petugas.buku.view', 'petugas.buku.create') ? 'active' : '' }}">
-                Data Buku
+        {{-- Katalog buku --}}
+        <li class="nav-item mb-2">
+            <a href="{{ route('anggota.buku.index') }}"
+            class="nav-link sidebar-link {{ request()->routeIs('anggota.buku.index') ? 'active' : '' }}">
+                Katalog Buku
             </a>
-        </li> --}}
+        </li>
 
         {{-- Profile --}}
         <li class="nav-item mb-2">
@@ -33,11 +31,11 @@
         </li>
 
         {{-- logout --}}
-        <li class="nav-item mb-2">
+        <li class="nav-item mt-2">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit"
-                    class="nav-link sidebar-link">
+                    class="nav-link sidebar-link w-100 text-start border-0 bg-transparent text-white">
                     Logout
                 </button>
             </form>
@@ -48,25 +46,36 @@
 
 {{-- STYLE --}}
 <style>
-.sidebar{
-    background-color: #DBEAFE;
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #6366f1, #9333ea);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
+/* Link default */
 .sidebar-link {
-    color: black;
-    border-radius: 8px;
+    color: white;
+    border-radius: 12px;
+    padding: 10px 15px;
     transition: 0.3s;
 }
 
-/* Hover effect */
+/* Hover */
 .sidebar-link:hover {
-    background-color: white;
-    padding-left: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding-left: 18px;
 }
 
-/* Active (halaman sekarang) */
+/* Active */
 .sidebar-link.active {
-    background-color: #DBEAFE;
-    font-weight: bold;
+    background: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+}
+
+/* Logout hover khusus */
+button.sidebar-link:hover {
+    background: rgba(255, 0, 0, 0.3);
 }
 </style>
