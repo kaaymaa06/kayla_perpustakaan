@@ -9,10 +9,12 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Petugas\DashboardController as PetugasDashboardController;
 use App\Http\Controllers\Petugas\PetugasController;
+use App\Http\Controllers\Petugas\PeminjamanController as PetugasPeminjamanController;
 use App\Http\Controllers\Petugas\BukuController as PetugasBukuController;
 use App\Http\Controllers\Petugas\AkunController as PetugasAkunController;
 
 use App\Http\Controllers\Anggota\AnggotaController;
+use App\Http\Controllers\Anggota\PeminjamanController;
 use App\Http\Controllers\Anggota\BukuController as AnggotaBukuController;
 use App\Http\Controllers\Anggota\DashboardController as AnggotaDashboardController;
 
@@ -151,11 +153,23 @@ Route::prefix('petugas')->middleware('auth')->name('petugas.')->group(function (
         Route::get('/', [PetugasBukuController::class, 'index'])->name('index');
 
         Route::post('/store', [PetugasBukuController::class, 'store'])->name('store');
-         Route::get('/create', [PetugasBukuController::class, 'create'])->name('create');
+        Route::get('/create', [PetugasBukuController::class, 'create'])->name('create');
         Route::get('/{buku}/edit', [PetugasBukuController::class, 'edit'])->name('edit');
         Route::put('/{buku}/update', [PetugasBukuController::class, 'update'])->name('update');
         Route::delete('/{buku}/delete', [PetugasBukuController::class, 'destroy'])->name('destroy');
     });
+    /*
+    |----------------------------------
+    | PEMINJAMAN
+    |----------------------------------
+    */
+    Route::get('/peminjaman', [PetugasPeminjamanController::class, 'index'])->name('peminjaman.index');;
+    Route::get('/petugas/peminjaman/{id}', [PetugasPeminjamanController::class, 'view'])->name('peminjaman.view');
+    Route::get('/peminjaman/{id}/tolak', [PetugasPeminjamanController::class, 'tolak'])->name('peminjaman.tolak');
+    Route::delete('/petugas/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+    Route::get('/peminjaman/konfirmasi/{id}', [PetugasPeminjamanController::class, 'formKonfirmasi'])->name('peminjaman.form');
+    Route::post('/peminjaman/proses/{id}', [PetugasPeminjamanController::class, 'prosesKonfirmasi'])->name('peminjaman.proses');
+
 
 });
 
@@ -188,6 +202,17 @@ Route::prefix('anggota')->middleware('auth')->name('anggota.')->group(function (
     */
     Route::get('/buku', [AnggotaBukuController::class, 'index'])->name('buku.index');
     Route::get('/buku/{buku}', [AnggotaBukuController::class, 'view'])->name('buku.view');
+
+    /*
+    |----------------------------------
+    | peminjaman
+    |----------------------------------
+    */
+    Route::post('/pinjam/{id}', [PeminjamanController::class, 'pinjam'])->name('buku.pinjam');
+    Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+    Route::get('/peminjaman/{id}', [PeminjamanController::class, 'view'])->name('peminjaman.view');
+    Route::delete('/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+    Route::get('/kembalikan/{id}', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
 
 
 

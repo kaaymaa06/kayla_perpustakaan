@@ -4,18 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class buku extends Model
+class Buku extends Model
 {
     protected $table = 'buku';
-    protected $guarded = [];
+    protected $fillable = [
+        'kode_buku',
+        'judul_buku',
+        'penulis',
+        'tahun_terbit',
+        'stok',
+        'sinopsis',
+        'cover',
+    ];
 
     public function kepala()
     {
         return $this->belongsTo(kepala_perpus::class);
     }
 
-    // public function peminjaman()
-    // {
-    //     return $this->hasMany(PeminjamanBuku::class, 'buku_id');
-    // }
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class);
+    }
 }

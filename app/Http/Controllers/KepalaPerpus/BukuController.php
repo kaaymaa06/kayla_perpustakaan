@@ -28,7 +28,7 @@ class BukuController extends Controller
             'judul_buku'   => 'required',
             'penulis'      => 'required',
             'sinopsis'     => 'nullable',
-            'tahun_terbit' => 'required|integer|min:1000| max:' . date('Y'),
+            'tahun_terbit' => 'required|integer|min:1000|max:' . date('Y'),
             'stok'   => 'required|integer|min:0',
             'cover'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);

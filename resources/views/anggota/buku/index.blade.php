@@ -32,11 +32,6 @@
             {{-- BUTTON --}}
             <div class="mt-3 w-full flex flex-col gap-2">
 
-                {{-- PINJAM --}}
-                <button class="w-full bg-indigo-500 text-white py-2 rounded text-sm hover:bg-indigo-600">
-                    Pinjam
-                </button>
-
                 {{-- DETAIL --}}
                 <a href="{{ route('anggota.buku.view', $b->id) }}"
                 class="w-full text-center bg-gray-500 text-white py-2 rounded text-sm hover:bg-gray-600">

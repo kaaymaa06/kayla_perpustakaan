@@ -47,6 +47,11 @@ class user extends Authenticatable
         return $this->hasOne(KepalaPerpus::class);
     }
 
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -59,4 +64,6 @@ class user extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
 }

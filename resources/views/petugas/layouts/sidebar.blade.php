@@ -14,6 +14,13 @@
             </a>
         </li>
 
+        {{-- PEMINJAMAN --}}
+        <li class="nav-item mb-2">
+            <a href="{{ route('petugas.peminjaman.index') }}"
+                class="nav-link sidebar-link {{ request()->routeIs('petugas.peminjaman.index') ? 'active' : '' }}">
+                Konfirmasi Peminjaman
+            </a>
+        </li>
 
         {{-- Daftar pengguna --}}
         <li class="nav-item mb-2">
