@@ -22,6 +22,14 @@
             </a>
         </li>
 
+        {{-- PENGEMBALIAN --}}
+        <li class="nav-item mb-2">
+            <a href="{{ route('petugas.pengembalian.index') }}"
+                class="nav-link sidebar-link {{ request()->routeIs('petugas.pengembalian.index') ? 'active' : '' }}">
+                Konfirmasi Pengembalian
+            </a>
+        </li>
+
         {{-- Daftar pengguna --}}
         <li class="nav-item mb-2">
             <a href="{{ route('petugas.akun.index') }}"

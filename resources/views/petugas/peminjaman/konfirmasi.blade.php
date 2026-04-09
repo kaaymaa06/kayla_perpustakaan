@@ -10,7 +10,6 @@
     <div class="flex gap-6 mb-6">
         <div>
             <img src="{{ asset('storage/' . $peminjaman->buku->cover) }}"
-                 alt="cover"
                  class="w-40 h-56 object-cover rounded-lg shadow">
         </div>
 
@@ -29,20 +28,14 @@
         <p><strong>Status:</strong> {{ $peminjaman->status }}</p>
     </div>
 
+    {{-- INFO --}}
+    <div class="mb-6 p-4 bg-yellow-100 text-yellow-800 rounded-lg">
+        Jatuh tempo akan otomatis ditentukan selama 7 hari oleh sistem.
+    </div>
+
     {{-- Form --}}
     <form action="{{ route('petugas.peminjaman.proses', $peminjaman->id) }}" method="POST">
         @csrf
-
-        <div class="mb-4">
-            <label class="block font-medium mb-2">
-                Tanggal Jatuh Tempo
-            </label>
-
-            <input type="date"
-                   name="tanggal_kembali"
-                   class="w-full border rounded-lg p-2"
-                   required>
-        </div>
 
         <div class="flex gap-4">
             <button type="submit"

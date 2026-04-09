@@ -22,11 +22,13 @@
             @foreach($peminjaman as $index => $p)
             <tr class="border-b">
                 <td class="p-3">{{ $index + 1 }}</td>
-                <td class="p-3">{{ $p->buku->kode_buku }}</td>
-                <td class="p-3">{{ $p->buku->judul_buku }}</td>
+                <td class="p-3">{{ $p->buku->kode_buku ?? '-' }}</td>
+                <td class="p-3">{{ $p->buku->judul_buku ?? '-' }}</td>
 
                 {{-- TANGGAL PINJAM --}}
-                <td class="p-3">{{ $p->tanggal_pinjam }}</td>
+                <td class="p-3">
+                    {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
+                </td>
 
                 {{-- JATUH TEMPO (SUDAH DIPERBAIKI) --}}
                 <td class="p-3">
@@ -37,9 +39,10 @@
                         <span>-</span>
 
                     @else
-                        {{ $p->tanggal_kembali ?? '-' }}
+                        {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
                     @endif
                 </td>
+
 
                 {{-- STATUS --}}
                 <td class="p-3">
@@ -61,19 +64,22 @@
                         Detail
                     </a>
 
-                    <form action="{{ route('anggota.peminjaman.destroy', $p->id) }}" method="POST"
-                        onsubmit="return confirm('Yakin ingin hapus data ini?')">
+                    @if($p->status == 'menunggu')
+                        <form action="{{ route('anggota.peminjaman.destroy', $p->id) }}" method="POST"
+                            onsubmit="return confirm('Yakin ingin batalkan peminjaman?')">
 
-                        @csrf
-                        @method('DELETE')
+                            @csrf
+                            @method('DELETE')
 
-                        <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">
-                            Hapus
-                        </button>
+                            <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">
+                                Batalkan
+                            </button>
 
-                    </form>
+                        </form>
+                    @endif
 
                 </td>
+
             </tr>
             @endforeach
         </tbody>

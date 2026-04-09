@@ -20,16 +20,16 @@
 
             <tr class="border-b">
                 <td class="py-2 font-semibold">Tanggal Pinjam</td>
-                <td>{{ $peminjaman->tanggal_pinjam }}</td>
+                <td>{{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->format('Y-m-d') }}</td>
             </tr>
 
             <tr class="border-b">
                 <td class="py-2 font-semibold">Jatuh Tempo</td>
                 <td>
-                    @if($peminjaman->tanggal_kembali)
-                        {{ \Carbon\Carbon::parse($peminjaman->tanggal_kembali)->format('Y-m-d') }}
-                    @else
+                    @if($peminjaman->status == 'menunggu')
                         Menunggu konfirmasi
+                    @else
+                        {{ \Carbon\Carbon::parse($peminjaman->jatuh_tempo)->format('Y-m-d') }}
                     @endif
                 </td>
             </tr>

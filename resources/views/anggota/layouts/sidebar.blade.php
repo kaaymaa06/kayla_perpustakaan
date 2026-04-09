@@ -30,6 +30,14 @@
             </a>
         </li>
 
+        {{-- Riwayat Peminjaman --}}
+        <li class="nav-item mb-2">
+            <a href="{{ route('anggota.riwayat.index') }}"
+            class="nav-link sidebar-link {{ request()->routeIs('anggota.pengembalian.index') ? 'active' : '' }}">
+                Riwayat Peminjaman
+            </a>
+        </li>
+
         {{-- Profile --}}
         <li class="nav-item mb-2">
             <a href="{{ route('anggota.profile.index') }}"

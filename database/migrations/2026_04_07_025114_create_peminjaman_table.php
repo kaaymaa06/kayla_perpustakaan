@@ -16,8 +16,11 @@ return new class extends Migration
         $table->foreignId('user_id')->constrained();
         $table->foreignId('buku_id')->constrained('buku');
         $table->date('tanggal_pinjam');
+        $table->date('tanggal_jatuh_tempo');
         $table->date('tanggal_kembali')->nullable();
-        $table->string('status'); // menunggu, dipinjam, ditolak, selesai
+        $table->integer('denda')->default(0);
+        $table->boolean('terlambat')->default(false);
+        $table->string('status')->default('dipinjam');// menunggu, dipinjam, ditolak, selesai
         $table->timestamps();
         });
 
