@@ -36,6 +36,12 @@
 
                     <td class="p-3">
                         {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
+
+                        @if($p->jatuh_tempo && now()->gt($p->jatuh_tempo))
+                            <div class="text-red-500 text-xs">
+                                Terlambat
+                            </div>
+                        @endif
                     </td>
 
                     <td class="p-3">
@@ -49,7 +55,7 @@
 
                         <a href="{{ route('petugas.pengembalian.form', $p->id) }}"
                             class="bg-blue-500 text-white px-3 py-1 rounded text-sm">
-                            Proses Pengembalian
+                            Konfirmasi Pengembalian
                         </a>
 
                     </td>

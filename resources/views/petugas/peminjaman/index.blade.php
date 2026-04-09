@@ -15,7 +15,11 @@
                 <th class="p-3 text-left">Jatuh Tempo</th>
                 <th class="p-3 text-left">Tanggal Kembali</th>
                 <th class="p-3 text-left">Denda</th>
+                <th class="p-3 text-left">Status Denda</th>
+                <th class="p-3 text-left">Pembayaran</th>
+                <th class="p-3 text-left">Tanggal Bayar</th>
                 <th class="p-3 text-left">Status</th>
+                <th class="p-3 text-left">Keterangan</th>
                 <th class="p-3 text-center">Aksi</th>
             </tr>
         </thead>
@@ -38,22 +42,33 @@
 
                 <td class="p-3">
                     {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
+
+                    @if($p->jatuh_tempo && \Carbon\Carbon::now()->gt($p->jatuh_tempo))
+                        <br>
+                        <span class="text-red-500 text-xs">Terlambat</span>
+                    @endif
                 </td>
 
                 <td class="p-3">
                     {{ $p->tanggal_kembali ? \Carbon\Carbon::parse($p->tanggal_kembali)->format('d-m-Y') : '-' }}
                 </td>
 
-                {{-- DENDA --}}
                 <td class="p-3">
-                    @if($p->status == 'dipinjam' && $p->terlambat)
-                        <span class="text-red-600 font-bold">
-                            Rp {{ number_format($p->denda) }}
-                        </span>
-                    @else
-                        -
-                    @endif
+                    {{ $p->denda ?? '-' }}
                 </td>
+
+                <td class="p-3">
+                    {{ $p->status_denda ?? '-' }}
+                </td>
+
+                <td class="p-3">
+                    {{ $p->metode_pembayaran ?? '-' }}
+                </td>
+
+                <td class="p-3">
+                    {{ $p->tanggal_bayar ? \Carbon\Carbon::parse($p->tanggal_bayar)->format('d-m-Y') : '-' }}
+                </td>
+
 
                 {{-- STATUS --}}
                 <td class="p-3">
@@ -79,17 +94,13 @@
                     @endif
                 </td>
 
+                <td class="p-3">
+                    {{ $p->keterangan ?? '-' }}
+                </td>
+
                 {{-- AKSI --}}
                 <td class="p-3 text-center">
                     <div class="flex gap-2 justify-center">
-
-                        {{-- KONFIRMASI PENGEMBALIAN --}}
-                        @if($p->status == 'dipinjam')
-                           <a href="{{ route('petugas.pengembalian.form', $p->id) }}"
-                                class="bg-blue-500 text-white px-3 py-1 rounded text-sm">
-                                Konfirmasi Pengembalian
-                            </a>
-                        @endif
 
                         {{-- TERIMA / TOLAK --}}
                         @if($p->status == 'menunggu')
@@ -104,7 +115,7 @@
                                 @csrf
 
                                 <button type="submit"
-                                    ,class="bg-red-500 text-white px-3 py-1 rounded text-sm">
+                                    class="bg-red-500 text-white px-3 py-1 rounded text-sm">
                                     Tolak
                                 </button>
                             </form>
@@ -122,6 +133,15 @@
                                 Hapus
                             </button>
                         </form>
+
+                        @if($p->status_denda == 'belum bayar')
+                        <form action="{{ route('petugas.peminjaman.bayar', $p->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded">
+                                Konfirmasi Bayar
+                            </button>
+                        </form>
+                        @endif
 
                     </div>
                 </td>

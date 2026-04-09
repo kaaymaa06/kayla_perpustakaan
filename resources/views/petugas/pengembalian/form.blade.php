@@ -16,6 +16,16 @@
             <p><b>Tanggal Pinjam:</b>
                 {{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->format('d-m-Y') }}
             </p>
+            <p><b>Jatuh Tempo:</b>
+                {{ \Carbon\Carbon::parse($peminjaman->jatuh_tempo)->format('d-m-Y') }}
+            </p>
+
+            @if(\Carbon\Carbon::now()->gt($peminjaman->jatuh_tempo))
+                <p class="text-red-500 font-semibold">
+                    Buku Terlambat Dikembalikan
+                </p>
+            @endif
+            
         </div>
 
         {{-- FORM --}}

@@ -113,14 +113,18 @@ Route::prefix('petugas')->middleware('auth')->name('petugas.')->group(function (
     Route::post('/peminjaman/{id}/tolak', [PetugasPeminjamanController::class, 'tolak'])->name('peminjaman.tolak');
     Route::delete('/peminjaman/{id}', [PetugasPeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 
+
     // KONFIRMASI PEMINJAMAN
     Route::get('/peminjaman/konfirmasi/{id}', [PetugasPeminjamanController::class, 'formKonfirmasi'])->name('peminjaman.form');
     Route::post('/peminjaman/proses/{id}', [PetugasPeminjamanController::class, 'prosesKonfirmasi'])->name('peminjaman.proses');
+    Route::get('/peminjaman/{id}/view', [PeminjamanController::class, 'view'])->name('petugas.peminjaman.view');
+    Route::delete('/peminjaman/{id}', [PetugasPeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+    Route::post('/peminjaman/{id}/bayar', [PetugasPeminjamanController::class, 'bayarDenda'])->name('peminjaman.bayar');
 
     // PENGEMBALIAN (PETUGAS)
     Route::get('/pengembalian', [PetugasPeminjamanController::class, 'pengembalian'])->name('pengembalian.index');
     Route::post('/pengembalian/{id}', [PetugasPeminjamanController::class, 'konfirmasiKembali'])->name('pengembalian.konfirmasi');
-    Route::get('/pengembalian/{id}', [PetugasPeminjamanController::class, 'formPengembalian'])->name('pengembalian.form');
+    Route::get('/pengembalian/{id}/form', [PetugasPeminjamanController::class, 'formKembali'])->name('pengembalian.form');
 
 
 });

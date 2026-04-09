@@ -59,48 +59,97 @@ class PeminjamanController extends Controller
             ->with('success', 'Peminjaman berhasil dikonfirmasi');
     }
 
+
     public function konfirmasiKembali(Request $request, $id)
     {
-        $data = Peminjaman::findOrFail($id);
+        $request->validate([
+            'kondisi' => 'required'
+        ]);
 
-        $data->tanggal_kembali = now();
-        $data->status = 'selesai';
-        $data->keterangan = $request->keterangan;
+        $p = Peminjaman::findOrFail($id);
+        $denda = 0;
+        $jenis = [];
 
-        if ($request->kondisi == 'rusak') {
-            $data->denda = 5000;
-            $data->status_denda = 'belum';
-        } elseif ($request->kondisi == 'hilang') {
-            $data->denda = 100000;
-            $data->status_denda = 'belum';
+         // DENDA TERLAMBAT
+        if ($p->jatuh_tempo && now()->gt($p->jatuh_tempo)) {
+            $hari = now()->diffInDays($p->jatuh_tempo);
+            $denda += $hari * 1000;
+            $jenis[] = 'terlambat';
         }
 
-        $data->save();
+        // DENDA KONDISI
+        if ($request->kondisi == 'rusak') {
+            $denda += 5000;
+            $jenis[] = 'rusak';
+        } elseif ($request->kondisi == 'hilang') {
+            $denda += 50000;
+            $jenis[] = 'hilang';
+        }
 
-        return redirect()->route('petugas.pengembalian.index');
+        // KEMBALIKAN STOK JIKA NORMAL
+        if ($request->kondisi == 'normal') {
+            $buku = Buku::find($p->buku_id);
+            if ($buku) {
+                $buku->increment('stok');
+            }
+        }
+
+        // UPDATE DATA
+        $p->update([
+            'tanggal_kembali' => now(),
+            'status' => 'selesai',
+            'denda' => $denda,
+            'jenis_denda' => implode(', ', $jenis),
+            'status_denda' => $denda > 0 ? 'belum bayar' : 'lunas',
+            'keterangan' => $request->keterangan
+        ]);
+
+
+        return redirect()->route('petugas.pengembalian.index')
+            ->with('success', 'Pengembalian berhasil diproses');
     }
 
     public function destroy($id)
     {
-        Peminjaman::destroy($id);
-        return back()->with('success', 'Data berhasil dihapus');
+        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman->delete();
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 
-    public function pengembalian()
+    public function view($id)
     {
-        $peminjaman = Peminjaman::with('buku', 'user')
+        $peminjaman = Peminjaman::with('user', 'buku')->findOrFail($id);
+        return view('petugas.peminjaman.view', compact('peminjaman'));
+    }
+
+   public function pengembalian()
+    {
+        $peminjaman = Peminjaman::with('user','buku')
             ->where('status', 'dipinjam')
-            ->latest()
             ->get();
 
         return view('petugas.pengembalian.index', compact('peminjaman'));
     }
 
-    public function formPengembalian($id)
+    public function formKembali($id)
     {
         $peminjaman = Peminjaman::with('buku', 'user')->findOrFail($id);
 
         return view('petugas.pengembalian.form', compact('peminjaman'));
+    }
+
+    public function bayarDenda($id)
+    {
+        $p = Peminjaman::findOrFail($id);
+
+        $p->update([
+            'status_denda' => 'lunas',
+            'metode_pembayaran' => 'cash',
+            'tanggal_bayar' => now(),
+        ]);
+
+        return back()->with('success', 'Denda berhasil dibayar');
     }
 
 
