@@ -10,20 +10,24 @@ class RiwayatController extends Controller
 {
     public function index()
     {
-        $riwayat = Peminjaman::with('buku')
+        $riwayat = Peminjaman::with('buku') 
             ->where('user_id', auth()->id())
-            ->latest()
+            ->whereIn('status', ['dipinjam', 'ditolak', 'selesai'])
             ->get();
 
         return view('anggota.riwayat.index', compact('riwayat'));
     }
 
-    public function bayarDenda($id)
+    public function bayarDenda(Request $request, $id)
     {
         $peminjaman = Peminjaman::findOrFail($id);
 
-        $peminjaman->denda_dibayar = true;
-        $peminjaman->save();
+        $peminjaman->update([
+            'status_denda' => 'lunas',
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'tanggal_bayar' => now(),
+            'keterangan' => 'Denda dibayar via ' . $request->metode_pembayaran
+        ]);
 
         return back()->with('success', 'Denda berhasil dibayar');
     }

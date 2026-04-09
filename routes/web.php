@@ -119,8 +119,9 @@ Route::prefix('petugas')->middleware('auth')->name('petugas.')->group(function (
 
     // PENGEMBALIAN (PETUGAS)
     Route::get('/pengembalian', [PetugasPeminjamanController::class, 'pengembalian'])->name('pengembalian.index');
-    Route::post('/pengembalian/{id}', [PetugasPeminjamanController::class, 'konfirmasiPengembalian'])->name('pengembalian.konfirmasi');
-    Route::put('/peminjaman/{id}/kembali', [PetugasPeminjamanController::class, 'konfirmasiKembali'])->name('peminjaman.kembalikan');
+    Route::post('/pengembalian/{id}', [PetugasPeminjamanController::class, 'konfirmasiKembali'])->name('pengembalian.konfirmasi');
+    Route::get('/pengembalian/{id}', [PetugasPeminjamanController::class, 'formPengembalian'])->name('pengembalian.form');
+
 
 });
 
@@ -147,6 +148,6 @@ Route::prefix('anggota')->middleware('auth')->name('anggota.')->group(function (
     Route::delete('/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
-    Route::post('/bayar-denda/{id}', [RiwayatController::class, 'bayarDenda'])->name('anggota.bayarDenda');
+    Route::post('/bayar-denda/{id}', [RiwayatController::class, 'bayarDenda'])->name('bayarDenda');
 
 });

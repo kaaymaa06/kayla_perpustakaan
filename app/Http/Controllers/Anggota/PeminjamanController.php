@@ -34,6 +34,7 @@ class PeminjamanController extends Controller
     {
         $peminjaman = Peminjaman::with('buku')
             ->where('user_id', auth()->id())
+            ->where('status', 'menunggu')
             ->get();
 
         return view('anggota.peminjaman.index', compact('peminjaman'));
@@ -42,28 +43,32 @@ class PeminjamanController extends Controller
     public function view($id)
     {
         $peminjaman = Peminjaman::with('buku')
+            ->where('id', $id)
             ->where('user_id', auth()->id())
-            ->findOrFail($id);
+            ->firstOrFail();
 
         return view('anggota.peminjaman.view', compact('peminjaman'));
     }
 
-    public function acc($id)
-    {
-        $peminjaman = Peminjaman::findOrFail($id);
-
-        $peminjaman->update([
-            'status' => 'dipinjam',
-            'tanggal_kembali' => now()->addDays(7)
-        ]);
-
-        return back()->with('success', 'Peminjaman disetujui');
-    }
 
     public function destroy($id)
     {
-        Peminjaman::destroy($id);
+        $data = Peminjaman::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
 
-        return back()->with('success', 'Data peminjaman berhasil dihapus');
+        $data->delete();
+
+        return back()->with('success', 'Data berhasil dihapus');
+    }
+
+    public function riwayat()
+    {
+        $riwayat = Peminjaman::with('buku')
+            ->where('user_id', auth()->id())
+            ->whereIn('status', ['dipinjam', 'ditolak', 'selesai'])
+            ->get();
+
+        return view('anggota.riwayat.index', compact('riwayat'));
     }
 }

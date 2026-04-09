@@ -20,7 +20,7 @@ return new class extends Migration
         $table->date('tanggal_kembali')->nullable();
         $table->integer('denda')->default(0);
         $table->boolean('terlambat')->default(false);
-        $table->string('status')->default('dipinjam');// menunggu, dipinjam, ditolak, selesai
+        $table->string('status')->default('dipinjam',);// menunggu, dipinjam, ditolak, selesai
         $table->timestamps();
         });
 

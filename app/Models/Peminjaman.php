@@ -15,44 +15,18 @@ class Peminjaman extends Model
         'user_id',
         'buku_id',
         'tanggal_pinjam',
-        'jatuh_tempo',
         'tanggal_kembali',
-        'status'
-        
+        'jatuh_tempo',
+        'status',
+
+        'denda',
+        'jenis_denda',
+        'terlambat',
+        'status_denda',
+        'metode_pembayaran',
+        'tanggal_bayar',
+        'keterangan',
     ];
-
-
-
-    public function getTerlambatAttribute()
-    {
-        if (!$this->jatuh_tempo) {
-            return false;
-        }
-
-        if (!$this->tanggal_kembali) {
-            return Carbon::now()->gt(Carbon::parse($this->jatuh_tempo));
-        }
-
-        return Carbon::parse($this->tanggal_kembali)
-            ->gt(Carbon::parse($this->jatuh_tempo));
-    }
-
-
-    public function getDendaAttribute()
-    {
-        if (!$this->jatuh_tempo) {
-            return 0;
-        }
-
-        $tanggalAkhir = $this->tanggal_kembali ?? Carbon::now();
-
-        if (Carbon::parse($tanggalAkhir)->gt(Carbon::parse($this->jatuh_tempo))) {
-            return Carbon::parse($tanggalAkhir)
-                ->diffInDays(Carbon::parse($this->jatuh_tempo)) * 1000;
-        }
-
-        return 0;
-    }
 
     public function user()
     {

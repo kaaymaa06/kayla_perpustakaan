@@ -21,7 +21,8 @@ class PeminjamanController extends Controller
         $peminjaman = Peminjaman::findOrFail($id);
 
         $peminjaman->update([
-            'status' => 'ditolak'
+            'status' => 'ditolak',
+            'keterangan' => 'Peminjaman ditolak oleh petugas'
         ]);
 
         return back()->with('success', 'Peminjaman ditolak');
@@ -50,43 +51,33 @@ class PeminjamanController extends Controller
         $peminjaman->update([
             'status' => 'dipinjam',
             'tanggal_pinjam' => Carbon::now(),
-            'jatuh_tempo' => Carbon::now()->addDays(7)
+            'jatuh_tempo' => Carbon::now()->addDays(7),
+            'keterangan' => 'Peminjaman disetujui'
         ]);
 
         return redirect()->route('petugas.peminjaman.index')
             ->with('success', 'Peminjaman berhasil dikonfirmasi');
     }
 
-    public function konfirmasiKembali($id)
+    public function konfirmasiKembali(Request $request, $id)
     {
-        $peminjaman = Peminjaman::with('buku')->findOrFail($id);
+        $data = Peminjaman::findOrFail($id);
 
-        $hariIni = Carbon::now();
+        $data->tanggal_kembali = now();
+        $data->status = 'selesai';
+        $data->keterangan = $request->keterangan;
 
-        $denda = 0;
-        $terlambat = false;
-
-       if ($peminjaman->jatuh_tempo) {
-            $jatuhTempo = Carbon::parse($peminjaman->jatuh_tempo);
-
-            if ($hariIni->gt($jatuhTempo)) {
-                $terlambat = true;
-                $denda = $jatuhTempo->diffInDays($hariIni) * 1000;
-            }
+        if ($request->kondisi == 'rusak') {
+            $data->denda = 5000;
+            $data->status_denda = 'belum';
+        } elseif ($request->kondisi == 'hilang') {
+            $data->denda = 100000;
+            $data->status_denda = 'belum';
         }
 
-        // tambah stok
-        $peminjaman->buku->increment('stok');
+        $data->save();
 
-        // update status
-        $peminjaman->update([
-            'status' => 'selesai',
-            'tanggal_kembali' => $hariIni,
-            'denda' => $denda,
-            'terlambat' => $terlambat
-        ]);
-
-        return back()->with('success', 'Pengembalian berhasil dikonfirmasi');
+        return redirect()->route('petugas.pengembalian.index');
     }
 
     public function destroy($id)
@@ -103,6 +94,13 @@ class PeminjamanController extends Controller
             ->get();
 
         return view('petugas.pengembalian.index', compact('peminjaman'));
+    }
+
+    public function formPengembalian($id)
+    {
+        $peminjaman = Peminjaman::with('buku', 'user')->findOrFail($id);
+
+        return view('petugas.pengembalian.form', compact('peminjaman'));
     }
 
 

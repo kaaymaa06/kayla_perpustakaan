@@ -29,7 +29,7 @@
                 <td class="p-3">{{ $p->user->name ?? '-' }}</td>
 
                 {{-- SESUAIKAN NAMA FIELD --}}
-                <td class="p-3">{{ $p->buku->judul ?? '-' }}</td>
+                <td class="p-3">{{ $p->buku->judul_buku ?? '-' }}</td>
 
                 {{-- FORMAT TANGGAL --}}
                 <td class="p-3">
@@ -85,14 +85,10 @@
 
                         {{-- KONFIRMASI PENGEMBALIAN --}}
                         @if($p->status == 'dipinjam')
-                            <form action="{{ route('petugas.pengembalian.konfirmasi', $p->id) }}" method="POST">
-                                @csrf
-
-                                <button type="submit"
-                                    class="bg-blue-500 text-white px-3 py-1 rounded text-sm">
-                                    Konfirmasi Pengembalian
-                                </button>
-                            </form>
+                           <a href="{{ route('petugas.pengembalian.form', $p->id) }}"
+                                class="bg-blue-500 text-white px-3 py-1 rounded text-sm">
+                                Konfirmasi Pengembalian
+                            </a>
                         @endif
 
                         {{-- TERIMA / TOLAK --}}
