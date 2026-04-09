@@ -13,6 +13,7 @@
                     <th class="p-3 text-left">No</th>
                     <th class="p-3 text-left">Judul Buku</th>
                     <th class="p-3 text-left">Tanggal Pinjam</th>
+                    <th class="p-3 text-left">Jatuh Tempo</th>
                     <th class="p-3 text-left">Tanggal Kembali</th>
                     <th class="p-3 text-left">Status</th>
                     <th class="p-3 text-left">Denda</th>
@@ -34,6 +35,10 @@
 
                     <td class="p-3">
                         {{ $item->tanggal_pinjam ? \Carbon\Carbon::parse($item->tanggal_pinjam)->format('d-m-Y') : '-' }}
+                    </td>
+
+                    <td class="p-3">
+                        {{ $item->jatuh_tempo ? \Carbon\Carbon::parse($item->jatuh_tempo)->format('d-m-Y') : '-' }}
                     </td>
 
                     <td class="p-3">
@@ -109,7 +114,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="10" class="text-center p-4">
+                    <td colspan="11" class="text-center p-4">
                         Belum ada riwayat peminjaman
                     </td>
                 </tr>
