@@ -15,7 +15,7 @@
 
         <div class="space-y-2">
             <p><strong>Kode Buku:</strong> {{ $peminjaman->buku->kode_buku }}</p>
-            <p><strong>Judul:</strong> {{ $p->buku->judul_buku}}</p>
+            <p><strong>Judul:</strong> {{ $peminjaman->buku->judul_buku}}</p>
             <p><strong>Penulis:</strong> {{ $peminjaman->buku->penulis }}</p>
             <p><strong>Tahun:</strong> {{ $peminjaman->buku->tahun_terbit }}</p>
             <p><strong>Stok:</strong> {{ $peminjaman->buku->stok }}</p>

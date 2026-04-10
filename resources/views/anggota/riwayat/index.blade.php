@@ -18,7 +18,6 @@
                     <th class="p-3 text-left">Status</th>
                     <th class="p-3 text-left">Denda</th>
                     <th class="p-3 text-left">Status Denda</th>
-                    <th class="p-3 text-left">Metode Pembayaran</th>
                     <th class="p-3 text-left">Tanggal Bayar</th>
                     <th class="p-3 text-left">Keterangan</th>
                 </tr>
@@ -71,33 +70,12 @@
                     </td>
 
                     <td class="p-3">
-                        @if($item->denda > 0 && $item->status_denda != 'lunas')
-
-                        @elseif($item->status_denda == 'lunas')
-                            <span class="text-green-600">Lunas</span>
-                        @else
-                            -
-                        @endif
-                    </td>
-
-                    <td class="p-3">
-                        @if($item->denda > 0 && $item->status_denda != 'lunas')
-
-                            <form action="{{ route('anggota.bayarDenda', $item->id) }}" method="POST">
-                                @csrf
-
-                                <select name="metode_pembayaran" class="border p-1 rounded mb-1">
-                                    <option value="transfer">Transfer</option>
-                                    <option value="cash">Cash</option>
-                                </select>
-
-                                <button class="px-3 py-1 bg-blue-500 text-white rounded block">
-                                    Bayar
-                                </button>
-                            </form>
-
-                        @elseif($item->status_denda == 'lunas')
-                            <span class="text-green-600">Lunas</span>
+                        @if($item->denda > 0)
+                            @if($item->status_denda == 'lunas')
+                                <span class="text-green-600 font-semibold">Lunas</span>
+                            @else
+                                <span class="text-red-600 font-semibold">Belum Bayar</span>
+                            @endif
                         @else
                             -
                         @endif

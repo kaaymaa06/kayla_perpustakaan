@@ -14,15 +14,6 @@
             </a>
         </li>
 
-        {{-- Transaksi --}}
-        <li class="nav-item mb-2">
-            <a href="/transaki"
-               class="nav-link sidebar-link {{ request()->is('transaksi*') ? 'active' : '' }}">
-                Transaksi
-            </a>
-        </li>
-
-
         {{-- Daftar pengguna --}}
         <li class="nav-item mb-2">
             <a href="{{ route('kepala.akun.index') }}"
@@ -38,6 +29,13 @@
                class="nav-link sidebar-link {{ request()->routeIs('kepala.buku.index',
                 'kepala.buku.edit', 'kepala.buku.view', 'kepala.buku.create') ? 'active' : '' }}">
                 Data Buku
+            </a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="{{ route('kepala.laporan.index') }}"
+                class="nav-link sidebar-link {{ request()->routeIs('kepala.laporan.index') ? 'active' : '' }}">
+                Laporan
             </a>
         </li>
 

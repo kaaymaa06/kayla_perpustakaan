@@ -10,6 +10,7 @@ use App\Http\Controllers\KepalaPerpus\AkunController;
 use App\Http\Controllers\KepalaPerpus\BukuController;
 use App\Http\Controllers\KepalaPerpus\KepalaPerpusController;
 use App\Http\Controllers\KepalaPerpus\DashboardController;
+use App\Http\Controllers\KepalaPerpus\LaporanController;
 
 // PETUGAS
 use App\Http\Controllers\Petugas\DashboardController as PetugasDashboardController;
@@ -71,6 +72,8 @@ Route::prefix('kepala')->middleware('auth')->name('kepala.')->group(function () 
         Route::put('/{buku}/update', [BukuController::class, 'update'])->name('update');
         Route::delete('/{buku}/delete', [BukuController::class, 'destroy'])->name('destroy');
     });
+
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 
 });
 

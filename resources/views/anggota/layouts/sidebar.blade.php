@@ -46,17 +46,17 @@
             </a>
         </li>
 
-        {{-- logout --}}
-        <li class="nav-item mt-2">
+         {{-- logout --}}
+        <li class="nav-item mt-3">
             <form action="{{ route('logout') }}" method="POST">
-        @csrf
-
-        <button type="submit"
-            class="w-full text-left px-4 py-2 hover:bg-gray-100">
-            Logout
-        </button>
-    </form>
+                @csrf
+                <button type="submit"
+                    class="nav-link sidebar-link w-100 text-start border-0 bg-transparent text-white">
+                    Logout
+                </button>
+            </form>
         </li>
+        
     </ul>
 
 </div>
