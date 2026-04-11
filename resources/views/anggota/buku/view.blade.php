@@ -1,73 +1,69 @@
 @extends('anggota.layouts.app')
 
 @section('content')
-<div class="p-6 flex justify-center">
+<div class="p-6 flex justify-center min-h-screen">
 
-    <div class="bg-white w-full max-w-3xl rounded-xl shadow p-6">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-lg p-6 h-fit">
 
-        <h2 class="text-2xl font-semibold mb-6">Detail Buku</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">
+            Detail Buku
+        </h2>
 
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
 
             {{-- COVER --}}
-            <div>
-                @if($buku->cover)
-                    <img src="{{ asset('storage/'.$buku->cover) }}"
-                         class="w-full w-60 rounded-lg shadow">
-                @endif
+            <div class="flex justify-center">
+                <div class="w-full h-70 bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden">
+                    <img src="{{ asset('storage/' . $buku->cover) }}"
+                         class="max-h-full object-contain transition duration-300 hover:scale-105">
+                </div>
             </div>
 
             {{-- DATA --}}
-            <div class="col-span-2">
+            <div class="md:col-span-2">
 
-                <table class="w-full text-sm">
-                    <tr class="border-b">
-                        <td class="py-2 font-semibold">Kode Buku</td>
-                        <td>{{ $buku->kode_buku }}</td>
-                    </tr>
+                <div class="w-full">
 
-                    <tr class="border-b">
-                        <td class="py-2 font-semibold">Judul Buku</td>
-                        <td>{{ $buku->judul_buku }}</td>
-                    </tr>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        {{ $buku->judul_buku }}
+                    </h2>
 
-                    <tr class="border-b">
-                        <td class="py-2 font-semibold">Penulis</td>
-                        <td>{{ $buku->penulis }}</td>
-                    </tr>
+                    <div class="space-y-2 text-gray-700">
+                        <p><b>Kode:</b> {{ $buku->kode_buku }}</p>
+                        <p><b>Penulis:</b> {{ $buku->penulis }}</p>
+                        <p><b>Tahun:</b> {{ $buku->tahun_terbit }}</p>
+                        <p>
+                            <b>Stok:</b>
+                            <span class="{{ $buku->stok > 0 ? 'text-green-600' : 'text-red-500' }}">
+                                {{ $buku->stok }}
+                            </span>
+                        </p>
+                    </div>
 
-                    <tr class="border-b">
-                        <td class="py-2 font-semibold">Tahun Terbit</td>
-                        <td>{{ $buku->tahun_terbit }}</td>
-                    </tr>
-
-                    <tr class="border-b">
-                        <td class="py-2 font-semibold">Stok</td>
-                        <td>{{ $buku->stok }}</td>
-                    </tr>
-
-                    <tr>
-                        <td class="py-2 font-semibold">Sinopsis</td>
-                        <td>{{ $buku->sinopsis }}</td>
-                    </tr>
-                </table>
+                    {{-- SINOPSIS --}}
+                    <div class="mt-5">
+                        <p class="font-semibold mb-1 text-gray-800">Sinopsis</p>
+                        <p class="text-gray-600 leading-relaxed text-justify">
+                            {{ $buku->sinopsis }}
+                        </p>
+                    </div>
 
                 {{-- BUTTON --}}
-                <div class="flex gap-3 mt-4">
+                <div class="flex gap-3 mt-5">
 
                     @if($buku->stok > 0)
                         <button onclick="openModal()"
-                            class="bg-blue-500 text-white px-4 py-2 rounded">
+                            class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                             Pinjam
                         </button>
                     @else
-                        <button class="bg-gray-400 px-4 py-2 rounded" disabled>
+                        <button class="bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed" disabled>
                             Stok Buku Habis
                         </button>
                     @endif
 
                     <a href="{{ route('anggota.buku.index') }}"
-                        class="bg-gray-300 px-4 py-2 rounded">
+                        class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
                         Kembali
                     </a>
 
@@ -84,21 +80,24 @@
 {{-- MODAL --}}
 <div id="modalPinjam" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
 
-    <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center">
+    <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center animate-fadeIn">
 
-        <p class="mb-4">Yakin mau pinjam buku ini?</p>
+        <p class="mb-4 text-gray-700 font-medium">
+            Yakin mau pinjam buku ini?
+        </p>
 
-        <div class="flex justify-center gap-2">
+        <div class="flex justify-center gap-3">
 
             <form action="{{ route('anggota.buku.pinjam', $buku->id) }}" method="POST">
                 @csrf
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                     Ya
                 </button>
             </form>
 
             <button onclick="closeModal()"
-                class="bg-gray-300 px-4 py-2 rounded">
+                class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
                 Batal
             </button>
 

@@ -1,89 +1,119 @@
 @extends('anggota.layouts.app')
 
 @section('content')
-<div class="p-6">
+<div class="p-6 min-h-screen">
 
-    <h2 class="text-2xl font-semibold mb-6">Peminjaman Saya</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        Peminjaman Saya
+    </h2>
 
-    <table class="w-full bg-white shadow rounded-lg overflow-hidden">
-        <thead class="bg-gray-200">
-            <tr>
-                <th class="p-3">No</th>
-                <th class="p-3 text-left">Kode Buku</th>
-                <th class="p-3 text-left">Judul Buku</th>
-                <th class="p-3 text-left">Tanggal Pinjam</th>
-                <th class="p-3 text-left">Jatuh Tempo</th>
-                <th class="p-3 text-left">Status</th>
-                <th class="p-3 text-center">Aksi</th>
-            </tr>
-        </thead>
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
 
-        <tbody>
-            @foreach($peminjaman as $index => $p)
-            <tr class="border-b">
-                <td class="p-3">{{ $index + 1 }}</td>
-                <td class="p-3">{{ $p->buku->kode_buku ?? '-' }}</td>
-                <td class="p-3">{{ $p->buku->judul_buku ?? '-' }}</td>
+        <table class="w-full border-collapse">
 
-                {{-- TANGGAL PINJAM --}}
-                <td class="p-3">
-                    {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
-                </td>
+            {{-- HEADER --}}
+            <thead class="bg-gray-100 text-gray-700 uppercase">
+                <tr>
+                    <th class="px-4 py-3">No</th>
+                    <th class="px-4 py-3 text-left">Kode Buku</th>
+                    <th class="px-4 py-3 text-left">Judul Buku</th>
+                    <th class="px-4 py-3 text-left">Tanggal Pinjam</th>
+                    <th class="px-4 py-3 text-left">Jatuh Tempo</th>
+                    <th class="px-4 py-3 text-left">Status</th>
+                    <th class="px-4 py-3 text-center">Aksi</th>
+                </tr>
+            </thead>
 
-                {{-- JATUH TEMPO (SUDAH DIPERBAIKI) --}}
-                <td class="p-3">
-                    @if($p->status == 'menunggu')
-                        <span class="text-yellow-500">Menunggu konfirmasi</span>
+            <tbody>
+                @foreach($peminjaman as $index => $p)
+                <tr class="border-b hover:bg-gray-50 transition">
 
-                    @elseif($p->status == 'ditolak')
-                        <span>-</span>
+                    <td class="px-4 py-3 text-center">
+                        {{ $index + 1 }}
+                    </td>
 
-                    @else
-                        {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
-                    @endif
-                </td>
+                    <td class="px-4 py-3">
+                        {{ $p->buku->kode_buku ?? '-' }}
+                    </td>
 
+                    <td class="px-4 py-3 font-medium text-gray-800">
+                        {{ $p->buku->judul_buku ?? '-' }}
+                    </td>
 
-                {{-- STATUS --}}
-                <td class="p-3">
-                    @if($p->status == 'menunggu')
-                        <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded">Menunggu</span>
-                    @elseif($p->status == 'dipinjam')
-                        <span class="bg-green-200 text-green-800 px-2 py-1 rounded">Dipinjam</span>
-                    @elseif($p->status == 'ditolak')
-                        <span class="bg-red-200 text-red-800 px-2 py-1 rounded">Ditolak</span>
-                    @elseif($p->status == 'selesai')
-                        <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded">Selesai</span>
-                    @endif
-                </td>
+                    {{-- TANGGAL PINJAM --}}
+                    <td class="px-4 py-3">
+                        {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
+                    </td>
 
-                <td class="p-3 text-center flex gap-2 justify-center">
+                    {{-- JATUH TEMPO --}}
+                    <td class="px-4 py-3">
+                        @if($p->status == 'menunggu')
+                            <span class="text-yellow-500 text-sm">
+                                Menunggu konfirmasi
+                            </span>
 
-                    <a href="{{ route('anggota.peminjaman.view', $p->id) }}"
-                        class="bg-blue-500 text-white px-3 py-1 rounded text-sm">
-                        Detail
-                    </a>
+                        @elseif($p->status == 'ditolak')
+                            <span>-</span>
 
-                    @if($p->status == 'menunggu')
-                        <form action="{{ route('anggota.peminjaman.destroy', $p->id) }}" method="POST"
-                            onsubmit="return confirm('Yakin ingin batalkan peminjaman?')">
+                        @else
+                            {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
+                        @endif
+                    </td>
 
-                            @csrf
-                            @method('DELETE')
+                    {{-- STATUS --}}
+                    <td class="px-4 py-3">
+                        @if($p->status == 'menunggu')
+                            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
+                                Menunggu
+                            </span>
+                        @elseif($p->status == 'dipinjam')
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                                Dipinjam
+                            </span>
+                        @elseif($p->status == 'ditolak')
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                                Ditolak
+                            </span>
+                        @elseif($p->status == 'selesai')
+                            <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full">
+                                Selesai
+                            </span>
+                        @endif
+                    </td>
 
-                            <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">
-                                Batalkan
-                            </button>
+                    {{-- AKSI --}}
+                    <td class="px-4 py-3">
+                        <div class="flex justify-center gap-2">
 
-                        </form>
-                    @endif
+                            <a href="{{ route('anggota.peminjaman.view', $p->id) }}"
+                                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">
+                                Detail
+                            </a>
 
-                </td>
+                            @if($p->status == 'menunggu')
+                                <form action="{{ route('anggota.peminjaman.destroy', $p->id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin ingin batalkan peminjaman?')">
 
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
+                                        Batalkan
+                                    </button>
+
+                                </form>
+                            @endif
+
+                        </div>
+                    </td>
+
+                </tr>
+                @endforeach
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 @endsection
