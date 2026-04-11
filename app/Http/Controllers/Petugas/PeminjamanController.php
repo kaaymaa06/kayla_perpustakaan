@@ -87,11 +87,10 @@ class PeminjamanController extends Controller
         }
 
         // KEMBALIKAN STOK JIKA NORMAL
-        if ($request->kondisi == 'normal') {
-            $buku = Buku::find($p->buku_id);
-            if ($buku) {
-                $buku->increment('stok');
-            }
+        $buku = Buku::find($p->buku_id);
+
+        if ($buku && $request->kondisi != 'hilang') {
+            $buku->increment('stok');
         }
 
         // UPDATE DATA
