@@ -9,7 +9,7 @@
 
     <div class="bg-white rounded-2xl shadow-lg overflow-x-auto border">
 
-        <table class="w-full border-collapse text-sm">
+        <table class="w-full border-collapse">
             <thead class="bg-gray-100 text-gray-700 uppercase tracking-wider">
                 <tr>
                     <th class="p-4 text-left">No</th>

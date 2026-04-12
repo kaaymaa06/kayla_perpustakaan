@@ -1,124 +1,127 @@
 @extends('petugas.layouts.app')
 
 @section('content')
-<div class="p-5 flex justify-center min-h-screen">
+<div class="p-6 flex justify-center min-h-screen">
 
     <div class="w-full max-w-3xl">
-        <div class="bg-white rounded-xl shadow p-6">
+        <div class="bg-white rounded-2xl shadow-md p-8">
 
-            <h3 class="text-2xl font-semibold text-gray-800 mb-6">
-                Tambah Akun
-            </h3>
+            {{-- HEADER --}}
+            <div class="mb-6 text-center">
+                <h3 class="text-2xl font-bold text-gray-800">
+                    Tambah Akun
+                </h3>
+                <p class="text-sm text-gray-500 mt-1">
+                    Tambahkan akun baru sesuai role pengguna
+                </p>
+            </div>
 
             <form action="{{ route('petugas.akun.store') }}" method="POST">
                 @csrf
 
                 {{-- ROLE --}}
-                <div class="mb-4">
-                     <label class="block mb-1">Role</label>
+                <div class="mb-5">
+                    <label class="block mb-1 text-sm text-gray-600">Role</label>
                     <select name="role" id="role"
-                        class="w-full border rounded px-3 py-2">
-                        <option value="">-- Pilih Role --</option>
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                        <option value="">-- Pilih role --</option>
                         <option value="anggota">Anggota</option>
                         <option value="petugas">Petugas</option>
                         <option value="kepala">Kepala Perpus</option>
+                        @error('level')<div class="text-danger small">{{ $message }}</div>@enderror
                     </select>
-                    @error('level')<div class="text-danger small">{{ $message }}</div>@enderror
                 </div>
 
                 {{-- NAMA --}}
-                <div class="mb-4">
-                    <label class="block mb-1">Nama</label>
-                    <input type="text" name="name" class="w-full border rounded px-3 py-2
-                    form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
-                    @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                <div class="mb-5">
+                    <label class="block mb-1 text-sm text-gray-600">Nama</label>
+                    <input type="text" name="name"
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+                        value="{{ old('name') }}">
                 </div>
 
                 {{-- EMAIL --}}
-                <div class="mb-4">
-                    <label class="block mb-1">Email</label>
-                    <input type="email" name="email" class="w-full border rounded px-3 py-2
-                    form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
-                    @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                <div class="mb-5">
+                    <label class="block mb-1 text-sm text-gray-600">Email</label>
+                    <input type="email" name="email"
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+                        value="{{ old('email') }}">
                 </div>
 
                 {{-- PASSWORD --}}
-                <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="grid grid-cols-2 gap-4 mb-6">
                     <div>
-                        <label class="block mb-1">Password</label>
-                        <input type="password" name="password" class="w-full border rounded px-3 py-2
-                        form-control @error('password') is-invalid @enderror">
-                        @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <label class="block mb-1 text-sm text-gray-600">Password</label>
+                        <input type="password" name="password"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block mb-1">Konfirmasi Password</label>
+                        <label class="block mb-1 text-sm text-gray-600">Konfirmasi</label>
                         <input type="password" name="password_confirmation"
-                        class="w-full border rounded px-3 py-2">
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
                     </div>
                 </div>
 
                 <hr class="my-6">
 
                 {{-- ANGGOTA --}}
-                <div id="fieldAnggota">
-                    <h5 class="font-semibold mb-3">Data Anggota</h5>
+                <div id="fieldAnggota" class="mb-6">
+                    <h5 class="font-semibold mb-3 text-indigo-600">Data Anggota</h5>
 
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <input type="text" name="nis"
-                            placeholder="NIS" class="border rounded px-3 py-2
-                            form-control @error('nis') is-invalid @enderror" value="{{ old('nis') }}">
-                            @error('nis')<div class="invalid-feedback">{{ $message }} @enderror
+                            placeholder="NIS"
+                            class="border rounded-lg px-3 py-2"
+                            value="{{ old('nis') }}">
 
-                        <input type="text" name="kelas" class="border rounded px-3 py-2
-                            form-control @error('kelas') is-invalid @enderror" placeholder="Contoh: 10A" value="{{ old('kelas') }}">
-                            @error('kelas')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <input type="text" name="kelas"
+                            placeholder="Kelas"
+                            class="border rounded-lg px-3 py-2"
+                            value="{{ old('kelas') }}">
                     </div>
 
                     <input type="text" name="alamat"
                         placeholder="Alamat"
-                        class="w-full border rounded px-3 py-2 mb-4"
+                        class="w-full border rounded-lg px-3 py-2"
                         value="{{ old('alamat') }}">
                 </div>
 
                 {{-- PETUGAS --}}
-                <div id="fieldPetugas">
-                    <h5 class="font-semibold mb-3">Data Petugas</h5>
+                <div id="fieldPetugas" class="mb-6">
+                    <h5 class="font-semibold mb-3 text-blue-600">Data Petugas</h5>
 
-                    <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="grid grid-cols-2 gap-4">
                         <input type="text" name="nip_petugas"
                             placeholder="NIP"
-                            class="border rounded px-3 py-2
-                            form-control @error('nip_petugas') is-invalid @enderror" value="{{ old('nip_petugas') }}">
-                            @error('nip_petugas')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            class="border rounded-lg px-3 py-2"
+                            value="{{ old('nip_petugas') }}">
 
                         <input type="text" name="no_hp"
                             placeholder="No HP"
-                            class="border rounded px-3 py-2
-                            form-control" value="{{ old('no_hp') }}">
+                            class="border rounded-lg px-3 py-2"
+                            value="{{ old('no_hp') }}">
                     </div>
                 </div>
 
                 {{-- KEPALA --}}
-                <div id="fieldKepala">
-                    <h5 class="font-semibold mb-3">Data Kepala</h5>
+                <div id="fieldKepala" class="mb-6">
+                    <h5 class="font-semibold mb-3 text-purple-600">Data Kepala</h5>
 
                     <input type="text" name="nip_kepala"
                         placeholder="NIP"
-                        class="w-full border rounded px-3 py-2 mb-4
-                        form-control @error('nip_kepala') is-invalid @enderror" value="{{ old('nip_kepala') }}">
-                        @error('nip_kepala')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        class="w-full border rounded-lg px-3 py-2"
+                        value="{{ old('nip_kepala') }}">
                 </div>
 
                 {{-- BUTTON --}}
                 <div class="flex gap-3 mt-6">
                     <button type="submit"
-                        class="bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600">
+                        class="flex-1 bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition">
                         Simpan
                     </button>
 
                     <a href="{{ route('petugas.akun.index') }}"
-                        class="bg-gray-300 px-5 py-2 rounded hover:bg-gray-400">
+                       class="flex-1 text-center bg-gray-300 py-2 rounded-lg hover:bg-gray-400 transition">
                         Batal
                     </a>
                 </div>
@@ -139,7 +142,6 @@
         document.getElementById('fieldKepala').style.display  = this.value === 'kepala'  ? 'block' : 'none';
     });
 
-    // Restore old value kalau ada error
     @if(old('role'))
         document.getElementById('role').value = '{{ old("role") }}';
         document.getElementById('role').dispatchEvent(new Event('change'));
