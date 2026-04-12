@@ -19,7 +19,7 @@
         <div class="bg-white p-6 rounded-2xl shadow flex justify-between items-center">
             <div>
                 <p class="text-gray-400 text-sm">Total Buku</p>
-                <h2 class="text-3xl font-bold text-indigo-600">{{ $totalBuku }}</h2>
+                <h2 class="text-3xl font-bold text-blue-600">{{ $totalBuku }}</h2>
             </div>
 
         </div>
@@ -34,7 +34,7 @@
         <div class="bg-white p-6 rounded-2xl shadow flex justify-between items-center">
             <div>
                 <p class="text-gray-400 ">Peminjaman Aktif</p>
-                <h2 class="text-3xl font-bold text-green-600">{{ $totalPinjam }}</h2>
+                <h2 class="text-3xl font-bold text-blue-600">{{ $totalPinjam }}</h2>
             </div>
         </div>
 
@@ -48,12 +48,12 @@
 
             <div class="bg-gray-50 p-4 rounded-xl">
                 <p class=" text-gray-500">Dipinjam Hari Ini</p>
-                <p class="text-xl font-bold text-indigo-600">{{ $pinjamHariIni ?? 0 }}</p>
+                <p class="text-xl font-bold text-blue-600">{{ $pinjamHariIni ?? 0 }}</p>
             </div>
 
             <div class="bg-gray-50 p-4 rounded-xl">
                 <p class=" text-gray-500">Dikembalikan</p>
-                <p class="text-xl font-bold text-green-600">{{ $kembaliHariIni ?? 0 }}</p>
+                <p class="text-xl font-bold text-blue-600">{{ $kembaliHariIni ?? 0 }}</p>
             </div>
 
             <div class="bg-gray-50 p-4 rounded-xl">
@@ -109,7 +109,7 @@
 
             <a href="{{ route('kepala.buku.index') }}"
                class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition block">
-                <h3 class="font-bold text-lg mb-1 text-indigo-600"> Data Buku</h3>
+                <h3 class="font-bold text-lg mb-1 text-blue-600"> Data Buku</h3>
                 <p class=" text-gray-500">Kelola semua buku</p>
             </a>
 
@@ -121,7 +121,7 @@
 
             <a href="{{ route('kepala.laporan.index') }}"
                class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition block">
-                <h3 class="font-bold text-lg mb-1 text-green-600">Laporan</h3>
+                <h3 class="font-bold text-lg mb-1 text-blue-600">Laporan</h3>
                 <p class=" text-gray-500">Lihat laporan perpustakaan</p>
             </a>
 

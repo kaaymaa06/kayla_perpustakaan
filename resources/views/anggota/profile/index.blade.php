@@ -8,7 +8,7 @@
         <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
 
             {{-- HEADER GRADIENT --}}
-            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 h-24 relative">
+            <div class="bg-gradient-to-r from-blue-500 to-cyan-600 h-24 relative">
 
                 {{-- AVATAR --}}
                 <div class="absolute left-1/2 transform -translate-x-1/2 top-12">
@@ -59,7 +59,7 @@
 
                 {{-- BUTTON --}}
                 <a href="{{ route('anggota.profile.edit', $anggota->id) }}"
-                   class="block mt-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition">
+                   class="block mt-6 bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition">
                     Edit Profile
                 </a>
 

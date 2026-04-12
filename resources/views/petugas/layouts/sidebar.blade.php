@@ -75,9 +75,18 @@
 .sidebar {
     width: 260px;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #6366f1, #9333ea);
+    background: linear-gradient(to right, #3b82f6, #0891b2);
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+}
+
+/* Logo */
+.logo-sidebar {
+    width: 110px;
+    height: auto;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
 }
 
 /* Link default */
@@ -85,23 +94,30 @@
     color: white;
     border-radius: 12px;
     padding: 10px 15px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    display: block;
 }
 
 /* Hover */
 .sidebar-link:hover {
     background: rgba(255, 255, 255, 0.2);
-    padding-left: 18px;
+    padding-left: 20px;
 }
 
 /* Active */
 .sidebar-link.active {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.35);
     font-weight: 600;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
 }
 
-/* Logout hover khusus */
+/* Logout hover */
 button.sidebar-link:hover {
     background: rgba(255, 0, 0, 0.3);
+}
+
+/* Scroll halus (kalau menu banyak) */
+.sidebar {
+    overflow-y: auto;
 }
 </style>

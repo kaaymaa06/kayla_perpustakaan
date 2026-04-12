@@ -25,7 +25,7 @@
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Kode Buku</label>
                     <input type="text" name="kode_buku"
                         value="{{ $buku->kode_buku }}"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
 
                 {{-- JUDUL --}}
@@ -33,7 +33,7 @@
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Judul Buku</label>
                     <input type="text" name="judul_buku"
                         value="{{ $buku->judul_buku }}"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
 
                 {{-- PENULIS --}}
@@ -41,7 +41,7 @@
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Penulis</label>
                     <input type="text" name="penulis"
                         value="{{ $buku->penulis }}"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
 
                 {{-- TAHUN & STOK --}}
@@ -51,14 +51,14 @@
                         <input type="number" name="tahun_terbit"
                             min="1990" max="2030"
                             value="{{ $buku->tahun_terbit }}"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                     </div>
 
                     <div>
                         <label class="block mb-1 text-sm font-semibold text-gray-600">Stok</label>
                         <input type="number" name="stok"
                             value="{{ $buku->stok }}"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Sinopsis</label>
                     <textarea name="sinopsis"
                         rows="4"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">{{ $buku->sinopsis }}</textarea>
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">{{ $buku->sinopsis }}</textarea>
                 </div>
 
                 {{-- COVER --}}
@@ -75,7 +75,7 @@
 
                     {{-- COVER LAMA --}}
                     <div>
-                        <label class="block mb-2 text-sm font-semibold text-gray-600">Cover Lama</label>
+                        <label class="block mb-2 text-sm font-semibold text-cyan-600">Cover Lama</label>
                         <div class="border rounded-lg p-2 flex justify-center bg-gray-50">
                             @if($buku->cover)
                                 <img src="{{ asset('storage/'.$buku->cover) }}"
@@ -97,7 +97,7 @@
 
                 {{-- BUTTON --}}
                 <div class="flex gap-3 mt-6">
-                    <button class="flex-1 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
+                    <button class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
                         Update
                     </button>
 

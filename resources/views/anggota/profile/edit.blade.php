@@ -52,7 +52,7 @@
                 <div class="flex gap-3 pt-4">
 
                     <button type="submit"
-                        class="flex-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2.5 rounded-lg hover:opacity-90 transition font-medium shadow">
+                        class="flex-1 bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-2.5 rounded-lg hover:opacity-90 transition font-medium shadow">
                         Simpan
                     </button>
 

@@ -39,7 +39,7 @@
 
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500 font-medium">Role</th>
-                            <td class="text-indigo-600 font-semibold">{{ ucfirst($user->role) }}</td>
+                            <td class="text-cyan-600 font-semibold">{{ ucfirst($user->role) }}</td>
                         </tr>
 
                         {{-- ANGGOTA --}}

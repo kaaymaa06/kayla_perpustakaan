@@ -4,7 +4,7 @@
     <title>Register</title>
     @vite('resources/css/app.css')
 </head>
-<body class="min-h-screen flex items-center justify-center bg-[#b8c3d1]">
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-cyan-600">
 
 <div class="bg-gray-100 p-10 rounded-2xl shadow-xl w-full max-w-md">
 
@@ -80,7 +80,7 @@
 
         {{-- BUTTON --}}
         <button class="w-full py-3 rounded-lg text-white font-semibold
-            bg-gradient-to-r from-green-500 to-emerald-600
+            bg-gradient-to-r from-blue-500 to-cyan-600
             hover:opacity-90 transition">
             Register
         </button>
@@ -89,7 +89,7 @@
     {{-- LOGIN --}}
     <p class="text-center text-sm mt-6">
         Sudah punya akun?
-        <a href="/login" class="text-indigo-600 font-medium hover:underline">
+        <a href="/login" class="text-blue-600 font-medium hover:underline">
             Login
         </a>
     </p>

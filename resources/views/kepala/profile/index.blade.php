@@ -8,11 +8,11 @@
         <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
 
             {{-- HEADER --}}
-            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 h-24 relative">
+            <div class="bg-gradient-to-r from-blue-500 to-cyan-600 h-24 relative">
 
                 {{-- AVATAR --}}
                 <div class="absolute left-1/2 transform -translate-x-1/2 top-12">
-                    <div class="w-24 h-24 bg-white rounded-full shadow flex items-center justify-center text-2xl font-bold text-indigo-600">
+                    <div class="w-24 h-24 bg-white rounded-full shadow flex items-center justify-center text-2xl font-bold text-blue-600">
                         {{ $inisial }}
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                 </div>
 
                 <a href="{{ route('kepala.profile.edit', $kepala->id) }}"
-                   class="block mt-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition">
+                   class="block mt-6 bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition">
                     Edit Profile
                 </a>
 

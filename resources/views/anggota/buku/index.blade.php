@@ -1,7 +1,7 @@
 @extends('anggota.layouts.app')
 
 @section('content')
-<div class="p-6 bg-gray-50 min-h-screen">
+<div class="p-6 min-h-screen">
 
     <h2 class="text-2xl font-bold mb-6 text-gray-800">
         Katalog Buku
@@ -42,7 +42,7 @@
             <div class="mt-auto pt-3">
 
                 <a href="{{ route('anggota.buku.view', $b->id) }}"
-                   class="block text-center bg-indigo-500 text-white py-2 rounded-lg text-sm hover:bg-indigo-600 transition">
+                   class="block text-center bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-2 rounded-lg text-sm hover:bg-indigo-600 transition">
                     Lihat Detail
                 </a>
 

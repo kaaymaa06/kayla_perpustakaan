@@ -53,7 +53,7 @@
 
                     @if($buku->stok > 0)
                         <button onclick="openModal()"
-                            class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                            class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                             Pinjam
                         </button>
                     @else
@@ -91,7 +91,7 @@
             <form action="{{ route('anggota.buku.pinjam', $buku->id) }}" method="POST">
                 @csrf
                 <button type="submit"
-                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                    class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                     Ya
                 </button>
             </form>

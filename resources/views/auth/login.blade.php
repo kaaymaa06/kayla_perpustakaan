@@ -4,7 +4,7 @@
     <title>Login</title>
     @vite('resources/css/app.css')
 </head>
-<body class="min-h-screen flex items-center justify-center bg-[#b8c3d1]">
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-cyan-600">
 
 <div class="bg-gray-100 p-10 rounded-2xl shadow-xl w-full max-w-md">
 
@@ -44,7 +44,7 @@
             <label class="text-sm text-gray-600">Email</label>
             <input type="email" name="email"
                 value="{{ old('email') }}"
-                class="w-full mt-1 p-3 rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="w-full mt-1 p-3 rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required>
         </div>
 
@@ -52,13 +52,13 @@
         <div>
             <label class="text-sm text-gray-600">Password</label>
             <input type="password" name="password"
-                class="w-full mt-1 p-3 rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="w-full mt-1 p-3 rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required>
         </div>
 
         {{-- BUTTON --}}
         <button class="w-full py-3 rounded-lg text-white font-semibold
-            bg-gradient-to-r from-indigo-500 to-purple-600
+            bg-gradient-to-r from-blue-500 to-cyan-600
             hover:opacity-90 transition">
             Login
         </button>
@@ -72,7 +72,7 @@
     {{-- REGISTER --}}
     <p class="text-center text-sm mt-2">
         Belum punya akun?
-        <a href="/register" class="text-indigo-600 font-medium hover:underline">
+        <a href="/register" class="text-blue-600 font-medium hover:underline">
             Register
         </a>
     </p>

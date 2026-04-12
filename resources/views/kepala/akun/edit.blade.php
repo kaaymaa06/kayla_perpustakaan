@@ -35,7 +35,7 @@
                 <div>
                     <label class="block  font-medium text-gray-600 mb-1">Nama</label>
                     <input type="text" name="name"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 @error('name') border-red-500 @enderror"
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 @error('name') border-red-500 @enderror"
                         value="{{ old('name', $user->name) }}">
                     @error('name')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -45,7 +45,7 @@
                 <div>
                     <label class="block  font-medium text-gray-600 mb-1">Email</label>
                     <input type="email" name="email"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 @error('email') border-red-500 @enderror"
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 @error('email') border-red-500 @enderror"
                         value="{{ old('email', $user->email) }}">
                     @error('email')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -59,7 +59,7 @@
             {{-- ANGGOTA --}}
             @if($user->role == 'anggota' && $user->anggota)
             <div class="mb-6">
-                <h5 class="text-lg font-semibold text-indigo-600 mb-3">Data Anggota</h5>
+                <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Anggota</h5>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
 
@@ -125,7 +125,7 @@
             {{-- KEPALA --}}
             @if($user->role == 'kepala' && $user->kepala)
             <div class="mb-6">
-                <h5 class="text-lg font-semibold text-purple-600 mb-3">Data Kepala Perpus</h5>
+                <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Kepala Perpus</h5>
 
                 <div>
                     <label class="block  text-gray-600 mb-1">NIP</label>
@@ -142,7 +142,7 @@
             {{-- BUTTON --}}
             <div class="flex gap-3 mt-8">
                 <button type="submit"
-                    class="flex-1 bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition">
+                    class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
                     Update
                 </button>
 

@@ -71,7 +71,7 @@
 .sidebar {
     width: 260px;
     min-height: 100vh;
-    background: linear-gradient(160deg, #6366f1, #9333ea);
+    background: linear-gradient(to right, #3b82f6, #0891b2);
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     box-shadow: 4px 0 20px rgba(0,0,0,0.1);

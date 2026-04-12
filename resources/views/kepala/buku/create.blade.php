@@ -34,21 +34,21 @@
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-medium text-gray-600">Kode Buku</label>
                     <input type="text" name="kode_buku"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
                 </div>
 
                 {{-- JUDUL --}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-medium text-gray-600">Judul Buku</label>
                     <input type="text" name="judul_buku"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
                 </div>
 
                 {{-- PENULIS --}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-medium text-gray-600">Penulis</label>
                     <input type="text" name="penulis"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
                 </div>
 
                 {{-- TAHUN & STOK --}}
@@ -56,13 +56,13 @@
                     <div>
                         <label class="block mb-1 text-sm font-medium text-gray-600">Tahun Terbit</label>
                         <input type="number" name="tahun_terbit"
-                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
                     </div>
 
                     <div>
                         <label class="block mb-1 text-sm font-medium text-gray-600">Stok</label>
                         <input type="number" name="stok"
-                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none">
                     </div>
                 </div>
 
@@ -70,20 +70,20 @@
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-medium text-gray-600">Sinopsis</label>
                     <textarea name="sinopsis"
-                        class="w-full border rounded-lg px-3 py-2 h-28 resize-none focus:ring-2 focus:ring-indigo-400 outline-none"></textarea>
+                        class="w-full border rounded-lg px-3 py-2 h-28 resize-none focus:ring-2 focus:ring-blue-400 outline-none"></textarea>
                 </div>
 
                 {{-- COVER --}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-medium text-gray-600">Cover</label>
                     <input type="file" name="cover"
-                        class="w-full border rounded-lg px-3 py-2 bg-white file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-indigo-500 file:text-white">
+                        class="w-full border rounded-lg px-3 py-2 bg-white file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-cyan-500 file:text-white">
                 </div>
 
                 {{-- BUTTON --}}
                 <div class="flex gap-3 mt-6">
 
-                    <button class="flex-1 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
+                    <button class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
                         Simpan
                     </button>
 

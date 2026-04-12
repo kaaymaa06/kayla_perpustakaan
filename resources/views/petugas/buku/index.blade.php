@@ -8,7 +8,7 @@
         <h2 class="text-2xl font-bold text-gray-800">Data Buku</h2>
 
         <a href="{{ route('petugas.buku.create') }}"
-           class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-4 py-2 rounded-lg shadow hover:shadow-md hover:scale-105 transition">
+           class="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-lg shadow hover:shadow-md hover:scale-105 transition">
             + Tambah Buku
         </a>
     </div>
@@ -62,7 +62,7 @@
                         </td>
 
                         <td class="px-4 py-3">
-                            <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs font-semibold">
+                            <span class="px-2 py-1 bg-indigo-100 text-cyan-700 rounded text-xs font-semibold">
                                 {{ $b->stok }}
                             </span>
                         </td>

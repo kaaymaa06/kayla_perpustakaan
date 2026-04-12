@@ -8,7 +8,7 @@
         <h2 class="text-2xl font-bold text-gray-800">Data Buku</h2>
 
         <a href="{{ route('kepala.buku.create') }}"
-           class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-4 py-2 rounded-lg shadow hover:shadow-md hover:scale-105 transition">
+           class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg shadow hover:shadow-md hover:scale-105 transition">
             + Tambah Buku
         </a>
     </div>

@@ -11,7 +11,7 @@
         </div>
 
         <a href="{{ route('petugas.akun.create') }}"
-           class="bg-blue-500 font-semibold text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition shadow">
+           class="bg-cyan-500 font-semibold text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition shadow">
             + Tambah Akun
         </a>
     </div>
@@ -55,7 +55,7 @@
 
                         <td class="px-4 py-3 text-gray-600">
                             @if($user->role == 'anggota' && $user->anggota)
-                                <span class="text-indigo-600 font-medium">
+                                <span class="text-cyan-600 font-medium">
                                     NIS: {{ $user->anggota->nis }}
                                 </span>
                                 <br>
@@ -64,12 +64,12 @@
                                 </span>
 
                             @elseif($user->role == 'petugas' && $user->petugas)
-                                <span class="text-blue-600 font-medium">
+                                <span class="text-cyan-600 font-medium">
                                     NIP: {{ $user->petugas->nip_petugas ?? '-' }}
                                 </span>
 
                             @elseif($user->role == 'kepala' && $user->kepala)
-                                <span class="text-purple-600 font-medium">
+                                <span class="text-cyan-600 font-medium">
                                     NIP: {{ $user->kepala->nip_kepala ?? '-' }}
                                 </span>
                             @else
@@ -81,7 +81,7 @@
                             <div class="flex flex-wrap gap-2 justify-center">
 
                                 <a href="{{ route('petugas.akun.detail', $user->id) }}"
-                                   class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+                                   class="px-3 py-1 bg-cyan-500 text-white rounded hover:bg-blue-600 transition">
                                     Detail
                                 </a>
 

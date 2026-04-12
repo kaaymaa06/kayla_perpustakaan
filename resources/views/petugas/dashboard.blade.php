@@ -17,7 +17,7 @@
         {{-- Total Buku --}}
         <div class="bg-white p-5 rounded-2xl shadow border">
             <p class="text-gray-500 text-sm">Total Buku</p>
-            <h2 class="text-3xl font-bold text-indigo-600 mt-2">
+            <h2 class="text-3xl font-bold text-blue-600 mt-2">
                 {{ $totalBuku }}
             </h2>
         </div>
@@ -33,7 +33,7 @@
         {{-- Peminjaman --}}
         <div class="bg-white p-5 rounded-2xl shadow border">
             <p class="text-gray-500 text-sm">Peminjaman Aktif</p>
-            <h2 class="text-3xl font-bold text-yellow-500 mt-2">
+            <h2 class="text-3xl font-bold text-blue-500 mt-2">
                 {{ $totalPeminjaman }}
             </h2>
         </div>

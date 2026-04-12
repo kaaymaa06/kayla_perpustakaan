@@ -17,7 +17,7 @@
         {{-- TOTAL BUKU --}}
         <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
             <p class="text-gray-500 ">Total Buku</p>
-            <h2 class="text-3xl font-bold text-indigo-600">
+            <h2 class="text-3xl font-bold text-blue-600">
                 {{ $totalBuku ?? 0 }}
             </h2>
         </div>
@@ -25,7 +25,7 @@
         {{-- DIPINJAM --}}
         <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
             <p class="text-gray-500 ">Sedang Dipinjam</p>
-            <h2 class="text-3xl font-bold text-green-600">
+            <h2 class="text-3xl font-bold text-blue-600">
                 {{ $dipinjam ?? 0 }}
             </h2>
         </div>
@@ -34,7 +34,7 @@
         <div class="bg-white p-5 rounded-2xl shadow hover:shadow-md transition">
             <p class="text-gray-500 ">Total Denda</p>
             <h2 class="text-3xl font-bold
-            {{ $totalDenda > 0 ? 'text-red-600' : 'text-green-600' }}">
+            {{ $totalDenda > 0 ? 'text-red-600' : 'text-blue-600' }}">
 
             @if($totalDenda > 0)
                 Rp {{ number_format($totalDenda) }}
@@ -65,7 +65,7 @@
             <a href="{{ route('anggota.buku.index') }}"
                class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition block">
 
-                <h3 class="font-semibold text-lg text-indigo-600">Katalog Buku</h3>
+                <h3 class="font-semibold text-lg text-blue-600">Katalog Buku</h3>
                 <p class=" text-gray-500 mt-1">Cari & pinjam buku</p>
             </a>
 
@@ -73,7 +73,7 @@
             <a href="{{ route('anggota.peminjaman.index') }}"
                class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition block">
 
-                <h3 class="font-semibold text-lg text-green-600">📖 Peminjaman</h3>
+                <h3 class="font-semibold text-lg text-blue-600">📖 Peminjaman</h3>
                 <p class="text-gray-500 mt-1">Lihat buku yang sedang dipinjam</p>
             </a>
 
@@ -95,6 +95,7 @@
         <ul class=" text-gray-600 space-y-2">
             <li>Lama peminjaman: 7 hari</li>
             <li>Denda keterlambatan: Rp 1.000 / hari</li>
+            <li>Jika buku Rrusak: denda Rp 5.000</li>
             <li>Jika buku hilang: denda Rp 50.000</li>
         </ul>
     </div>

@@ -23,7 +23,7 @@
                 <div class="mb-5">
                     <label class="block mb-1 text-sm text-gray-600">Role</label>
                     <select name="role" id="role"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                         <option value="">-- Pilih role --</option>
                         <option value="anggota">Anggota</option>
                         <option value="petugas">Petugas</option>
@@ -36,7 +36,7 @@
                 <div class="mb-5">
                     <label class="block mb-1 text-sm text-gray-600">Nama</label>
                     <input type="text" name="name"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         value="{{ old('name') }}">
                 </div>
 
@@ -44,7 +44,7 @@
                 <div class="mb-5">
                     <label class="block mb-1 text-sm text-gray-600">Email</label>
                     <input type="email" name="email"
-                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         value="{{ old('email') }}">
                 </div>
 
@@ -53,12 +53,12 @@
                     <div>
                         <label class="block mb-1 text-sm text-gray-600">Password</label>
                         <input type="password" name="password"
-                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                     </div>
                     <div>
                         <label class="block mb-1 text-sm text-gray-600">Konfirmasi</label>
                         <input type="password" name="password_confirmation"
-                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@
 
                 {{-- ANGGOTA --}}
                 <div id="fieldAnggota" class="mb-6">
-                    <h5 class="font-semibold mb-3 text-indigo-600">Data Anggota</h5>
+                    <h5 class="font-semibold mb-3 text-cyan-600">Data Anggota</h5>
 
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <input type="text" name="nis"
@@ -88,7 +88,7 @@
 
                 {{-- PETUGAS --}}
                 <div id="fieldPetugas" class="mb-6">
-                    <h5 class="font-semibold mb-3 text-blue-600">Data Petugas</h5>
+                    <h5 class="font-semibold mb-3 text-cyan-600">Data Petugas</h5>
 
                     <div class="grid grid-cols-2 gap-4">
                         <input type="text" name="nip_petugas"
@@ -105,7 +105,7 @@
 
                 {{-- KEPALA --}}
                 <div id="fieldKepala" class="mb-6">
-                    <h5 class="font-semibold mb-3 text-purple-600">Data Kepala</h5>
+                    <h5 class="font-semibold mb-3 text-cyan-600">Data Kepala</h5>
 
                     <input type="text" name="nip_kepala"
                         placeholder="NIP"
@@ -116,7 +116,7 @@
                 {{-- BUTTON --}}
                 <div class="flex gap-3 mt-6">
                     <button type="submit"
-                        class="flex-1 bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition">
+                        class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
                         Simpan
                     </button>
 
