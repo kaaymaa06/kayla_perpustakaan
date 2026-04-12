@@ -24,7 +24,7 @@
     <div class="bg-white rounded-2xl shadow-md overflow-hidden">
 
         <div class="overflow-x-auto">
-            <table class="w-full ">
+            <table class="w-full">
 
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
@@ -72,26 +72,23 @@
                                 <img src="{{ asset('storage/'.$b->cover) }}"
                                      class="w-14 h-20 object-cover rounded-lg border shadow-sm">
                             @else
-                                <span class="text-gray-400 ">-</span>
+                                <span class="text-gray-400">-</span>
                             @endif
                         </td>
 
                         <td class="px-4 py-3 flex gap-2">
 
                             <a href="{{ route('kepala.buku.edit', $b->id) }}"
-                               class="px-3 py-1 bg-yellow-400 text-white rounded-md hover:bg-yellow-500 transition ">
+                               class="px-3 py-1 bg-yellow-400 text-white rounded-md hover:bg-yellow-500 transition">
                                 Edit
                             </a>
 
-                            <form action="{{ route('kepala.buku.destroy', $b->id) }}"
-                                  method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button onclick="return confirm('Yakin hapus?')"
-                                    class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-500 transition ">
-                                    Hapus
-                                </button>
-                            </form>
+                            {{-- GANTI BUTTON HAPUS --}}
+                            <button type="button"
+                                onclick="openModal('{{ route('kepala.buku.destroy', $b->id) }}')"
+                                class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition">
+                                Hapus
+                            </button>
 
                         </td>
 
@@ -105,4 +102,49 @@
     </div>
 
 </div>
+
+{{-- MODAL HAPUS --}}
+<div id="modalHapus" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+
+    <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center">
+
+        <p class="mb-4 text-gray-700 font-medium">
+            Yakin ingin hapus buku ini?
+        </p>
+
+        <div class="flex justify-center gap-3">
+
+            <form id="formHapus" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit"
+                    class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                    Ya, Hapus
+                </button>
+            </form>
+
+            <button onclick="closeModal()"
+                class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
+                Batal
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{{-- SCRIPT --}}
+<script>
+    function openModal(url) {
+        document.getElementById('modalHapus').classList.remove('hidden');
+        document.getElementById('formHapus').action = url;
+    }
+
+    function closeModal() {
+        document.getElementById('modalHapus').classList.add('hidden');
+    }
+</script>
+
 @endsection

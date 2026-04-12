@@ -4,7 +4,7 @@
 <div class="p-6 min-h-screen space-y-6 ">
 
     {{-- HEADER --}}
-    <div class="bg-gradient-to-r from-indigo-500 to-blue-500 p-6 rounded-2xl shadow text-white">
+    <div class="bg-white p-6 rounded-2xl shadow text-gray-700">
         <h1 class="text-2xl font-bold">Halo, {{ auth()->user()->name }} </h1>
         <p class=" opacity-90 mt-1">
             Selamat datang di dashboard perpustakaan

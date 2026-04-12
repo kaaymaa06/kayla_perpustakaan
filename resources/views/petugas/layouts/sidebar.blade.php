@@ -18,7 +18,7 @@
         <li class="nav-item mb-2">
             <a href="{{ route('petugas.peminjaman.index') }}"
                 class="nav-link sidebar-link {{ request()->routeIs('petugas.peminjaman.index') ? 'active' : '' }}">
-                Konfirmasi Peminjaman
+                Peminjaman
             </a>
         </li>
 
@@ -61,7 +61,7 @@
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit"
-                    class="nav-link sidebar-link w-100 text-start border-0 bg-transparent text-white">
+                    class="nav-link sidebar-link">
                     Logout
                 </button>
             </form>

@@ -1,60 +1,64 @@
 @extends('petugas.layouts.app')
 
 @section('content')
-<div class="p-6 flex justify-center  min-h-screen items-start">
+<div class="p-4 min-h-screen flex justify-center items-center">
 
     <div class="w-full max-w-md">
-        <div class="bg-white rounded-xl shadow p-6">
+
+        <div class="bg-white rounded-3xl shadow-lg p-6">
 
             {{-- HEADER --}}
-            <h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">
-                Edit Profile Petugas
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                Edit Profile
             </h3>
 
-            <form action="{{ route('petugas.profile.update', $petugas->id) }}" method="POST" class="space-y-4">
+            <form action="{{ route('petugas.profile.update', $petugas->id) }}" method="POST" class="space-y-5">
                 @csrf
                 @method('PUT')
 
                 {{-- NAMA --}}
                 <div>
-                    <label class="block text-sm text-gray-600 mb-1">Nama</label>
+                    <label class="block text-sm text-gray-500 mb-1">Nama</label>
                     <input type="text" name="name"
-                        class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
                         value="{{ old('name', $petugas->user->name) }}">
                 </div>
 
                 {{-- EMAIL --}}
                 <div>
-                    <label class="block text-sm text-gray-600 mb-1">Email</label>
+                    <label class="block text-sm text-gray-500 mb-1">Email</label>
                     <input type="email" name="email"
-                        class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
                         value="{{ old('email', $petugas->user->email) }}">
                 </div>
 
                 {{-- NIP --}}
                 <div>
-                    <label class="block text-sm text-gray-600 mb-1">NIP</label>
+                    <label class="block text-sm text-gray-500 mb-1">NIP</label>
                     <input type="text" name="nip_petugas"
-                        class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
                         value="{{ old('nip_petugas', $petugas->nip_petugas) }}">
                 </div>
 
                 {{-- BUTTON --}}
-                <div class="flex gap-2 pt-2">
+                <div class="flex gap-3 pt-4">
+
                     <button type="submit"
-                        class="flex-1 bg-indigo-500 text-white py-2 rounded hover:bg-indigo-600 transition">
+                        class="flex-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2.5 rounded-lg hover:opacity-90 transition font-medium shadow">
                         Simpan
                     </button>
 
                     <a href="{{ route('petugas.profile.index') }}"
-                       class="flex-1 text-center bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400 transition">
+                       class="flex-1 text-center bg-gray-200 text-gray-700 py-2.5 rounded-lg hover:bg-gray-300 transition font-medium">
                         Kembali
                     </a>
+
                 </div>
 
             </form>
 
         </div>
+
     </div>
 
 </div>

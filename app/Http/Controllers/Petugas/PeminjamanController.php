@@ -16,16 +16,16 @@ class PeminjamanController extends Controller
         return view('petugas.peminjaman.index', compact('peminjaman'));
     }
 
-    public function tolak($id)
+    public function tolak(Request $request, $id)
     {
-        $peminjaman = Peminjaman::findOrFail($id);
+        $p = Peminjaman::findOrFail($id);
 
-        $peminjaman->update([
-            'status' => 'ditolak',
-            'keterangan' => 'Peminjaman ditolak oleh petugas'
-        ]);
+        $p->status = 'ditolak';
+        $p->keterangan = $request->keterangan;
 
-        return back()->with('success', 'Peminjaman ditolak');
+        $p->save();
+
+        return redirect()->back()->with('success', 'Peminjaman ditolak');
     }
 
     public function formKonfirmasi($id)

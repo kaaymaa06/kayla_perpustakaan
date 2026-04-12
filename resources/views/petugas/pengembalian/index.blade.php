@@ -1,76 +1,85 @@
 @extends('petugas.layouts.app')
 
 @section('content')
-<div class="p-6">
+<div class="p-6 min-h-screen">
 
-    <h2 class="text-2xl font-semibold mb-6">Data Pengembalian Buku</h2>
+    <h2 class="text-xl font-semibold mb-6 text-gray-800">
+        Data Pengembalian Buku
+    </h2>
 
-    <div class="bg-white rounded-xl shadow overflow-x-auto">
+    <div class="bg-white rounded-2xl shadow-sm border">
 
-        <table class="w-full border-collapse">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="p-3">No</th>
-                    <th class="p-3 text-left">Nama</th>
-                    <th class="p-3 text-left">Judul Buku</th>
-                    <th class="p-3 text-left">Tanggal Pinjam</th>
-                    <th class="p-3 text-left">Jatuh Tempo</th>
-                    <th class="p-3 text-left">Status</th>
-                    <th class="p-3 text-center">Aksi</th>
-                </tr>
-            </thead>
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[800px]">
 
-            <tbody>
-                @forelse ($peminjaman as $index => $p)
-                <tr class="border-b">
+                <thead class="bg-gray-100 text-gray-700">
+                    <tr>
+                        <th class="p-3">No</th>
+                        <th class="p-3 text-left">Nama</th>
+                        <th class="p-3 text-left">Judul Buku</th>
+                        <th class="p-3 text-left">Tanggal Pinjam</th>
+                        <th class="p-3 text-left">Jatuh Tempo</th>
+                        <th class="p-3 text-left">Status</th>
+                        <th class="p-3 text-center">Aksi</th>
+                    </tr>
+                </thead>
 
-                    <td class="p-3">{{ $index + 1 }}</td>
+                <tbody>
+                    @forelse ($peminjaman as $index => $p)
+                    <tr class="border-b hover:bg-gray-50 transition">
 
-                    <td class="p-3">{{ $p->user->name ?? '-' }}</td>
+                        <td class="p-3">{{ $index + 1 }}</td>
 
-                    <td class="p-3">{{ $p->buku->judul_buku ?? '-' }}</td>
+                        <td class="p-3 font-medium text-gray-800">
+                            {{ $p->user->name ?? '-' }}
+                        </td>
 
-                    <td class="p-3">
-                        {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
-                    </td>
+                        <td class="p-3 text-gray-600">
+                            {{ $p->buku->judul_buku ?? '-' }}
+                        </td>
 
-                    <td class="p-3">
-                        {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
+                        <td class="p-3 text-gray-600">
+                            {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
+                        </td>
 
-                        @if($p->jatuh_tempo && now()->gt($p->jatuh_tempo))
-                            <div class="text-red-500 text-xs">
-                                Terlambat
-                            </div>
-                        @endif
-                    </td>
+                        <td class="p-3 text-gray-600">
+                            {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
 
-                    <td class="p-3">
-                        <span class="bg-green-200 text-green-800 px-2 py-1 rounded">
-                            Dipinjam
-                        </span>
-                    </td>
+                            @if($p->jatuh_tempo && now()->gt($p->jatuh_tempo))
+                                <div class="text-red-500 mt-1">
+                                    Terlambat
+                                </div>
+                            @endif
+                        </td>
 
-                    {{-- AKSI --}}
-                    <td class="p-3 text-center">
+                        <td class="p-3">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded">
+                                Dipinjam
+                            </span>
+                        </td>
 
-                        <a href="{{ route('petugas.pengembalian.form', $p->id) }}"
-                            class="bg-blue-500 text-white px-3 py-1 rounded text-sm">
-                            Konfirmasi Pengembalian
-                        </a>
+                        {{-- AKSI --}}
+                        <td class="p-3 text-center">
 
-                    </td>
+                            <a href="{{ route('petugas.pengembalian.form', $p->id) }}"
+                                class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded transition">
+                                Konfirmasi
+                            </a>
 
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="7" class="text-center p-4">
-                        Tidak ada data pengembalian
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
+                        </td>
 
-        </table>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="text-center p-6 text-gray-500">
+                            Tidak ada data pengembalian
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+
+            </table>
+        </div>
 
     </div>
 
