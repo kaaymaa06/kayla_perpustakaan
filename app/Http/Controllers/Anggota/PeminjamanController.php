@@ -9,13 +9,13 @@ use App\Models\Buku;
 
 class PeminjamanController extends Controller
 {
+    //proses pinjam buku
     public function pinjam($id)
     {
+        //ambil data buku
         $buku = Buku::findOrFail($id);
 
-        // =========================
-        // 1. CEK DENDA DULU 🔥
-        // =========================
+        //cek apakah masih ada denda
         $cekDenda = Peminjaman::where('user_id', auth()->id())
             ->where('status_denda', 'belum bayar')
             ->exists();
@@ -24,16 +24,12 @@ class PeminjamanController extends Controller
             return back()->with('error', 'Masih ada denda yang belum dibayar!');
         }
 
-        // =========================
-        // 2. CEK STOK
-        // =========================
+        //cek stok buku
         if ($buku->stok <= 0) {
             return back()->with('error', 'Stok habis');
         }
 
-        // =========================
-        // 3. SIMPAN DATA
-        // =========================
+        // simpan data peminjaman
         Peminjaman::create([
             'user_id' => auth()->id(),
             'buku_id' => $id,
@@ -45,7 +41,7 @@ class PeminjamanController extends Controller
             ->with('success', 'Berhasil mengajukan peminjaman');
     }
 
-    // TAMPIL DATA PEMINJAMAN ANGGOTA
+    // menampilkan peminjaman
     public function index()
     {
         $peminjaman = Peminjaman::with('buku')
@@ -56,6 +52,7 @@ class PeminjamanController extends Controller
         return view('anggota.peminjaman.index', compact('peminjaman'));
     }
 
+    //detail peminjaman
     public function view($id)
     {
         $peminjaman = Peminjaman::with('buku')
@@ -66,7 +63,7 @@ class PeminjamanController extends Controller
         return view('anggota.peminjaman.view', compact('peminjaman'));
     }
 
-
+    //hapus data peminjaman
     public function destroy($id)
     {
         $data = Peminjaman::where('id', $id)
@@ -78,6 +75,7 @@ class PeminjamanController extends Controller
         return back()->with('success', 'Data berhasil dihapus');
     }
 
+    //menampilkan riwayat peminjaman
     public function riwayat()
     {
         $riwayat = Peminjaman::with('buku')

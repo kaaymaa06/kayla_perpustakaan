@@ -9,16 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    //menambahkan kolon jatuh tempo
     public function up(): void
     {
         Schema::table('peminjaman', function (Blueprint $table) {
-            $table->date('jatuh_tempo')->nullable();
+            $table->date('jatuh_tempo')->nullable(); //batas pengembalian
         });
     }
 
     /**
      * Reverse the migrations.
      */
+
+    //menghapus kolom pas rollback
     public function down(): void
     {
         Schema::table('peminjaman', function (Blueprint $table) {

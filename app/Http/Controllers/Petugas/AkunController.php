@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AkunController extends Controller
 {
-    // MENAMPILKAN SEMUA AKUN
+    // menampilkan semua akun
     public function index()
     {
         // Mengambil semua user, urutkan terbaru
@@ -21,16 +21,16 @@ class AkunController extends Controller
         return view('petugas.akun.index', compact('users'));
     }
 
-    // FORM TAMBAH AKUN
+    //form tambah akun
     public function create()
     {
         return view('petugas.akun.create');
     }
 
-    // SIMPAN KE DATABASE (LOGIKA DINAMIS)
+    //simpan akun baru
     public function store(Request $request)
     {
-        // Validasi Dasar (Berlaku untuk semua role)
+        // Validasi Dasar buat role
         $rules = [
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email',
@@ -53,10 +53,9 @@ class AkunController extends Controller
 
         $request->validate($rules);
 
-        // MULAI TRANSACTION
         DB::beginTransaction();
         try {
-            // 1. Buat Akun User Terlebih Dahulu
+            //simpan ke tabel user
             $user = User::create([
                 'name'     => $request->name,
                 'email'    => $request->email,
@@ -64,7 +63,7 @@ class AkunController extends Controller
                 'role'    => $request->role,
             ]);
 
-            // 2. Simpan Data ke Tabel Profil Berdasarkan role
+            // simpan ke tabel sesuai role
             if ($request->role == 'anggota') {
                 Anggota::create([
                     'user_id' => $user->id,
@@ -96,12 +95,12 @@ class AkunController extends Controller
         }
     }
 
-    // FORM EDIT AKUN
+    //form edit akun
     public function edit($id)
     {
         $user = User::findOrFail($id);
 
-        // Ambil data profilnya berdasarkan role
+        // Ambil data sesuai role
         if ($user->role == 'anggota') {
             $user->load('anggota');
         } elseif ($user->role == 'petugas') {
@@ -113,11 +112,12 @@ class AkunController extends Controller
         return view('petugas.akun.edit', compact('user'));
     }
 
-    // UPDATE DATABASE
+    //update akun
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
+        //validasi
         $rules = [
             'name'  => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -136,13 +136,13 @@ class AkunController extends Controller
 
         DB::beginTransaction();
         try {
-            // 1. Update Data User
+            //update user
             $user->update([
                 'name'  => $request->name,
                 'email' => $request->email,
             ]);
 
-            // 2. Update Data Profil
+            //update profile sesuai role
             if ($user->role == 'anggota') {
                 $user->anggota->update([
                     'nis'    => $request->nis,
@@ -169,27 +169,27 @@ class AkunController extends Controller
         }
     }
 
-    //DETAIL AKUN
+    //detail akun
     public function detail($id)
-{
-    $user = User::findOrFail($id);
+    {
+        $user = User::findOrFail($id);
 
-    if ($user->role == 'anggota') {
-        $user->load('anggota');
-    } elseif ($user->role == 'petugas') {
-        $user->load('petugas');
-    } elseif ($user->role == 'kepala') {
-        $user->load('kepala');
+        if ($user->role == 'anggota') {
+            $user->load('anggota');
+        } elseif ($user->role == 'petugas') {
+            $user->load('petugas');
+        } elseif ($user->role == 'kepala') {
+            $user->load('kepala');
+        }
+
+        return view('petugas.akun.view', compact('user'));
     }
 
-    return view('petugas.akun.view', compact('user'));
-}
-
-    // HAPUS AKUN
+    //hapus akun
     public function destroy($id)
     {
-        // Karena pakai cascadeOnDelete() di migration,
-        // menghapus user OTOMATIS menghapus data anggota/petugas/kepalanya
+        // pakai cascadeOnDelete() di migration,
+        // menghapus user otomatis menghapus data anggota/petugas/kepalanya
         User::destroy($id);
         return redirect()->route('petugas.akun.index')->with('success', 'Akun berhasil dihapus!');
     }

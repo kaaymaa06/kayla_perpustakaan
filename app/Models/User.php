@@ -17,6 +17,8 @@ class user extends Authenticatable
      *
      * @var list<string>
      */
+
+    //kolom yang bisa diisi
     protected $fillable = [
         'name',
         'email',
@@ -29,24 +31,31 @@ class user extends Authenticatable
      *
      * @var list<string>
      */
+
+    //kolom yang disembunyi
     protected $hidden = [
         'password',
     ];
 
-    //relasi
+    //relasi ke anggota
     public function anggota()
     {
         return $this->hasOne(Anggota::class);
     }
+
+    //relasi ke petugas
      public function petugas()
     {
         return $this->hasOne(Petugas::class);
     }
+
+    //relasi ke kepala perpus
     public function kepala()
     {
         return $this->hasOne(KepalaPerpus::class);
     }
 
+    //relasi peminjaman
     public function peminjaman()
     {
         return $this->hasMany(Peminjaman::class);

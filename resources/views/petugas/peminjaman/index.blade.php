@@ -5,11 +5,12 @@
 
     <h2 class="text-2xl font-semibold mb-6">Data Peminjaman</h2>
 
+    {{-- TABEL KONTAINER --}}
     <div class="bg-white shadow rounded-xl overflow-x-auto">
 
         <table class="w-full">
 
-            {{-- HEADER --}}
+            {{-- HEADER TABEL--}}
             <thead class="bg-gray-100 text-gray-700">
                 <tr>
                     <th class="p-3">No</th>
@@ -33,20 +34,25 @@
                 @foreach($peminjaman as $p)
                 <tr class="hover:bg-gray-50 transition">
 
+                    {{-- NOMOR URUT--}}
                     <td class="p-3">{{ $loop->iteration }}</td>
 
+                    {{-- DATA USER --}}
                     <td class="p-3 font-medium text-gray-800">
                         {{ $p->user->name ?? '-' }}
                     </td>
 
+                    {{-- DATA BUKU --}}
                     <td class="p-3">
                         {{ $p->buku->judul_buku ?? '-' }}
                     </td>
 
+                    {{-- TANGGAL PINAJAM--}}
                     <td class="p-3">
                         {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
                     </td>
 
+                    {{-- JATUH TEMPO --}}
                     <td class="p-3">
                         {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
 
@@ -57,14 +63,17 @@
                         @endif
                     </td>
 
+                    {{-- TANGGAL KEMBALI --}}
                     <td class="p-3">
                         {{ $p->tanggal_kembali ? \Carbon\Carbon::parse($p->tanggal_kembali)->format('d-m-Y') : '-' }}
                     </td>
 
+                    {{-- DENDA --}}
                     <td class="p-3 font-semibold text-red-500">
                         Rp {{ number_format($p->denda ?? 0, 0, ',', '.') }}
                     </td>
 
+                    {{-- STATUS DENDA --}}
                     <td class="p-3">
                         <span class="px-2 py-1 rounded font-semibold
                             {{ $p->status_denda == 'lunas' ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700' }}">
@@ -72,10 +81,12 @@
                         </span>
                     </td>
 
+                    {{-- METODE PEMBAYARAN --}}
                     <td class="p-3">
                         {{ $p->metode_pembayaran ?? '-' }}
                     </td>
 
+                    {{-- TANGGAL BAYAR--}}
                     <td class="p-3">
                         {{ $p->tanggal_bayar ? \Carbon\Carbon::parse($p->tanggal_bayar)->format('d-m-Y') : '-' }}
                     </td>
@@ -93,11 +104,12 @@
                         @endif
                     </td>
 
+                    {{-- KETERANGAN --}}
                     <td class="p-3 text-gray-600">
                         {{ $p->keterangan ?? '-' }}
                     </td>
 
-                    {{-- AKSI --}}
+                    {{-- TOMBOL AKSI --}}
                     <td class="p-3 text-center">
                         <div class="flex flex-wrap gap-2 justify-center">
 
@@ -124,6 +136,7 @@
                                 Hapus
                             </button>
 
+                            {{-- BAYAR DENDA --}}
                             @if(($p->denda ?? 0) > 0 && $p->status_denda == 'belum bayar')
                             <form action="{{ route('petugas.peminjaman.bayar', $p->id) }}" method="POST">
                                 @csrf
@@ -203,7 +216,7 @@
     </div>
 </div>
 
-{{-- SCRIPT --}}
+{{-- SCRIPT MODAL --}}
 <script>
     function openModal(url) {
         document.getElementById('modalHapus').classList.remove('hidden');

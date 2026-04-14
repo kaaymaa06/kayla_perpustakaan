@@ -6,27 +6,31 @@
 </head>
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-cyan-600">
 
+{{-- conrainer card register --}}
 <div class="bg-gray-100 p-10 rounded-2xl shadow-xl w-full max-w-md">
 
+    {{-- judul halaman --}}
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">
         Daftar Anggota
     </h1>
 
+    {{-- sub judul --}}
     <p class="text-center text-gray-500 mb-6">
         Silakan isi data untuk membuat akun
     </p>
 
-    {{-- ERROR --}}
+    {{-- eror validasi --}}
     @if($errors->any())
         <div class="bg-red-100 text-red-700 p-3 mb-4 rounded-lg text-sm">
             {{ $errors->first() }}
         </div>
     @endif
 
+    {{-- form register --}}
     <form method="POST" action="/register" class="space-y-4">
         @csrf
 
-        {{-- NAMA --}}
+        {{-- input nama --}}
         <div>
             <label class="text-sm text-gray-600">Nama</label>
             <input type="text" name="name"
@@ -35,7 +39,7 @@
                 required>
         </div>
 
-        {{-- EMAIL --}}
+        {{-- input email --}}
         <div>
             <label class="text-sm text-gray-600">Email</label>
             <input type="email" name="email"
@@ -44,7 +48,7 @@
                 required>
         </div>
 
-        {{-- PASSWORD --}}
+        {{-- inpus password --}}
         <div>
             <label class="text-sm text-gray-600">Password</label>
             <input type="password" name="password"
@@ -52,7 +56,7 @@
                 required>
         </div>
 
-        {{-- KONFIRMASI PASSWORD --}}
+        {{-- konfirmasi password --}}
         <div>
             <label class="text-sm text-gray-600">Konfirmasi Password</label>
             <input type="password" name="password_confirmation"
@@ -60,7 +64,7 @@
                 required>
         </div>
 
-        {{-- NIS --}}
+        {{-- input nis --}}
         <div>
             <label class="text-sm text-gray-600">NIS</label>
             <input type="text" name="nis"
@@ -69,7 +73,7 @@
                 required>
         </div>
 
-        {{-- KELAS --}}
+        {{-- inut kelas --}}
         <div>
             <label class="text-sm text-gray-600">Kelas</label>
             <input type="text" name="kelas"
@@ -78,7 +82,7 @@
                 required>
         </div>
 
-        {{-- BUTTON --}}
+        {{-- tombol register --}}
         <button class="w-full py-3 rounded-lg text-white font-semibold
             bg-gradient-to-r from-blue-500 to-cyan-600
             hover:opacity-90 transition">
@@ -86,7 +90,7 @@
         </button>
     </form>
 
-    {{-- LOGIN --}}
+    {{-- link ke login --}}
     <p class="text-center text-sm mt-6">
         Sudah punya akun?
         <a href="/login" class="text-blue-600 font-medium hover:underline">

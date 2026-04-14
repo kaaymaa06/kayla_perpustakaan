@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="p-6 min-h-screen flex justify-center items-start bg-gray-50">
+<div class="p-6 min-h-screen flex justify-center items-start">
 
     <div class="w-full max-w-3xl">
         <div class="bg-white p-6 rounded-2xl shadow-md">
@@ -44,7 +44,7 @@
                 Jatuh tempo akan otomatis ditentukan selama <b>7 hari</b> oleh sistem.
             </div>
 
-            {{-- Form --}}
+            {{-- FORM KONFIRMASI --}}
             <form action="{{ route('petugas.peminjaman.proses', $peminjaman->id) }}" method="POST">
                 @csrf
 

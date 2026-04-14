@@ -3,7 +3,7 @@
 @section('content')
 <div class="p-6 flex justify-center min-h-screen">
 
-    {{-- CARD --}}
+    {{-- CARD UTAMA --}}
     <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-4xl h-fit">
 
         {{-- HEADER --}}
@@ -37,16 +37,22 @@
                     <input type="text" name="name"
                         class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 @error('name') border-red-500 @enderror"
                         value="{{ old('name', $user->name) }}">
+
+                    {{-- VALIDASI EROR NAMA --}}
                     @error('name')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
+
+                {{-- EMAIL --}}
                 <div>
                     <label class="block  font-medium text-gray-600 mb-1">Email</label>
                     <input type="email" name="email"
                         class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 @error('email') border-red-500 @enderror"
                         value="{{ old('email', $user->email) }}">
+
+                    {{-- VALIDASI EROR EMAIL --}}
                     @error('email')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -56,7 +62,7 @@
 
             <hr class="my-6">
 
-            {{-- ANGGOTA --}}
+            {{-- DATA TAMBAHAN ANGGOTA --}}
             @if($user->role == 'anggota' && $user->anggota)
             <div class="mb-6">
                 <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Anggota</h5>
@@ -73,6 +79,7 @@
                         @enderror
                     </div>
 
+                    {{-- KELAS --}}
                     <div>
                         <label class="block  text-gray-600 mb-1">Kelas</label>
                         <input type="text" name="kelas"
@@ -85,6 +92,7 @@
 
                 </div>
 
+                {{-- ALAMAT --}}
                 <div>
                     <label class="block  text-gray-600 mb-1">Alamat</label>
                     <input type="text" name="alamat"
@@ -94,13 +102,14 @@
             </div>
             @endif
 
-            {{-- PETUGAS --}}
+            {{-- DATA TAMABHAN PETUGAS --}}
             @if($user->role == 'petugas' && $user->petugas)
             <div class="mb-6">
                 <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Petugas</h5>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
+                    {{-- NIP --}}
                     <div>
                         <label class="block  text-gray-600 mb-1">NIP</label>
                         <input type="text" name="nip_petugas"
@@ -111,6 +120,7 @@
                         @enderror
                     </div>
 
+                    {{-- NO HP --}}
                     <div>
                         <label class="block  text-gray-600 mb-1">No HP</label>
                         <input type="text" name="no_hp"
@@ -122,11 +132,12 @@
             </div>
             @endif
 
-            {{-- KEPALA --}}
+            {{-- DATA TAMBAHAN KEPALA --}}
             @if($user->role == 'kepala' && $user->kepala)
             <div class="mb-6">
                 <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Kepala Perpus</h5>
 
+                {{-- NIP KEPALA --}}
                 <div>
                     <label class="block  text-gray-600 mb-1">NIP</label>
                     <input type="text" name="nip_kepala"

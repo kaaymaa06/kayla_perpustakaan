@@ -10,32 +10,33 @@ use Carbon\Carbon;
 
 class PeminjamanController extends Controller
 {
+    //menampilkan semua peminjaman
     public function index()
     {
-        // ❌ SUDAH TIDAK ADA FOREACH BUG
         $peminjaman = Peminjaman::with('buku', 'user')->latest()->get();
-
         return view('petugas.peminjaman.index', compact('peminjaman'));
     }
 
+    //tolak peminjaman
     public function tolak(Request $request, $id)
     {
         $p = Peminjaman::findOrFail($id);
 
         $p->status = 'ditolak';
         $p->keterangan = $request->keterangan;
-
         $p->save();
 
         return redirect()->back()->with('success', 'Peminjaman ditolak');
     }
 
+    //from konfirmasi peminjaman
     public function formKonfirmasi($id)
     {
         $peminjaman = Peminjaman::with('buku', 'user')->findOrFail($id);
         return view('petugas.peminjaman.konfirmasi', compact('peminjaman'));
     }
 
+    //proses konfirmasi peminjaman
     public function prosesKonfirmasi(Request $request, $id)
     {
         $peminjaman = Peminjaman::findOrFail($id);
@@ -49,7 +50,7 @@ class PeminjamanController extends Controller
         // kurangi stok
         $buku->decrement('stok');
 
-        // update peminjaman
+        // update status peminjaman
         $peminjaman->update([
             'status' => 'dipinjam',
             'tanggal_pinjam' => Carbon::now(),
@@ -61,6 +62,7 @@ class PeminjamanController extends Controller
             ->with('success', 'Peminjaman berhasil dikonfirmasi');
     }
 
+    //proses pengembalian buku
     public function konfirmasiKembali(Request $request, $id)
     {
         $request->validate([
@@ -71,9 +73,7 @@ class PeminjamanController extends Controller
         $denda = 0;
         $jenis = [];
 
-        // =========================
-        // DENDA TERLAMBAT
-        // =========================
+        //denda terlambat
         if ($p->jatuh_tempo && now()->gt($p->jatuh_tempo)) {
 
             $hari = \Carbon\Carbon::parse($p->jatuh_tempo)
@@ -85,9 +85,7 @@ class PeminjamanController extends Controller
             $jenis[] = 'terlambat';
         }
 
-        // =========================
-        // DENDA KONDISI
-        // =========================
+        // denda kondisi buku
         if ($request->kondisi == 'rusak') {
             $denda += 5000;
             $jenis[] = 'rusak';
@@ -96,23 +94,16 @@ class PeminjamanController extends Controller
             $jenis[] = 'hilang';
         }
 
-        // =========================
-        // UPDATE STOK
-        // =========================
+        //update stok kecuali hilang
         $buku = Buku::find($p->buku_id);
-
         if ($buku && $request->kondisi != 'hilang') {
             $buku->increment('stok');
         }
 
-        // =========================
-        // STATUS DENDA (INI KUNCI)
-        // =========================
+        //status denda
         $statusDenda = $denda > 0 ? 'belum bayar' : 'lunas';
 
-        // =========================
-        // UPDATE DATA
-        // =========================
+        //update data peminjaman
         $p->update([
             'tanggal_kembali' => now(),
             'status' => 'selesai',
@@ -126,6 +117,7 @@ class PeminjamanController extends Controller
             ->with('success', 'Pengembalian berhasil diproses');
     }
 
+    //hapus data
     public function destroy($id)
     {
         $peminjaman = Peminjaman::findOrFail($id);
@@ -134,12 +126,14 @@ class PeminjamanController extends Controller
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 
+    //detail peminjaman
     public function view($id)
     {
         $peminjaman = Peminjaman::with('user', 'buku')->findOrFail($id);
         return view('petugas.peminjaman.view', compact('peminjaman'));
     }
 
+    //menampilkan data pengembalian
     public function pengembalian()
     {
         $peminjaman = Peminjaman::with('user','buku')
@@ -149,13 +143,14 @@ class PeminjamanController extends Controller
         return view('petugas.pengembalian.index', compact('peminjaman'));
     }
 
+    //form pengembalian
     public function formKembali($id)
     {
         $peminjaman = Peminjaman::with('buku', 'user')->findOrFail($id);
-
         return view('petugas.pengembalian.form', compact('peminjaman'));
     }
 
+    //bayar denda
     public function bayarDenda($id)
     {
         $p = Peminjaman::findOrFail($id);

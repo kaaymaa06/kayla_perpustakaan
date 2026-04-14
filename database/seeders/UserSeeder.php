@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // ================= ANGGOTA =================
+        //buat user anggota
         $anggota = User::create([
             'name' => 'Anisha ',
             'email' => 'anisha@gmail.com',
@@ -21,13 +21,14 @@ class UserSeeder extends Seeder
             'role' => 'anggota',
         ]);
 
+        //simpan ke tabel anggota
         Anggota::create([
             'user_id' => $anggota->id,
             'nis' => '1001',
             'kelas' => 'XII RPL 1',
         ]);
 
-        // ================= PETUGAS =================
+        // buat user pertugas
         $petugas = User::create([
             'name' => 'Bunga',
             'email' => 'bunga@gmail.com',
@@ -35,13 +36,14 @@ class UserSeeder extends Seeder
             'role' => 'petugas',
         ]);
 
+        //simpan ke tabel petugas
         Petugas::create([
             'user_id' => $petugas->id,
             'nip_petugas' => 'P001',
             'no_hp' => '08123456789',
         ]);
 
-        // ================= KEPALA =================
+        //buat user kepala perpus
         $kepala = User::create([
             'name' => 'Kayla',
             'email' => 'kayla@gmail.com',
@@ -49,6 +51,7 @@ class UserSeeder extends Seeder
             'role' => 'kepala_perpus',
         ]);
 
+        //simpan user kepala perpus
         KepalaPerpus::create([
             'user_id' => $kepala->id,
             'nip_kepala' => 'K001',

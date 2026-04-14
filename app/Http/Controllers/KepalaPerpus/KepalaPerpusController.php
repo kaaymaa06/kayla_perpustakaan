@@ -8,13 +8,13 @@ use Illuminate\Routing\Controller;
 
 class KepalaPerpusController extends Controller
 {
-
+    //menampilkan profike kepala perpus
     public function index()
     {
-        // ambil 1 data kepala perpus (sementara)
+        //ambil data kepala + user
         $kepala = KepalaPerpus::with('user')->first();
 
-        // ambil inisial dari nama
+        //buat inisial nama
         $inisial = '';
         if ($kepala && $kepala->user) {
             $nama = explode(' ', $kepala->user->name);
@@ -24,39 +24,42 @@ class KepalaPerpusController extends Controller
             }
         }
 
+        //kirim ke view
         return view('kepala.profile.index', compact('kepala', 'inisial'));
     }
 
+    //form edit profile
     public function edit($id)
-{
-    $kepala = KepalaPerpus::with('user')->findOrFail($id);
+    {
+        $kepala = KepalaPerpus::with('user')->findOrFail($id);
 
-    return view('kepala.profile.edit', compact('kepala'));
-}
+        return view('kepala.profile.edit', compact('kepala'));
+    }
 
-public function update(Request $request, $id)
-{
-    $kepala = KepalaPerpus::with('user')->findOrFail($id);
+    //update data profle
+    public function update(Request $request, $id)
+    {
+        $kepala = KepalaPerpus::with('user')->findOrFail($id);
 
-    // validasi
-    $request->validate([
-        'name' => 'required',
-        'email' => 'required|email',
-        'nip_kepala' => 'required',
-    ]);
+        //validasi input
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'nip_kepala' => 'required',
+        ]);
 
-    // update user
-    $kepala->user->update([
-        'name' => $request->name,
-        'email' => $request->email,
-    ]);
+        // update user
+        $kepala->user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
 
-    // update kepala
-    $kepala->update([
-        'nip_kepala' => $request->nip_kepala,
-    ]);
+        // update data kepala
+        $kepala->update([
+            'nip_kepala' => $request->nip_kepala,
+        ]);
 
-    return redirect()->route('kepala.profile.index')->with('success', 'Data berhasil diupdate');
-}
+        return redirect()->route('kepala.profile.index')->with('success', 'Data berhasil diupdate');
+    }
 
 }

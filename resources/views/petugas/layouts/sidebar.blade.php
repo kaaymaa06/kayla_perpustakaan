@@ -76,6 +76,9 @@
             </a>
         </li>
 
+        {{-- Divider --}}
+        <hr class="border-white opacity-25 my-3">
+
         {{-- logout --}}
         <li class="nav-item">
             <form action="{{ route('logout') }}" method="POST">
@@ -92,49 +95,46 @@
 
 {{-- STYLE --}}
 <style>
+/* Container sidebar */
 .sidebar {
-    width: 260px;
-    min-height: 100vh;
-    background: linear-gradient(to right, #3b82f6, #0891b2);
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+    width: 260px; /*lebar side bar */
+    min-height: 100vh; /* tinggi full layar*/
+    background: linear-gradient(to right, #3b82f6, #0891b2); /*warna gradasi */
+    border-top-right-radius: 30px; /* sudut kenan atas melengkung */
+    border-bottom-right-radius: 30px; /*sudur kanan bawa melengkung */
+    box-shadow: 4px 0 20px rgba(0,0,0,0.1); /*scroll kalau menu banyak*/
 }
 
 /* Logo */
 .logo-sidebar {
-    width: 110px;
-    height: auto;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+    width: 110px; /*ukuran logo*/
+    height: auto; /* biar proporsional*/
+    margin-bottom: 10px; /*jarak bawah logo */
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2)); /*efek bayangan logo*/
 }
 
 /* Link default */
 .sidebar-link {
-    color: white;
-    border-radius: 12px;
-    padding: 10px 15px;
-    transition: all 0.3s ease;
-    display: block;
+    color: white; /*warna teks */
+    border-radius: 12px; /* sudut membulat*/
+    padding: 10px 15px; /* jarak dalam*/
+    transition: all 0.3s ease; /* animasi halus*/
+    display: block; /* biar full area bisa klik*/
 }
 
-/* Hover */
+/* Hover menu*/
 .sidebar-link:hover {
     background: rgba(255, 255, 255, 0.2);
     padding-left: 20px;
 }
 
-/* Active */
+/* menu aktip */
 .sidebar-link.active {
-    background: rgba(255, 255, 255, 0.35);
-    font-weight: 600;
-    box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.35); /* warna menu aktif */
+    font-weight: 600; /* teks lebih tebal */
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.2); /* efek dalam */
 }
 
-/* Logout hover */
-button.sidebar-link:hover {
-    background: rgba(255, 0, 0, 0.3);
-}
 
 /* Scroll halus (kalau menu banyak) */
 .sidebar {

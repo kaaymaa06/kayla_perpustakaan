@@ -21,7 +21,7 @@
                     {{ \Carbon\Carbon::parse($peminjaman->jatuh_tempo)->format('d-m-Y') }}
                 </p>
 
-                {{-- STATUS TERLAMBAT (TANPA HITUNG RUMIT DI BLADE) --}}
+                {{-- STATUS TERLAMBAT  --}}
                 @if(\Carbon\Carbon::now()->gt($peminjaman->jatuh_tempo))
                     <span class="inline-block mt-2 px-3 py-1 bg-red-500 text-white text-sm rounded-full">
                         Terlambat
@@ -33,7 +33,7 @@
                 @endif
             </div>
 
-            {{-- FORM --}}
+            {{-- FORM KONFIRMASI PENGEMBALIAN --}}
             <form action="{{ route('petugas.pengembalian.konfirmasi', $peminjaman->id) }}" method="POST">
                 @csrf
 
@@ -63,7 +63,7 @@
                         placeholder="Contoh: halaman robek">
                 </div>
 
-                {{-- BUTTON --}}
+                {{-- BUTTON  AKSI--}}
                 <div class="mt-6 flex gap-3">
 
                     <a href="{{ route('petugas.pengembalian.index') }}"

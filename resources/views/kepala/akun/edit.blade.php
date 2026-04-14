@@ -1,12 +1,14 @@
 @extends('kepala.layouts.app')
 
 @section('content')
+
+{{-- container utama halaman --}}
 <div class="p-6 flex justify-center min-h-screen">
 
-    {{-- CARD --}}
+    {{-- card form edit --}}
     <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-4xl h-fit">
 
-        {{-- HEADER --}}
+        {{-- header form  --}}
         <div class="mb-6 border-b pb-4">
             <h3 class="text-2xl font-bold text-gray-800">
                 Edit Akun
@@ -16,11 +18,12 @@
             </p>
         </div>
 
+        {{-- form update akun --}}
         <form action="{{ route('kepala.akun.update', $user->id) }}" method="POST">
             @method('PUT')
             @csrf
 
-            {{-- ROLE --}}
+            {{-- role user tidak bisa diubah --}}
             <div class="mb-5">
                 <label class="block font-medium text-gray-600 mb-1">Role</label>
                 <input type="text"
@@ -29,9 +32,10 @@
                 <p class="text-xs text-gray-400 mt-1">Role tidak bisa diubah</p>
             </div>
 
-            {{-- NAMA & EMAIL --}}
+            {{-- data user --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
 
+                {{-- nama --}}
                 <div>
                     <label class="block  font-medium text-gray-600 mb-1">Nama</label>
                     <input type="text" name="name"
@@ -42,6 +46,7 @@
                     @enderror
                 </div>
 
+                {{-- email --}}
                 <div>
                     <label class="block  font-medium text-gray-600 mb-1">Email</label>
                     <input type="email" name="email"
@@ -56,13 +61,15 @@
 
             <hr class="my-6">
 
-            {{-- ANGGOTA --}}
+            {{-- form anggota --}}
             @if($user->role == 'anggota' && $user->anggota)
             <div class="mb-6">
+
                 <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Anggota</h5>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
 
+                    {{-- nis --}}
                     <div>
                         <label class="block  text-gray-600 mb-1">NIS</label>
                         <input type="text" name="nis"
@@ -73,6 +80,7 @@
                         @enderror
                     </div>
 
+                    {{-- kelas --}}
                     <div>
                         <label class="block  text-gray-600 mb-1">Kelas</label>
                         <input type="text" name="kelas"
@@ -85,6 +93,7 @@
 
                 </div>
 
+                {{-- alamat --}}
                 <div>
                     <label class="block  text-gray-600 mb-1">Alamat</label>
                     <input type="text" name="alamat"
@@ -94,13 +103,15 @@
             </div>
             @endif
 
-            {{-- PETUGAS --}}
+            {{-- form petugas --}}
             @if($user->role == 'petugas' && $user->petugas)
             <div class="mb-6">
+
                 <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Petugas</h5>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
+                    {{-- nip --}}
                     <div>
                         <label class="block  text-gray-600 mb-1">NIP</label>
                         <input type="text" name="nip_petugas"
@@ -111,6 +122,7 @@
                         @enderror
                     </div>
 
+                    {{-- no hp --}}
                     <div>
                         <label class="block  text-gray-600 mb-1">No HP</label>
                         <input type="text" name="no_hp"
@@ -122,11 +134,12 @@
             </div>
             @endif
 
-            {{-- KEPALA --}}
+            {{-- form kepala --}}
             @if($user->role == 'kepala' && $user->kepala)
             <div class="mb-6">
                 <h5 class="text-lg font-semibold text-blue-600 mb-3">Data Kepala Perpus</h5>
 
+                {{-- nip kepala --}}
                 <div>
                     <label class="block  text-gray-600 mb-1">NIP</label>
                     <input type="text" name="nip_kepala"
@@ -139,7 +152,7 @@
             </div>
             @endif
 
-            {{-- BUTTON --}}
+            {{-- tombol update sama batal --}}
             <div class="flex gap-3 mt-8">
                 <button type="submit"
                     class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">

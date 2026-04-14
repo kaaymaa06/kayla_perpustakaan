@@ -3,24 +3,28 @@
 @section('content')
 <div class="p-6 min-h-screen">
 
+     {{-- judul halaman --}}
     <h2 class="text-2xl font-bold text-gray-800 mb-6">
         Peminjaman Saya
     </h2>
 
-    {{-- ================= ALERT ================= --}}
+    {{-- alert --}}
+
+    {{-- notifikasi eror --}}
     @if(session('error'))
         <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
             {{ session('error') }}
         </div>
     @endif
 
+     {{-- notofikasi sukser --}}
     @if(session('success'))
         <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
             {{ session('success') }}
         </div>
     @endif
 
-    {{-- ================= CEK DENDA ================= --}}
+    {{-- cek denda --}}
     @php
         $punyaDenda = \App\Models\Peminjaman::where('user_id', auth()->id())
             ->where('status', 'selesai')
@@ -28,6 +32,7 @@
             ->exists();
     @endphp
 
+    {{-- tampilakan warning jika ada denda --}}
     @if($punyaDenda)
         <div class="bg-yellow-100 text-yellow-800 p-4 rounded mb-4 flex justify-between items-center">
             <span>
@@ -41,12 +46,13 @@
         </div>
     @endif
 
-    {{-- ================= TABLE ================= --}}
+    {{-- tabel--}}
+
     <div class="bg-white rounded-2xl shadow-md overflow-hidden">
 
         <table class="w-full border-collapse">
 
-            {{-- HEADER --}}
+            {{-- header tabel --}}
             <thead class="bg-gray-100 text-gray-700 uppercase">
                 <tr>
                     <th class="px-4 py-3">No</th>
@@ -60,27 +66,31 @@
             </thead>
 
             <tbody>
+                {{-- loop data peminajan --}}
                 @foreach($peminjaman as $index => $p)
                 <tr class="border-b hover:bg-gray-50 transition">
 
+                    {{-- nomor--}}
                     <td class="px-4 py-3 text-center">
                         {{ $index + 1 }}
                     </td>
 
+                    {{-- kode buku --}}
                     <td class="px-4 py-3">
                         {{ $p->buku->kode_buku ?? '-' }}
                     </td>
 
+                    {{-- judul buku --}}
                     <td class="px-4 py-3 font-medium text-gray-800">
                         {{ $p->buku->judul_buku ?? '-' }}
                     </td>
 
-                    {{-- TANGGAL PINJAM --}}
+                    {{-- tanggal pinjam --}}
                     <td class="px-4 py-3">
                         {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
                     </td>
 
-                    {{-- JATUH TEMPO --}}
+                    {{-- jatuh tempo --}}
                     <td class="px-4 py-3">
                         @if($p->status == 'menunggu')
                             <span class="text-yellow-500 text-sm">
@@ -95,7 +105,7 @@
                         @endif
                     </td>
 
-                    {{-- STATUS --}}
+                    {{-- status --}}
                     <td class="px-4 py-3">
                         @if($p->status == 'menunggu')
                             <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
@@ -116,15 +126,17 @@
                         @endif
                     </td>
 
-                    {{-- AKSI --}}
+                    {{-- aksi --}}
                     <td class="px-4 py-3">
                         <div class="flex justify-center gap-2">
 
+                            {{-- tombol detail --}}
                             <a href="{{ route('anggota.peminjaman.view', $p->id) }}"
                                 class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">
                                 Detail
                             </a>
 
+                            {{-- tombol batalkan jika msih menunggu--}}
                             @if($p->status == 'menunggu')
                                 <button onclick="openModal({{ $p->id }})"
                                     class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
@@ -144,7 +156,8 @@
     </div>
 
 </div>
-{{-- MODAL HAPUS --}}
+
+{{-- modal hapus --}}
 <div id="modalHapus" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
 
     <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center animate-fadeIn">
@@ -155,6 +168,7 @@
 
         <div class="flex justify-center gap-3">
 
+            {{-- form hapus --}}
             <form id="formHapus" method="POST">
                 @csrf
                 @method('DELETE')
@@ -165,6 +179,7 @@
                 </button>
             </form>
 
+            {{-- tombol batal--}}
             <button onclick="closeModal()"
                 class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
                 Batal
@@ -176,15 +191,20 @@
 
 </div>
 
+{{-- script modal--}}
 <script>
     function openModal(id) {
         let form = document.getElementById('formHapus');
-        form.action = '/anggota/peminjaman/' + id; // sesuaikan route kamu
 
+        //set action sesuai id
+        form.action = '/anggota/peminjaman/' + id;
+
+        //tampilkan modal
         document.getElementById('modalHapus').classList.remove('hidden');
     }
 
     function closeModal() {
+        //sembunyikan modal
         document.getElementById('modalHapus').classList.add('hidden');
     }
 </script>

@@ -7,12 +7,14 @@
         Katalog Buku
     </h2>
 
+    {{-- grid daftar buku --}}
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
+        {{-- loop data buku --}}
         @foreach($buku as $b)
         <div class="bg-white rounded-2xl shadow hover:shadow-lg transition duration-300 p-4 flex flex-col">
 
-            {{-- COVER --}}
+            {{-- cover buku --}}
             @if($b->cover)
                 <div class="h-44 bg-gray-100 flex items-center justify-center rounded-lg mb-3">
                     <img src="{{ asset('storage/'.$b->cover) }}"
@@ -20,16 +22,17 @@
                 </div>
             @endif
 
-            {{-- JUDUL --}}
+            {{-- judul buku --}}
             <h3 class="font-semibold text-sm text-gray-800 line-clamp-2">
                 {{ $b->judul_buku }}
             </h3>
 
+            {{-- penulis --}}
             <p class="text-xs text-gray-500 mt-1">
                 {{ $b->penulis }}
             </p>
 
-            {{-- STOK --}}
+            {{-- stok buku --}}
             <p class="text-xs mt-2">
                 Stok:
                 <span class="font-semibold
@@ -38,7 +41,7 @@
                 </span>
             </p>
 
-            {{-- BUTTON --}}
+            {{-- tombol detail --}}
             <div class="mt-auto pt-3">
 
                 <a href="{{ route('anggota.buku.view', $b->id) }}"

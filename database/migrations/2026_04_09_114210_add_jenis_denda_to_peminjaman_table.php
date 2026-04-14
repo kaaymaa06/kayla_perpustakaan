@@ -9,10 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    //menambahkan kolom jenis denda
     public function up(): void
     {
         Schema::table('peminjaman', function (Blueprint $table) {
-            $table->string('jenis_denda')->nullable();
+            $table->string('jenis_denda')->nullable(); //jenis denda terlambat, rusak, atau hilang
         });
     }
 

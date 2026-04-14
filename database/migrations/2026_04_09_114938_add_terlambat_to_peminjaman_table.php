@@ -9,10 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    //menambahkan kolom status terlambat
     public function up(): void
     {
         Schema::table('peminjaman', function (Blueprint $table) {
-            $table->boolean('terlambat')->default(false);
+            $table->boolean('terlambat')->default(false); //false itu tidak terlambat
         });
     }
 

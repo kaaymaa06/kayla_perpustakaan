@@ -7,6 +7,7 @@
     <div class="flex justify-between items-center">
         <h2 class="text-2xl font-bold text-gray-800">Data Buku</h2>
 
+        {{-- TOMBOL TAMBAH BUKU --}}
         <a href="{{ route('petugas.buku.create') }}"
            class="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-lg shadow hover:shadow-md hover:scale-105 transition">
             + Tambah Buku
@@ -20,12 +21,13 @@
         </div>
     @endif
 
-    {{-- TABLE --}}
+    {{-- TABLE DATA BUKU --}}
     <div class="bg-white rounded-2xl shadow-md overflow-hidden">
 
         <div class="overflow-x-auto">
             <table class="w-full">
 
+                {{-- HEADER KOLOM TABEL --}}
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
@@ -39,34 +41,41 @@
                     </tr>
                 </thead>
 
+                {{-- DATA LOOP BUKU--}}
                 <tbody class="divide-y">
                     @foreach($buku as $index => $b)
                     <tr class="hover:bg-gray-50 transition">
 
                         <td class="px-4 py-3">{{ $index + 1 }}</td>
 
+                        {{-- KODE BUKU--}}
                         <td class="px-4 py-3 text-gray-600">
                             {{ $b->kode_buku }}
                         </td>
 
+                        {{-- JUDUL BUKU --}}
                         <td class="px-4 py-3 font-semibold text-gray-800">
                             {{ $b->judul_buku }}
                         </td>
 
+                        {{-- PENULIS --}}
                         <td class="px-4 py-3 text-gray-600">
                             {{ $b->penulis }}
                         </td>
 
+                        {{-- TAHUN TERBIT--}}
                         <td class="px-4 py-3">
                             {{ $b->tahun_terbit }}
                         </td>
 
+                        {{-- STOK BUKU --}}
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 bg-indigo-100 text-cyan-700 rounded text-xs font-semibold">
                                 {{ $b->stok }}
                             </span>
                         </td>
 
+                        {{-- COVER BUKU --}}
                         <td class="px-4 py-3">
                             @if($b->cover)
                                 <img src="{{ asset('storage/'.$b->cover) }}"
@@ -83,7 +92,7 @@
                                 Edit
                             </a>
 
-                            {{-- BUTTON HAPUS (PAKAI MODAL) --}}
+                            {{-- BUTTON HAPUS PAKE MODAL  --}}
                             <button type="button"
                                 onclick="openModal('{{ route('petugas.buku.destroy', $b->id) }}')"
                                 class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition">
@@ -103,7 +112,7 @@
 
 </div>
 
-{{-- MODAL HAPUS --}}
+{{-- MODAL KONFIRMASI HAPUS --}}
 <div id="modalHapus" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 
     <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center animate-fadeIn">
@@ -114,6 +123,7 @@
 
         <div class="flex justify-center gap-3">
 
+            {{-- FORM DELETE --}}
             <form id="formHapus" method="POST">
                 @csrf
                 @method('DELETE')
@@ -124,6 +134,7 @@
                 </button>
             </form>
 
+            {{-- TOMBOL BATAL --}}
             <button onclick="closeModal()"
                 class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
                 Batal
@@ -135,14 +146,16 @@
 
 </div>
 
-{{-- SCRIPT --}}
+{{-- SCRIPT MODAL--}}
 <script>
     function openModal(url) {
+         // menampilkan modal dan set action form delete
         document.getElementById('modalHapus').classList.remove('hidden');
         document.getElementById('formHapus').action = url;
     }
 
     function closeModal() {
+        // menyembunyikan modal
         document.getElementById('modalHapus').classList.add('hidden');
     }
 </script>

@@ -6,7 +6,7 @@
     <div class="w-full max-w-2xl">
         <div class="bg-white rounded-2xl shadow-lg p-8">
 
-            {{-- HEADER --}}
+            {{-- HEADER HALAMAN --}}
             <div class="mb-6">
                 <h2 class="text-2xl font-bold text-gray-800">
                     Edit Buku
@@ -16,11 +16,12 @@
                 </p>
             </div>
 
+            {{-- FORM EDIT BUKU --}}
             <form action="{{ route('petugas.buku.update', $buku->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                {{-- KODE --}}
+                {{-- KODE BUKU--}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Kode Buku</label>
                     <input type="text" name="kode_buku"
@@ -95,7 +96,7 @@
 
                 </div>
 
-                {{-- BUTTON --}}
+                {{-- BUTTON AKSI --}}
                 <div class="flex gap-3 mt-6">
                     <button class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
                         Update

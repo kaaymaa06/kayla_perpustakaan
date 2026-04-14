@@ -10,25 +10,26 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    //menampilkan dashboard kepala perpus
     public function index()
     {
+        //total buku dan anggota
         $totalBuku = Buku::count();
         $totalAnggota = User::count();
 
-        // peminjaman aktif
+        //total peminjaman aktip
         $totalPinjam = Peminjaman::where('status', 'dipinjam')->count();
 
-        // hari ini
+        //data hari ini
         $pinjamHariIni = Peminjaman::whereDate('created_at', today())->count();
-
         $kembaliHariIni = Peminjaman::whereDate('tanggal_kembali', today())->count();
 
-        // terlambat
+        //jumlah keterlambatan
         $terlambat = Peminjaman::where('status', 'dipinjam')
             ->where('jatuh_tempo', '<', now())
             ->count();
 
-        // buku populer
+        //buku yang sering dipinjam
         $bukuPopuler = Peminjaman::select('buku_id')
             ->selectRaw('count(*) as total')
             ->groupBy('buku_id')
@@ -42,13 +43,14 @@ class DashboardController extends Controller
                 ];
             });
 
-        // list terlambat
+        // list peminjaman yang terlambat
         $terlambatList = Peminjaman::with('user','buku')
             ->where('status', 'dipinjam')
             ->where('jatuh_tempo', '<', now())
             ->take(5)
             ->get();
 
+        //kirim ke view dahsboard
         return view('kepala.dashboard', compact(
             'totalBuku',
             'totalAnggota',

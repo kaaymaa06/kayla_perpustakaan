@@ -6,8 +6,10 @@
     <div class="w-full max-w-2xl">
         <div class="bg-white rounded-2xl shadow-md p-8">
 
-            {{-- HEADER --}}
+            {{-- HEADER HALAMAN  --}}
             <div class="mb-6">
+
+                {{-- TOMBOL TAMBAH BUKU --}}
                 <h2 class="text-2xl font-bold text-gray-800">
                     Tambah Buku
                 </h2>
@@ -27,6 +29,8 @@
                 </div>
             @endif
 
+
+            {{-- FORM TAMBAH BUKU --}}
             <form action="{{ route('petugas.buku.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 

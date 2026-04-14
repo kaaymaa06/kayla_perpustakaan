@@ -9,8 +9,10 @@ use Carbon\Carbon;
 
 class Peminjaman extends Model
 {
+    //nama tabel
     protected $table = 'peminjaman';
 
+    //kolom yang bisa diisi
     protected $fillable = [
         'user_id',
         'buku_id',
@@ -28,11 +30,13 @@ class Peminjaman extends Model
         'keterangan',
     ];
 
+    //relasi ke user anggota
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    //relasi ke buku
     public function buku()
     {
         return $this->belongsTo(Buku::class, 'buku_id');

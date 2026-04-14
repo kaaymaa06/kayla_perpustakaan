@@ -3,15 +3,17 @@
 @section('content')
 <div class="p-6 flex justify-center min-h-screen">
 
+    {{-- container utama --}}
     <div class="bg-white w-full max-w-4xl rounded-2xl shadow-lg p-6 h-fit">
 
+        {{-- judul --}}
         <h2 class="text-2xl font-bold mb-6 text-gray-800">
             Detail Buku
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
 
-            {{-- COVER --}}
+            {{-- cover buku --}}
             <div class="flex justify-center">
                 <div class="w-full h-70 bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden">
                     <img src="{{ asset('storage/' . $buku->cover) }}"
@@ -19,7 +21,7 @@
                 </div>
             </div>
 
-            {{-- DATA --}}
+            {{-- data buku --}}
             <div class="md:col-span-2">
 
                 <div class="w-full">
@@ -28,6 +30,7 @@
                         {{ $buku->judul_buku }}
                     </h2>
 
+                    {{-- informasi buku --}}
                     <div class="space-y-2 text-gray-700">
                         <p><b>Kode:</b> {{ $buku->kode_buku }}</p>
                         <p><b>Penulis:</b> {{ $buku->penulis }}</p>
@@ -40,7 +43,7 @@
                         </p>
                     </div>
 
-                    {{-- SINOPSIS --}}
+                    {{-- sinopsis --}}
                     <div class="mt-5">
                         <p class="font-semibold mb-1 text-gray-800">Sinopsis</p>
                         <p class="text-gray-600 leading-relaxed text-justify">
@@ -48,20 +51,24 @@
                         </p>
                     </div>
 
-                {{-- BUTTON --}}
+                {{-- tombol --}}
                 <div class="flex gap-3 mt-5">
 
+                    {{-- jika stok tersedia --}}
                     @if($buku->stok > 0)
                         <button onclick="openModal()"
                             class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                             Pinjam
                         </button>
                     @else
+
+                        {{-- jika stok habis --}}
                         <button class="bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed" disabled>
                             Stok Buku Habis
                         </button>
                     @endif
 
+                    {{-- tombol kembali --}}
                     <a href="{{ route('anggota.buku.index') }}"
                         class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
                         Kembali
@@ -77,7 +84,7 @@
 
 </div>
 
-{{-- MODAL --}}
+{{-- modal konfirmasi pinjam --}}
 <div id="modalPinjam" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
 
     <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center animate-fadeIn">
@@ -88,6 +95,7 @@
 
         <div class="flex justify-center gap-3">
 
+            {{-- form pinjam --}}
             <form action="{{ route('anggota.buku.pinjam', $buku->id) }}" method="POST">
                 @csrf
                 <button type="submit"
@@ -96,6 +104,7 @@
                 </button>
             </form>
 
+            {{-- tombol batal --}}
             <button onclick="closeModal()"
                 class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
                 Batal
@@ -107,6 +116,7 @@
 
 </div>
 
+{{-- script modal --}}
 <script>
     function openModal() {
         document.getElementById('modalPinjam').classList.remove('hidden');

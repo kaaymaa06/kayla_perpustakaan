@@ -3,7 +3,7 @@
 @section('content')
 <div class="p-6 min-h-screen space-y-6">
 
-    {{-- HEADER --}}
+    {{-- header dashboard --}}
     <div class="bg-white p-6 rounded-2xl shadow">
         <h1 class="text-2xl font-bold text-gray-800">
             Dashboard Kepala Perpustakaan
@@ -13,17 +13,18 @@
         </p>
     </div>
 
-    {{-- STATISTIK --}}
+    {{-- statistik --}}
     <div class="grid grid-cols-3 gap-6">
 
+        {{-- total buku --}}
         <div class="bg-white p-6 rounded-2xl shadow flex justify-between items-center">
             <div>
                 <p class="text-gray-400 text-sm">Total Buku</p>
                 <h2 class="text-3xl font-bold text-blue-600">{{ $totalBuku }}</h2>
             </div>
-
         </div>
 
+        {{-- total anggota --}}
         <div class="bg-white p-6 rounded-2xl shadow flex justify-between items-center">
             <div>
                 <p class="text-gray-400 ">Total Anggota</p>
@@ -31,6 +32,7 @@
             </div>
         </div>
 
+        {{-- peminjaman aktip --}}
         <div class="bg-white p-6 rounded-2xl shadow flex justify-between items-center">
             <div>
                 <p class="text-gray-400 ">Peminjaman Aktif</p>
@@ -40,22 +42,25 @@
 
     </div>
 
-    {{-- RINGKASAN HARI INI --}}
+    {{-- ringkasan hari ini --}}
     <div class="bg-white p-6 rounded-2xl shadow">
         <h3 class="text-lg font-semibold mb-4 text-gray-700">Ringkasan Hari Ini</h3>
 
         <div class="grid grid-cols-3 gap-4 text-center">
 
+            {{-- dipinajam hari ini --}}
             <div class="bg-gray-50 p-4 rounded-xl">
                 <p class=" text-gray-500">Dipinjam Hari Ini</p>
                 <p class="text-xl font-bold text-blue-600">{{ $pinjamHariIni ?? 0 }}</p>
             </div>
 
+            {{-- dikembalikan hari ini --}}
             <div class="bg-gray-50 p-4 rounded-xl">
                 <p class=" text-gray-500">Dikembalikan</p>
                 <p class="text-xl font-bold text-blue-600">{{ $kembaliHariIni ?? 0 }}</p>
             </div>
 
+            {{-- terlambat --}}
             <div class="bg-gray-50 p-4 rounded-xl">
                 <p class=" text-gray-500">Terlambat</p>
                 <p class="text-xl font-bold text-red-600">{{ $terlambat ?? 0 }}</p>
@@ -64,10 +69,10 @@
         </div>
     </div>
 
-    {{-- GRID DATA --}}
+    {{-- grid informasi tambahan --}}
     <div class="grid grid-cols-2 gap-6">
 
-        {{-- BUKU TERPOPULER --}}
+        {{-- buku teropuler --}}
         <div class="bg-white p-6 rounded-2xl shadow">
             <h3 class="text-lg font-semibold mb-4 text-gray-700">Buku Terpopuler</h3>
 
@@ -83,7 +88,7 @@
             </ul>
         </div>
 
-        {{-- ⏰ TERLAMBAT --}}
+        {{-- list terlambat --}}
         <div class="bg-white p-6 rounded-2xl shadow">
             <h3 class="text-lg font-semibold mb-4 text-gray-700">Peminjaman Terlambat</h3>
 
@@ -101,24 +106,27 @@
 
     </div>
 
-    {{-- 🔥 MENU CEPAT --}}
+    {{--menu cepat--}}
     <div>
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Menu Cepat</h2>
 
         <div class="grid grid-cols-3 gap-6">
 
+            {{-- menu data buku --}}
             <a href="{{ route('kepala.buku.index') }}"
                class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition block">
                 <h3 class="font-bold text-lg mb-1 text-blue-600"> Data Buku</h3>
                 <p class=" text-gray-500">Kelola semua buku</p>
             </a>
 
+            {{-- menu data akun --}}
             <a href="{{ route('kepala.akun.index') }}"
                class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition block">
                 <h3 class="font-bold text-lg mb-1 text-blue-600">Data Akun</h3>
                 <p class=" text-gray-500">Kelola pengguna</p>
             </a>
 
+            {{-- menu laporan --}}
             <a href="{{ route('kepala.laporan.index') }}"
                class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition block">
                 <h3 class="font-bold text-lg mb-1 text-blue-600">Laporan</h3>

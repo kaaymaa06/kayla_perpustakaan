@@ -7,16 +7,17 @@
 
         <div class="bg-white rounded-3xl shadow-lg p-6">
 
-            {{-- HEADER --}}
+            {{-- header form edit profile --}}
             <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
                 Edit Profile
             </h3>
 
+            {{-- form update profile petugas --}}
             <form action="{{ route('petugas.profile.update', $petugas->id) }}" method="POST" class="space-y-5">
                 @csrf
                 @method('PUT')
 
-                {{-- NAMA --}}
+                {{-- input nama --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">Nama</label>
                     <input type="text" name="name"
@@ -24,7 +25,7 @@
                         value="{{ old('name', $petugas->user->name) }}">
                 </div>
 
-                {{-- EMAIL --}}
+                {{-- input email --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">Email</label>
                     <input type="email" name="email"
@@ -32,7 +33,7 @@
                         value="{{ old('email', $petugas->user->email) }}">
                 </div>
 
-                {{-- NIP --}}
+                {{-- input nip --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">NIP</label>
                     <input type="text" name="nip_petugas"
@@ -40,14 +41,16 @@
                         value="{{ old('nip_petugas', $petugas->nip_petugas) }}">
                 </div>
 
-                {{-- BUTTON --}}
+                {{-- tombol aksin--}}
                 <div class="flex gap-3 pt-4">
 
+                    {{-- tombol simpan --}}
                     <button type="submit"
                         class="flex-1 bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-2.5 rounded-lg hover:opacity-90 transition font-medium shadow">
                         Simpan
                     </button>
 
+                    {{-- tombol kembali --}}
                     <a href="{{ route('petugas.profile.index') }}"
                        class="flex-1 text-center bg-gray-200 text-gray-700 py-2.5 rounded-lg hover:bg-gray-300 transition font-medium">
                         Kembali

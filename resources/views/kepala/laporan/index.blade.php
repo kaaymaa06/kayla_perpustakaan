@@ -1,23 +1,26 @@
 @extends('kepala.layouts.app')
 
 @section('content')
+
+{{-- container utama halaman --}}
 <div class="p-6 min-h-screen print-area">
 
-    {{-- HEADER --}}
+    {{-- header halaman --}}
     <h2 class="text-2xl font-bold mb-6 text-gray-800">
         Laporan Peminjaman Buku
     </h2>
 
-
+    {{-- header khusus saat print --}}
     <div class="hidden print:block text-center mb-4">
         <h1 class="text-xl font-bold">LAPORAN PEMINJAMAN BUKU</h1>
         <p class="text-sm">Dicetak pada: {{ now()->format('d-m-Y') }}</p>
         <hr class="mt-2 border-black">
     </div>
 
-    {{-- ================= RINGKASAN ================= --}}
+    {{--ringkasan--}}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
 
+        {{-- total peminjaman --}}
         <div class="bg-white p-4 rounded-xl shadow">
             <p class="text-gray-500">Total Peminjaman</p>
             <p class="text-xl font-bold text-gray-800">
@@ -25,6 +28,7 @@
             </p>
         </div>
 
+        {{-- total semua denda --}}
         <div class="bg-white p-4 rounded-xl shadow">
             <p class="text-gray-500">Total Denda</p>
             <p class="text-xl font-bold text-red-600">
@@ -32,6 +36,7 @@
             </p>
         </div>
 
+        {{-- denda yang belum dibayar --}}
         <div class="bg-white p-4 rounded-xl shadow">
             <p class="text-gray-500">Denda Belum Dibayar</p>
             <p class="text-xl font-bold text-yellow-600">
@@ -41,30 +46,36 @@
 
     </div>
 
-    {{-- ================= FILTER ================= --}}
+    {{-- filter data --}}
+
     <form method="GET" class="bg-white p-5 rounded-xl shadow mb-6 flex flex-wrap gap-4 items-end">
 
+        {{-- filter dari tanggal --}}
         <div>
             <label class= text-gray-600">Dari</label>
             <input type="date" name="from" value="{{ request('from') }}"
                 class="border rounded-lg px-3 py-2">
         </div>
 
+        {{-- filter sampai tanggal --}}
         <div>
             <label class= text-gray-600">Sampai</label>
             <input type="date" name="to" value="{{ request('to') }}"
                 class="border rounded-lg px-3 py-2">
         </div>
 
+        {{-- tombol filter --}}
         <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
             Filter
         </button>
 
+        {{-- reset filter --}}
         <a href="{{ route('kepala.laporan.index') }}"
             class="bg-gray-300 px-4 py-2 rounded-lg">
             Reset
         </a>
 
+        {{-- tombol print laporan --}}
        <button type="button" onclick="window.print()"
             class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
             Print
@@ -72,11 +83,12 @@
 
     </form>
 
-    {{-- ================= TABLE ================= --}}
+    {{-- tabel laporan--}}
     <div class="bg-white rounded-2xl shadow overflow-x-auto">
 
         <table class="w-full">
 
+            {{-- header tabel --}}
             <thead class="bg-gray-100 text-gray-700">
                 <tr>
                     <th class="p-3">No</th>
@@ -92,33 +104,39 @@
 
             <tbody class="divide-y">
 
+                {{-- looping data laporan --}}
                 @forelse ($laporan as $i => $p)
                 <tr class="hover:bg-gray-50">
 
                     <td class="p-3">{{ $i + 1 }}</td>
 
+                    {{-- nama peminjaman --}}
                     <td class="p-3">{{ $p->user->name }}</td>
 
+                    {{-- judul buku --}}
                     <td class="p-3">{{ $p->buku->judul_buku }}</td>
 
+                    {{-- tanggal pinjam --}}
                     <td class="p-3">
                         {{ $p->tanggal_pinjam ? \Carbon\Carbon::parse($p->tanggal_pinjam)->format('d-m-Y') : '-' }}
                     </td>
 
+                    {{-- jatuh tempo --}}
                     <td class="p-3">
                         {{ $p->jatuh_tempo ? \Carbon\Carbon::parse($p->jatuh_tempo)->format('d-m-Y') : '-' }}
                     </td>
 
+                    {{-- tanggal kembali --}}
                     <td class="p-3">
                         {{ $p->tanggal_kembali ? \Carbon\Carbon::parse($p->tanggal_kembali)->format('d-m-Y') : '-' }}
                     </td>
 
-                    {{-- DENDA --}}
+                    {{-- total denda --}}
                     <td class="p-3 font-semibold text-red-600">
                         Rp {{ number_format($p->denda ?? 0, 0, ',', '.') }}
                     </td>
 
-                    {{-- STATUS --}}
+                    {{-- status denda --}}
                     <td class="p-3">
                         @if($p->status_denda == 'lunas')
                             <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">
@@ -150,6 +168,7 @@
 
 </div>
 
+{{-- print style buat tampilan saat di cetak --}}
 <style>
 @media print {
 

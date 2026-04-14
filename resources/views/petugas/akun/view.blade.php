@@ -22,27 +22,31 @@
 
                     <tbody class="divide-y">
 
+                        {{-- ID USER --}}
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500 font-medium">ID</th>
                             <td class="text-gray-800">{{ $user->id }}</td>
                         </tr>
 
+                        {{-- NAMA --}}
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500 font-medium">Nama</th>
                             <td class="text-gray-800">{{ $user->name }}</td>
                         </tr>
 
+                        {{-- EMAIL --}}
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500 font-medium">Email</th>
                             <td class="text-gray-800">{{ $user->email }}</td>
                         </tr>
 
+                        {{-- ROLE --}}
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500 font-medium">Role</th>
                             <td class="text-cyan-600 font-semibold">{{ ucfirst($user->role) }}</td>
                         </tr>
 
-                        {{-- ANGGOTA --}}
+                        {{-- DATA TAMBAHAN UNTUK ANGGOTA --}}
                         @if($user->role == 'anggota' && $user->anggota)
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500">NIS</th>
@@ -58,7 +62,7 @@
                         </tr>
                         @endif
 
-                        {{-- PETUGAS --}}
+                        {{-- DATA TAMBAHAN BUAT PETUGAS --}}
                         @if($user->role == 'petugas' && $user->petugas)
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500">NIP</th>
@@ -70,7 +74,7 @@
                         </tr>
                         @endif
 
-                        {{-- KEPALA --}}
+                        {{-- DATA TAMBAHAN BUAT KEPALA --}}
                         @if($user->role == 'kepala' && $user->kepala)
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500">NIP</th>
@@ -78,11 +82,13 @@
                         </tr>
                         @endif
 
+                        {{-- INFO WAKTU DIBUAT --}}
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500">Dibuat</th>
                             <td>{{ optional($user->created_at)->format('d-m-Y H:i') }}</td>
                         </tr>
 
+                        {{-- INFO WAKTU DIUPDATE --}}
                         <tr class="grid grid-cols-[120px_1fr] px-4 py-2 items-center">
                             <th class="text-gray-500">Diupdate</th>
                             <td>{{ optional($user->updated_at)->format('d-m-Y H:i') }}</td>

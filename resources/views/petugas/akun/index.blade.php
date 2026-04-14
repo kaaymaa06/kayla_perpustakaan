@@ -10,6 +10,7 @@
             <p class=" text-gray-500">Kelola semua akun pengguna</p>
         </div>
 
+         {{-- TOMBOL TAMBAH AKUN --}}
         <a href="{{ route('petugas.akun.create') }}"
            class="bg-cyan-500 font-semibold text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition shadow">
             + Tambah Akun
@@ -22,6 +23,7 @@
         <div class="overflow-x-auto">
             <table class="w-full ">
 
+                 {{-- HEADER TABEL --}}
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
@@ -34,25 +36,32 @@
                 </thead>
 
                 <tbody>
+
+                    {{-- LOOPINF DATA USER --}}
                     @foreach($users as $index => $user)
                     <tr class="border-b hover:bg-gray-50 transition">
 
+                         {{-- NOMOR URUT --}}
                         <td class="px-4 py-3">{{ $index + 1 }}</td>
 
+                         {{-- NAMA --}}
                         <td class="px-4 py-3 font-semibold text-gray-800">
                             {{ $user->name }}
                         </td>
 
+                         {{-- EMAIL --}}
                         <td class="px-4 py-3 text-gray-600">
                             {{ $user->email }}
                         </td>
 
+                         {{-- ROLE --}}
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 rounded-full bg-gray-200 capitalize">
                                 {{ $user->role }}
                             </span>
                         </td>
 
+                         {{-- IDENTITAS BERDASARKAN ROLE --}}
                         <td class="px-4 py-3 text-gray-600">
                             @if($user->role == 'anggota' && $user->anggota)
                                 <span class="text-cyan-600 font-medium">
@@ -77,6 +86,7 @@
                             @endif
                         </td>
 
+                         {{-- TOMBOL AKSI --}}
                         <td class="px-4 py-3">
                             <div class="flex flex-wrap gap-2 justify-center">
 
@@ -142,7 +152,7 @@
 
 </div>
 
-{{-- SCRIPT --}}
+{{-- SCRIPT MODAL --}}
 <script>
     function openModal(url) {
         document.getElementById('modalHapus').classList.remove('hidden');

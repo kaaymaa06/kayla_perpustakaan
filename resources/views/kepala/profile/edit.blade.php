@@ -7,16 +7,17 @@
 
         <div class="bg-white rounded-3xl shadow-lg p-6">
 
-            {{-- HEADER --}}
+            {{-- judul form --}}
             <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
                 Edit Profile
             </h3>
 
+            {{-- form edit profile kepala --}}
             <form action="{{ route('kepala.update', $kepala->id) }}" method="POST" class="space-y-5">
                 @csrf
                 @method('PUT')
 
-                {{-- NAMA --}}
+                {{-- input nama --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">Nama</label>
                     <input type="text" name="name"
@@ -24,7 +25,7 @@
                         value="{{ old('name', $kepala->user->name) }}">
                 </div>
 
-                {{-- EMAIL --}}
+                {{-- input email --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">Email</label>
                     <input type="email" name="email"
@@ -32,7 +33,7 @@
                         value="{{ old('email', $kepala->user->email) }}">
                 </div>
 
-                {{-- NIP --}}
+                {{-- input nip --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">NIP</label>
                     <input type="text" name="nip_kepala"
@@ -43,11 +44,13 @@
                 {{-- BUTTON --}}
                 <div class="flex gap-3 pt-4">
 
+                    {{-- button simpan data --}}
                     <button type="submit"
                         class="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2.5 rounded-lg hover:opacity-90 transition font-medium shadow">
                         Simpan
                     </button>
 
+                    {{-- button kembali ke profile --}}
                     <a href="{{ route('kepala.profile.index') }}"
                        class="flex-1 text-center bg-gray-200 text-gray-700 py-2.5 rounded-lg hover:bg-gray-300 transition font-medium">
                         Kembali

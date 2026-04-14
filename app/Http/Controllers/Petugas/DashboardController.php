@@ -12,16 +12,26 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-     public function index()
+    //menampilkan dashboard petugas
+    public function index()
     {
         return view('petugas.dashboard', [
+
+            //total buku
             'totalBuku' => Buku::count(),
+
+            //total anggota
             'totalAnggota' => User::where('role', 'anggota')->count(),
+
+            //total peminjaman aktif
             'totalPeminjaman' => Peminjaman::where('status', 'dipinjam')->count(),
+
+            //total keterlambatan
             'totalTerlambat' => Peminjaman::where('status', 'dipinjam')
                 ->where('jatuh_tempo', '<', Carbon::now())
                 ->count(),
 
+            //data peminjaman terbaru
             'peminjamanTerbaru' => Peminjaman::with('buku', 'user')
                 ->latest()
                 ->take(5)

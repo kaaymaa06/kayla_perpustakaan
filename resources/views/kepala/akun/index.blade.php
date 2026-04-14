@@ -1,27 +1,32 @@
 @extends('kepala.layouts.app')
 
 @section('content')
+
+{{-- container utama halaman --}}
 <div class="p-6 min-h-screen space-y-6">
 
-    {{-- HEADER --}}
+    {{-- header halaman --}}
     <div class="flex justify-between items-center">
+
         <div>
             <h3 class="text-2xl font-bold text-gray-800">Daftar Pengguna</h3>
             <p class=" text-gray-500">Kelola semua akun pengguna</p>
         </div>
 
+        {{-- tombol tambah akun --}}
         <a href="{{ route('kepala.akun.create') }}"
            class="bg-cyan-500 font-semibold text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition shadow">
             + Tambah Akun
         </a>
     </div>
 
-    {{-- TABLE CARD --}}
+    {{-- card tabel pengguna --}}
     <div class="bg-white rounded-2xl shadow overflow-hidden">
 
         <div class="overflow-x-auto">
             <table class="w-full ">
 
+                {{-- header tabel --}}
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
@@ -34,26 +39,34 @@
                 </thead>
 
                 <tbody>
+                    {{-- looping data user --}}
                     @foreach($users as $index => $user)
                     <tr class="border-b hover:bg-gray-50 transition">
 
+                        {{-- nomor urut --}}
                         <td class="px-4 py-3">{{ $index + 1 }}</td>
 
+                        {{-- nama user --}}
                         <td class="px-4 py-3 font-semibold text-gray-800">
                             {{ $user->name }}
                         </td>
 
+                        {{-- email user --}}
                         <td class="px-4 py-3 text-gray-600">
                             {{ $user->email }}
                         </td>
 
+                        {{-- role user --}}
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 rounded-full bg-gray-200 capitalize">
                                 {{ $user->role }}
                             </span>
                         </td>
 
+                        {{-- identitass sesuai role --}}
                         <td class="px-4 py-3 text-gray-600">
+
+                            {{-- jika anggota --}}
                             @if($user->role == 'anggota' && $user->anggota)
                                 <span class="text-cyan-600 font-medium">
                                     NIS: {{ $user->anggota->nis }}
@@ -63,34 +76,41 @@
                                     {{ $user->anggota->kelas }}
                                 </span>
 
+                            {{-- jika petugas --}}
                             @elseif($user->role == 'petugas' && $user->petugas)
                                 <span class="text-cyan-600 font-medium">
                                     NIP: {{ $user->petugas->nip_petugas ?? '-' }}
                                 </span>
 
+                            {{-- jika kepala --}}
                             @elseif($user->role == 'kepala_perpus' && $user->kepala)
                                 <span class="text-cyan-600 font-medium">
                                     NIP: {{ $user->kepala->nip_kepala ?? '-' }}
                                 </span>
+
+                            {{-- jika tidak ada data --}}
                             @else
                                 -
                             @endif
                         </td>
 
+                        {{-- tombol aksi --}}
                         <td class="px-4 py-3">
                             <div class="flex flex-wrap gap-2 justify-center">
 
+                                {{-- tombol detail --}}
                                 <a href="{{ route('kepala.akun.detail', $user->id) }}"
                                    class="px-3 py-1 bg-cyan-500 text-white rounded hover:bg-blue-600 transition">
                                     Detail
                                 </a>
 
+                                {{-- tombol edit --}}
                                 <a href="{{ route('kepala.akun.edit', $user->id) }}"
                                    class="px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition">
                                     Edit
                                 </a>
 
-                                {{-- BUTTON HAPUS (MODAL) --}}
+                                {{-- tombol hapus pake modal --}}
                                 <button type="button"
                                     onclick="openModal('{{ route('kepala.akun.destroy', $user->id) }}')"
                                     class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">

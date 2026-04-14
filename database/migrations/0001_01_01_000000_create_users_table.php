@@ -9,21 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    //membuat tabel user
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('role'); //anggota/petugas/kepala perpus
-            $table->timestamps();
+            $table->id(); //id user
+            $table->string('name'); //nama
+            $table->string('email')->unique(); //email unik
+            $table->string('password'); // password
+            $table->string('role'); //role anggota/petugas/kepala perpus
+            $table->timestamps(); //create dan update
         });
     }
 
     /**
      * Reverse the migrations.
      */
+
+    //menghapus tabel user
     public function down(): void
     {
         Schema::dropIfExists('users');

@@ -1,12 +1,16 @@
 @extends('kepala.layouts.app')
 
 @section('content')
+
+{{-- container utama halaman --}}
 <div class="p-6 flex justify-center min-h-screen">
 
     <div class="w-full max-w-3xl">
+
+        {{-- card form --}}
         <div class="bg-white rounded-2xl shadow-md p-8">
 
-            {{-- HEADER --}}
+            {{-- header form --}}
             <div class="mb-6 text-center">
                 <h3 class="text-2xl font-bold text-gray-800">
                     Tambah Akun
@@ -16,10 +20,11 @@
                 </p>
             </div>
 
+            {{-- form tambah akun --}}
             <form action="{{ route('kepala.akun.store') }}" method="POST">
                 @csrf
 
-                {{-- ROLE --}}
+                {{-- pilih role --}}
                 <div class="mb-5">
                     <label class="block mb-1 text-sm text-gray-600">Role</label>
                     <select name="role" id="role"
@@ -28,11 +33,15 @@
                         <option value="anggota">Anggota</option>
                         <option value="petugas">Petugas</option>
                         <option value="kepala">Kepala Perpus</option>
-                        @error('level')<div class="text-danger small">{{ $message }}</div>@enderror
+
+                        {{-- eror role kalo ada --}}
+                        @error('level')
+                            <div class="text-danger small">{{ $message }}</div>
+                        @enderror
                     </select>
                 </div>
 
-                {{-- NAMA --}}
+                {{-- input nama --}}
                 <div class="mb-5">
                     <label class="block mb-1 text-sm text-gray-600">Nama</label>
                     <input type="text" name="name"
@@ -40,7 +49,7 @@
                         value="{{ old('name') }}">
                 </div>
 
-                {{-- EMAIL --}}
+                {{-- input email --}}
                 <div class="mb-5">
                     <label class="block mb-1 text-sm text-gray-600">Email</label>
                     <input type="email" name="email"
@@ -48,13 +57,15 @@
                         value="{{ old('email') }}">
                 </div>
 
-                {{-- PASSWORD --}}
+                {{-- input password --}}
                 <div class="grid grid-cols-2 gap-4 mb-6">
                     <div>
                         <label class="block mb-1 text-sm text-gray-600">Password</label>
                         <input type="password" name="password"
                             class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                     </div>
+
+                    {{-- konfirmasi password --}}
                     <div>
                         <label class="block mb-1 text-sm text-gray-600">Konfirmasi</label>
                         <input type="password" name="password_confirmation"
@@ -64,7 +75,7 @@
 
                 <hr class="my-6">
 
-                {{-- ANGGOTA --}}
+                {{-- form anggota --}}
                 <div id="fieldAnggota" class="mb-6">
                     <h5 class="font-semibold mb-3 text-cyan-600">Data Anggota</h5>
 
@@ -86,7 +97,7 @@
                         value="{{ old('alamat') }}">
                 </div>
 
-                {{-- PETUGAS --}}
+                {{-- form petugas --}}
                 <div id="fieldPetugas" class="mb-6">
                     <h5 class="font-semibold mb-3 text-cyan-600">Data Petugas</h5>
 
@@ -103,7 +114,7 @@
                     </div>
                 </div>
 
-                {{-- KEPALA --}}
+                {{-- form kapala --}}
                 <div id="fieldKepala" class="mb-6">
                     <h5 class="font-semibold mb-3 text-cyan-600">Data Kepala</h5>
 
@@ -113,7 +124,7 @@
                         value="{{ old('nip_kepala') }}">
                 </div>
 
-                {{-- BUTTON --}}
+                {{-- tombol simpan --}}
                 <div class="flex gap-3 mt-6">
                     <button type="submit"
                         class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
@@ -136,12 +147,14 @@
 
 @push('scripts')
 <script>
+    //menampilkan form sesuai role yang dipilih
     document.getElementById('role').addEventListener('change', function() {
         document.getElementById('fieldAnggota').style.display = this.value === 'anggota' ? 'block' : 'none';
         document.getElementById('fieldPetugas').style.display = this.value === 'petugas' ? 'block' : 'none';
         document.getElementById('fieldKepala').style.display  = this.value === 'kepala'  ? 'block' : 'none';
     });
 
+    //set value lama jika form gagal validasi
     @if(old('role'))
         document.getElementById('role').value = '{{ old("role") }}';
         document.getElementById('role').dispatchEvent(new Event('change'));

@@ -3,20 +3,22 @@
 @section('content')
 <div class="p-4 min-h-screen flex justify-center items-center">
 
+    {{-- container form --}}
     <div class="w-full max-w-md">
 
         <div class="bg-white rounded-3xl shadow-lg p-6">
 
-            {{-- HEADER --}}
+            {{-- judul --}}
             <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
                 Edit Profile
             </h3>
 
+            {{-- form update profile --}}
             <form action="{{ route('anggota.profile.update', $anggota->id) }}" method="POST" class="space-y-5">
                 @csrf
                 @method('PUT')
 
-                {{-- NAMA --}}
+                {{-- input nama --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">Nama</label>
                     <input type="text" name="name"
@@ -24,7 +26,7 @@
                         value="{{ old('name', $anggota->user->name) }}">
                 </div>
 
-                {{-- EMAIL --}}
+                {{-- input emil --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">Email</label>
                     <input type="email" name="email"
@@ -32,7 +34,7 @@
                         value="{{ old('email', $anggota->user->email) }}">
                 </div>
 
-                {{-- NIS --}}
+                {{-- input nis --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">NIS</label>
                     <input type="text" name="nis"
@@ -40,7 +42,7 @@
                         value="{{ old('nis', $anggota->nis) }}">
                 </div>
 
-                {{-- KELAS --}}
+                {{-- input kelas --}}
                 <div>
                     <label class="block text-sm text-gray-500 mb-1">Kelas</label>
                     <input type="text" name="kelas"
@@ -48,14 +50,16 @@
                         value="{{ old('kelas', $anggota->kelas) }}">
                 </div>
 
-                {{-- BUTTON --}}
+                {{-- tombol aksi --}}
                 <div class="flex gap-3 pt-4">
 
+                    {{-- tombol simpan --}}
                     <button type="submit"
                         class="flex-1 bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-2.5 rounded-lg hover:opacity-90 transition font-medium shadow">
                         Simpan
                     </button>
 
+                    {{-- tombol kembali --}}
                     <a href="{{ route('anggota.profile.index') }}"
                        class="flex-1 text-center bg-gray-200 text-gray-700 py-2.5 rounded-lg hover:bg-gray-300 transition font-medium">
                         Kembali

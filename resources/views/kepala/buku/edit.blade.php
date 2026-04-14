@@ -1,12 +1,16 @@
 @extends('kepala.layouts.app')
 
 @section('content')
+
+{{-- container utama halaman --}}
 <div class="p-6 flex justify-center min-h-screen bg-gray-50">
 
     <div class="w-full max-w-2xl">
+
+        {{-- card edit buku --}}
         <div class="bg-white rounded-2xl shadow-lg p-8">
 
-            {{-- HEADER --}}
+            {{-- header halaman --}}
             <div class="mb-6">
                 <h2 class="text-2xl font-bold text-gray-800">
                     Edit Buku
@@ -16,11 +20,12 @@
                 </p>
             </div>
 
+            {{-- form update buku --}}
             <form action="{{ route('kepala.buku.update', $buku->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                {{-- KODE --}}
+                {{-- input kode buku --}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Kode Buku</label>
                     <input type="text" name="kode_buku"
@@ -28,7 +33,7 @@
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
 
-                {{-- JUDUL --}}
+                {{-- input judul --}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Judul Buku</label>
                     <input type="text" name="judul_buku"
@@ -36,7 +41,7 @@
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
 
-                {{-- PENULIS --}}
+                {{-- input penulis --}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Penulis</label>
                     <input type="text" name="penulis"
@@ -44,8 +49,10 @@
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
 
-                {{-- TAHUN & STOK --}}
+                {{-- tahun terbit & stok --}}
                 <div class="grid grid-cols-2 gap-4 mb-4">
+
+                    {{-- tahun terbit --}}
                     <div>
                         <label class="block mb-1 text-sm font-semibold text-gray-600">Tahun Terbit</label>
                         <input type="number" name="tahun_terbit"
@@ -54,6 +61,7 @@
                             class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                     </div>
 
+                    {{-- stok buku --}}
                     <div>
                         <label class="block mb-1 text-sm font-semibold text-gray-600">Stok</label>
                         <input type="number" name="stok"
@@ -62,7 +70,7 @@
                     </div>
                 </div>
 
-                {{-- SINOPSIS --}}
+                {{-- input sinopsis --}}
                 <div class="mb-4">
                     <label class="block mb-1 text-sm font-semibold text-gray-600">Sinopsis</label>
                     <textarea name="sinopsis"
@@ -70,10 +78,10 @@
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">{{ $buku->sinopsis }}</textarea>
                 </div>
 
-                {{-- COVER --}}
+                {{-- cover buku --}}
                 <div class="grid grid-cols-2 gap-4 mb-4 items-center">
 
-                    {{-- COVER LAMA --}}
+                    {{-- cover lama --}}
                     <div>
                         <label class="block mb-2 text-sm font-semibold text-cyan-600">Cover Lama</label>
                         <div class="border rounded-lg p-2 flex justify-center bg-gray-50">
@@ -86,7 +94,7 @@
                         </div>
                     </div>
 
-                    {{-- GANTI COVER --}}
+                    {{-- upload cover buku --}}
                     <div>
                         <label class="block mb-2 text-sm font-semibold text-gray-600">Ganti Cover</label>
                         <input type="file" name="cover"
@@ -95,12 +103,15 @@
 
                 </div>
 
-                {{-- BUTTON --}}
+                {{-- tombol aksi --}}
                 <div class="flex gap-3 mt-6">
+
+                    {{-- tombol update --}}
                     <button class="flex-1 bg-cyan-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
                         Update
                     </button>
 
+                    {{-- tombol kembali --}}
                     <a href="{{ route('kepala.buku.index') }}"
                        class="flex-1 text-center bg-gray-300 py-2 rounded-lg hover:bg-gray-400 transition">
                         Kembali
