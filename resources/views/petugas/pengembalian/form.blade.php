@@ -21,28 +21,24 @@
                     {{ \Carbon\Carbon::parse($peminjaman->jatuh_tempo)->format('d-m-Y') }}
                 </p>
 
-                {{-- CEK TERLAMBAT --}}
-                @php
-                    $today = \Carbon\Carbon::now();
-                    $jatuhTempo = \Carbon\Carbon::parse($peminjaman->jatuh_tempo);
-                @endphp
-
-                @if($today->gt($jatuhTempo))
-                    @php
-                        $hariTelat = $today->diffInDays($jatuhTempo);
-                        $denda = $hariTelat * 1000;
-                    @endphp
-
-                    <div class="mt-2 p-3 bg-red-100 text-red-600 rounded-lg">
-                        ⚠️ Terlambat {{ $hariTelat }} hari — Denda Rp {{ number_format($denda) }}
-                    </div>
+                {{-- STATUS TERLAMBAT (TANPA HITUNG RUMIT DI BLADE) --}}
+                @if(\Carbon\Carbon::now()->gt($peminjaman->jatuh_tempo))
+                    <span class="inline-block mt-2 px-3 py-1 bg-red-500 text-white text-sm rounded-full">
+                        Terlambat
+                    </span>
+                @else
+                    <span class="inline-block mt-2 px-3 py-1 bg-green-500 text-white text-sm rounded-full">
+                        Tepat Waktu
+                    </span>
                 @endif
-
             </div>
 
             {{-- FORM --}}
             <form action="{{ route('petugas.pengembalian.konfirmasi', $peminjaman->id) }}" method="POST">
                 @csrf
+
+                {{-- tanggal kembali --}}
+                <input type="hidden" name="tanggal_kembali" value="{{ now() }}">
 
                 {{-- KONDISI --}}
                 <div class="mb-4">

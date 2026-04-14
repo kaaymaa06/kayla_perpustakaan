@@ -24,6 +24,7 @@
                     <th class="px-4 py-3 text-left">Status Denda</th>
                     <th class="px-4 py-3 text-left">Tanggal Bayar</th>
                     <th class="px-4 py-3 text-left">Keterangan</th>
+                    <th class="px-4 py-3 text-left">Aksi</th>
                 </tr>
             </thead>
 
@@ -100,6 +101,13 @@
                     {{-- KETERANGAN --}}
                     <td class="px-4 py-3 text-gray-600">
                         {{ $item->keterangan ?? '-' }}
+                    </td>
+
+                    <td class="px-4 py-3">
+                        <a href="{{ route('anggota.peminjaman.detail', $item->id) }}"
+                            class="bg-cyan-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
+                            Detail
+                        </a>
                     </td>
 
                 </tr>

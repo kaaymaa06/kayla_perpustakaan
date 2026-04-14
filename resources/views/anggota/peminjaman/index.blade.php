@@ -7,6 +7,41 @@
         Peminjaman Saya
     </h2>
 
+    {{-- ================= ALERT ================= --}}
+    @if(session('error'))
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    {{-- ================= CEK DENDA ================= --}}
+    @php
+        $punyaDenda = \App\Models\Peminjaman::where('user_id', auth()->id())
+            ->where('status', 'selesai')
+            ->where('status_denda', 'belum bayar')
+            ->exists();
+    @endphp
+
+    @if($punyaDenda)
+        <div class="bg-yellow-100 text-yellow-800 p-4 rounded mb-4 flex justify-between items-center">
+            <span>
+                ⚠️ Anda memiliki denda yang belum dibayar. Silakan bayar terlebih kepada Petugas sebelum meminjam buku.
+            </span>
+
+            <a href="{{ route('anggota.riwayat.index') }}"
+                class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm">
+                Bayar Denda
+            </a>
+        </div>
+    @endif
+
+    {{-- ================= TABLE ================= --}}
     <div class="bg-white rounded-2xl shadow-md overflow-hidden">
 
         <table class="w-full border-collapse">
@@ -91,17 +126,10 @@
                             </a>
 
                             @if($p->status == 'menunggu')
-                                <form action="{{ route('anggota.peminjaman.destroy', $p->id) }}" method="POST"
-                                    onsubmit="return confirm('Yakin ingin batalkan peminjaman?')">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
-                                        Batalkan
-                                    </button>
-
-                                </form>
+                                <button onclick="openModal({{ $p->id }})"
+                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
+                                    Batalkan
+                                </button>
                             @endif
 
                         </div>
@@ -116,4 +144,48 @@
     </div>
 
 </div>
+{{-- MODAL HAPUS --}}
+<div id="modalHapus" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+
+    <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center animate-fadeIn">
+
+        <p class="mb-4 text-gray-700 font-medium">
+            Yakin ingin batalkan peminjaman ini?
+        </p>
+
+        <div class="flex justify-center gap-3">
+
+            <form id="formHapus" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit"
+                    class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                    Ya
+                </button>
+            </form>
+
+            <button onclick="closeModal()"
+                class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
+                Batal
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function openModal(id) {
+        let form = document.getElementById('formHapus');
+        form.action = '/anggota/peminjaman/' + id; // sesuaikan route kamu
+
+        document.getElementById('modalHapus').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modalHapus').classList.add('hidden');
+    }
+</script>
 @endsection

@@ -12,7 +12,9 @@ class PeminjamanController extends Controller
 {
     public function index()
     {
+        // ❌ SUDAH TIDAK ADA FOREACH BUG
         $peminjaman = Peminjaman::with('buku', 'user')->latest()->get();
+
         return view('petugas.peminjaman.index', compact('peminjaman'));
     }
 
@@ -47,7 +49,7 @@ class PeminjamanController extends Controller
         // kurangi stok
         $buku->decrement('stok');
 
-        // update peminjaman (AUTO 7 HARI)
+        // update peminjaman
         $peminjaman->update([
             'status' => 'dipinjam',
             'tanggal_pinjam' => Carbon::now(),
@@ -59,7 +61,6 @@ class PeminjamanController extends Controller
             ->with('success', 'Peminjaman berhasil dikonfirmasi');
     }
 
-
     public function konfirmasiKembali(Request $request, $id)
     {
         $request->validate([
@@ -70,14 +71,23 @@ class PeminjamanController extends Controller
         $denda = 0;
         $jenis = [];
 
-         // DENDA TERLAMBAT
+        // =========================
+        // DENDA TERLAMBAT
+        // =========================
         if ($p->jatuh_tempo && now()->gt($p->jatuh_tempo)) {
-            $hari = now()->diffInDays($p->jatuh_tempo);
+
+            $hari = \Carbon\Carbon::parse($p->jatuh_tempo)
+                        ->startOfDay()
+                        ->diffInDays(now()->startOfDay());
+
             $denda += $hari * 1000;
+
             $jenis[] = 'terlambat';
         }
 
+        // =========================
         // DENDA KONDISI
+        // =========================
         if ($request->kondisi == 'rusak') {
             $denda += 5000;
             $jenis[] = 'rusak';
@@ -86,23 +96,31 @@ class PeminjamanController extends Controller
             $jenis[] = 'hilang';
         }
 
-        // KEMBALIKAN STOK JIKA NORMAL
+        // =========================
+        // UPDATE STOK
+        // =========================
         $buku = Buku::find($p->buku_id);
 
         if ($buku && $request->kondisi != 'hilang') {
             $buku->increment('stok');
         }
 
+        // =========================
+        // STATUS DENDA (INI KUNCI)
+        // =========================
+        $statusDenda = $denda > 0 ? 'belum bayar' : 'lunas';
+
+        // =========================
         // UPDATE DATA
+        // =========================
         $p->update([
             'tanggal_kembali' => now(),
             'status' => 'selesai',
             'denda' => $denda,
-            'jenis_denda' => implode(', ', $jenis),
-            'status_denda' => $denda > 0 ? 'belum bayar' : 'lunas',
+            'jenis_denda' => count($jenis) ? implode(', ', $jenis) : null,
+            'status_denda' => $statusDenda,
             'keterangan' => $request->keterangan
         ]);
-
 
         return redirect()->route('petugas.pengembalian.index')
             ->with('success', 'Pengembalian berhasil diproses');
@@ -122,7 +140,7 @@ class PeminjamanController extends Controller
         return view('petugas.peminjaman.view', compact('peminjaman'));
     }
 
-   public function pengembalian()
+    public function pengembalian()
     {
         $peminjaman = Peminjaman::with('user','buku')
             ->where('status', 'dipinjam')
@@ -150,6 +168,4 @@ class PeminjamanController extends Controller
 
         return back()->with('success', 'Denda berhasil dibayar');
     }
-
-
 }

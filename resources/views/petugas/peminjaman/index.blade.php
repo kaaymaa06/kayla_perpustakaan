@@ -62,7 +62,7 @@
                     </td>
 
                     <td class="p-3 font-semibold text-red-500">
-                        {{ $p->denda ?? '-' }}
+                        Rp {{ number_format($p->denda ?? 0, 0, ',', '.') }}
                     </td>
 
                     <td class="p-3">
@@ -124,7 +124,7 @@
                                 Hapus
                             </button>
 
-                            @if($p->status_denda == 'belum bayar')
+                            @if(($p->denda ?? 0) > 0 && $p->status_denda == 'belum bayar')
                             <form action="{{ route('petugas.peminjaman.bayar', $p->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"

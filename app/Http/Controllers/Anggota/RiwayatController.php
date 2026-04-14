@@ -10,7 +10,7 @@ class RiwayatController extends Controller
 {
     public function index()
     {
-        $riwayat = Peminjaman::with('buku') 
+        $riwayat = Peminjaman::with('buku')
             ->where('user_id', auth()->id())
             ->whereIn('status', ['dipinjam', 'ditolak', 'selesai'])
             ->get();
@@ -30,5 +30,12 @@ class RiwayatController extends Controller
         ]);
 
         return back()->with('success', 'Denda berhasil dibayar');
+    }
+
+    public function detail($id)
+    {
+        $peminjaman = Peminjaman::with('buku')->findOrFail($id);
+
+        return view('anggota.riwayat.detail', compact('peminjaman'));
     }
 }

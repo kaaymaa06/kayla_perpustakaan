@@ -4,6 +4,26 @@
         <img src="{{ asset('image/logo.png')}}" alt="logo" style="width:120px; height:auto; margin-bottom:30px;">
     </div>
 
+     {{-- USER MINI --}}
+    <div class="d-flex align-items-center gap-2 mb-4 px-2 py-2 bg-white/10 rounded-lg">
+
+        <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center fw-bold"
+             style="width:35px; height:35px;">
+            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+        </div>
+
+        <div class="lh-sm">
+            <div class="fw-semibold small text-truncate" style="max-width:150px;">
+                {{ Auth::user()->name }}
+            </div>
+            <div class="text-light" style="font-size:11px;">
+                Kepala Perpus
+            </div>
+        </div>
+
+    </div>
+
+
     <ul class="nav flex-column gap-2">
 
         {{-- Dashboard --}}
@@ -48,11 +68,11 @@
         </li>
 
         {{-- logout --}}
-        <li class="nav-item mt-3">
+        <li class="nav-item">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit"
-                    class="nav-link sidebar-link">
+                    class="nav-link sidebar-link w-100 text-start border-0 bg-transparent text-white">
                     Logout
                 </button>
             </form>

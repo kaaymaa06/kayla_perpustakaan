@@ -6,6 +6,24 @@
              class="logo-sidebar">
     </div>
 
+    <div class="d-flex align-items-center gap-2 mb-4 px-2 py-2 bg-white/10 rounded-lg">
+
+        <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center fw-bold"
+             style="width:35px; height:35px;">
+            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+        </div>
+
+        <div class="lh-sm">
+            <div class="fw-semibold small text-truncate" style="max-width:150px;">
+                {{ Auth::user()->name }}
+            </div>
+            <div style="font-size:11px; color:#e5e7eb;">
+                Anggota
+            </div>
+        </div>
+
+    </div>
+
     <ul class="nav flex-column gap-2 mt-3">
 
         {{-- Dashboard --}}

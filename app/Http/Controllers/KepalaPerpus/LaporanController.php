@@ -8,9 +8,24 @@ use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $laporan = Peminjaman::with('user','buku')->get();
+        $query = Peminjaman::with('user', 'buku');
+
+        // FILTER TANGGAL PINJAM
+        if ($request->from && $request->to) {
+            $query->whereBetween('tanggal_pinjam', [$request->from, $request->to]);
+        }
+
+        if ($request->from && !$request->to) {
+            $query->whereDate('tanggal_pinjam', '>=', $request->from);
+        }
+
+        if (!$request->from && $request->to) {
+            $query->whereDate('tanggal_pinjam', '<=', $request->to);
+        }
+
+        $laporan = $query->latest()->get();
 
         return view('kepala.laporan.index', compact('laporan'));
     }

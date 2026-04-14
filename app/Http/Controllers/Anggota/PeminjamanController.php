@@ -13,12 +13,27 @@ class PeminjamanController extends Controller
     {
         $buku = Buku::findOrFail($id);
 
-        // cek stok
+        // =========================
+        // 1. CEK DENDA DULU 🔥
+        // =========================
+        $cekDenda = Peminjaman::where('user_id', auth()->id())
+            ->where('status_denda', 'belum bayar')
+            ->exists();
+
+        if ($cekDenda) {
+            return back()->with('error', 'Masih ada denda yang belum dibayar!');
+        }
+
+        // =========================
+        // 2. CEK STOK
+        // =========================
         if ($buku->stok <= 0) {
             return back()->with('error', 'Stok habis');
         }
 
-        // simpan data
+        // =========================
+        // 3. SIMPAN DATA
+        // =========================
         Peminjaman::create([
             'user_id' => auth()->id(),
             'buku_id' => $id,
@@ -26,7 +41,8 @@ class PeminjamanController extends Controller
             'status' => 'menunggu'
         ]);
 
-        return redirect()->route('anggota.peminjaman.index');
+        return redirect()->route('anggota.peminjaman.index')
+            ->with('success', 'Berhasil mengajukan peminjaman');
     }
 
     // TAMPIL DATA PEMINJAMAN ANGGOTA

@@ -155,6 +155,7 @@ Route::prefix('anggota')->middleware('auth')->name('anggota.')->group(function (
     Route::delete('/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+    Route::get('/anggota/peminjaman/{id}', [RiwayatController::class, 'detail'])->name('peminjaman.detail');
     Route::post('/bayar-denda/{id}', [RiwayatController::class, 'bayarDenda'])->name('bayarDenda');
 
 });
