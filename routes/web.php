@@ -123,6 +123,8 @@ Route::prefix('petugas')->middleware('auth')->name('petugas.')->group(function (
     Route::get('/peminjaman/{id}/view', [PeminjamanController::class, 'view'])->name('petugas.peminjaman.view');
     Route::delete('/peminjaman/{id}', [PetugasPeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
     Route::post('/peminjaman/{id}/bayar', [PetugasPeminjamanController::class, 'bayarDenda'])->name('peminjaman.bayar');
+    Route::post('/peminjaman/{id}/pinjam', [PeminjamanController::class, 'pinjam'])->name('peminjaman.pinjam');
+
 
     // PENGEMBALIAN (PETUGAS)
     Route::get('/pengembalian', [PetugasPeminjamanController::class, 'pengembalian'])->name('pengembalian.index');
@@ -157,5 +159,7 @@ Route::prefix('anggota')->middleware('auth')->name('anggota.')->group(function (
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
     Route::get('/anggota/peminjaman/{id}', [RiwayatController::class, 'detail'])->name('peminjaman.detail');
     Route::post('/bayar-denda/{id}', [RiwayatController::class, 'bayarDenda'])->name('bayarDenda');
-
+ Route::post('/anggota/peminjaman', [PeminjamanController::class, 'store'])
+    ->name('peminjaman.store');
 });
+

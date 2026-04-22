@@ -2,7 +2,7 @@
 
     {{-- Logo --}}
     <div class="text-center">
-        <img src="{{ asset('image/logo.png')}}" alt="logo"
+        <img src="{{ asset('image/smk.png')}}" alt="logo"
              class="logo-sidebar">
     </div>
 

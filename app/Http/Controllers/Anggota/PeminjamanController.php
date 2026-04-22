@@ -41,6 +41,7 @@ class PeminjamanController extends Controller
             ->with('success', 'Berhasil mengajukan peminjaman');
     }
 
+
     // menampilkan peminjaman
     public function index()
     {
@@ -85,4 +86,21 @@ class PeminjamanController extends Controller
 
         return view('anggota.riwayat.index', compact('riwayat'));
     }
+   public function store(Request $request)
+{
+    $request->validate([
+        'buku_id' => 'required',
+    ]);
+
+    \App\Models\Peminjaman::create([
+        'user_id' => auth()->id(),
+        'buku_id' => $request->buku_id,
+        'tanggal_pinjam' => now(),
+        'jatuh_tempo' => now()->addDays(7),
+        'status' => 'menunggu',
+    ]);
+
+    return back()->with('success', 'Peminjaman berhasil');
+}
+
 }

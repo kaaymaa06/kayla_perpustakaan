@@ -32,6 +32,8 @@
             ->exists();
     @endphp
 
+
+
     {{-- tampilakan warning jika ada denda --}}
     @if($punyaDenda)
         <div class="bg-yellow-100 text-yellow-800 p-4 rounded mb-4 flex justify-between items-center">
@@ -45,6 +47,7 @@
             </a>
         </div>
     @endif
+
 
     {{-- tabel--}}
 

@@ -1,7 +1,7 @@
 <div class="text-white d-flex flex-column sidebar p-4">
     {{-- Logo --}}
     <div>
-        <img src="{{ asset('image/logo.png')}}" alt="logo" style="width:120px; height:auto; margin-bottom:30px;">
+        <img src="{{ asset('image/smk.png')}}" alt="logo" style="width:120px; height:auto; margin-bottom:30px;">
     </div>
 
      {{-- user info --}}

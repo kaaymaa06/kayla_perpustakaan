@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Anggota;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Buku;
+use App\Models\Peminjaman;
 
 class BukuController extends Controller
 {
@@ -21,7 +22,20 @@ class BukuController extends Controller
     //menampilkan detail buku
     public function view(Buku $buku)
     {
-        //kirim data buku ke halaman detail
-        return view('anggota.buku.view', compact('buku'));
-    }
+        $buku = \App\Models\Buku::findOrFail($buku->id);
+
+    // cek apakah user sudah meminjam buku ini
+    $sudahPinjam = \App\Models\Peminjaman::where('user_id', auth()->id())
+        ->where('buku_id', $buku->id)
+        ->whereIn('status', ['menunggu', 'dipinjam'])
+        ->exists();
+
+    // kirim ke view
+    return view('anggota.buku.view', [
+        'buku' => $buku,
+        'sudahPinjam' => $sudahPinjam,
+    ]);
 }
+    }
+
+

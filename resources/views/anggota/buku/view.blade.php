@@ -96,13 +96,26 @@
         <div class="flex justify-center gap-3">
 
             {{-- form pinjam --}}
-            <form action="{{ route('anggota.buku.pinjam', $buku->id) }}" method="POST">
+            {{-- <form action="{{ route('anggota.buku.pinjam', $buku->id) }}" method="POST">
                 @csrf
                 <button type="submit"
                     class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                     Ya
                 </button>
-            </form>
+            </form> --}}
+            @if($sudahPinjam)
+                <form action="{{ route('anggota.peminjaman.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="buku_id" value="{{ $buku->id }}">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                        Pinjam
+                    </button>
+                </form>
+            @else
+                <div class="bg-yellow-100 text-yellow-800 p-3 rounded mb-4">
+                    ❌ Anda sudah meminjam buku, tunggu sampai selesai sebelum meminjam lagi.
+                </div>
+            @endif
 
             {{-- tombol batal --}}
             <button onclick="closeModal()"
